@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Baba Ahmad University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== ADMIN STYLES ===== */
+        :root {
+            --primary: #7c3aed;
+            --primary-light: #8b5cf6;
+            --accent: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f1f5f9;
+            color: var(--dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== ENHANCED PASSWORD PROTECTION ===== */
+        .password-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .password-screen::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-50px, -50px) rotate(360deg); }
+        }
+
+        .password-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .password-box i {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        .password-box h1 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .password-box p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .password-input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 18px 50px 18px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            transition: var(--transition);
+            letter-spacing: 1px;
+            font-family: monospace;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(124, 58, 237, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s;
+        }
+
+        .login-btn:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        .security-features {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--light);
+        }
+
+        .security-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            justify-content: center;
+        }
+
+        .security-item i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        /* ===== ADMIN DASHBOARD ===== */
+        .admin-dashboard {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px;
+            box-shadow: var(--card-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-logo i {
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 50%;
+        }
+
+        .admin-logo h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .admin-info i {
+            font-size: 1.2rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        /* ===== ENHANCED STATS ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            border-top: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 0 0 0 80px;
+        }
+
+        .stat-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-icon.pending { 
+            background: linear-gradient(135deg, var(--warning), #fbbf24);
+            border-top-color: var(--warning);
+        }
+        .stat-icon.approved { 
+            background: linear-gradient(135deg, var(--accent), #34d399);
+            border-top-color: var(--accent);
+        }
+        .stat-icon.rejected { 
+            background: linear-gradient(135deg, var(--danger), #f87171);
+            border-top-color: var(--danger);
+        }
+        .stat-icon.total { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-top-color: var(--primary);
+        }
+
+        .stat-info h3 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .stat-info p {
+            color: var(--gray);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* ===== ENHANCED CONTROLS ===== */
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--primary);
+        }
+
+        .controls h2 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .control-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 16px 25px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition);
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+        }
+        .btn-success { 
+            background: linear-gradient(135deg, var(--accent), #34d399);
+            color: white;
+        }
+        .btn-danger { 
+            background: linear-gradient(135deg, var(--danger), #f87171);
+            color: white;
+        }
+        .btn-warning { 
+            background: linear-gradient(135deg, var(--warning), #fbbf24);
+            color: white;
+        }
+
+        /* ===== ENHANCED FEEDBACK LIST ===== */
+        .feedback-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--accent);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-header h2 {
+            color: var(--dark);
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            background: var(--light);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--dark);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .filter-btn:hover:not(.active) {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .feedback-list-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feedback-item {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            border: 2px solid var(--light);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feedback-item.pending {
+            border-left: 4px solid var(--warning);
+        }
+
+        .feedback-item.approved {
+            border-left: 4px solid var(--accent);
+        }
+
+        .feedback-item.rejected {
+            border-left: 4px solid var(--danger);
+        }
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .feedback-question {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .feedback-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-pending { 
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
+        }
+        .status-approved { 
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
+        }
+        .status-rejected { 
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
+        }
+
+        .feedback-answer {
+            line-height: 1.7;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .feedback-answer::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .feedback-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn.approve { 
+            background: linear-gradient(135deg, var(--accent), #34d399);
+            color: white;
+        }
+        .action-btn.reject { 
+            background: linear-gradient(135deg, var(--danger), #f87171);
+            color: white;
+        }
+        .action-btn.delete { 
+            background: linear-gradient(135deg, var(--gray), #94a3b8);
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--gray);
+        }
+
+        .empty-state i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: #cbd5e1;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* ===== ENHANCED PUBLIC WALL PREVIEW ===== */
+        .wall-preview {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--info);
+        }
+
+        .wall-preview h2 {
+            color: var(--dark);
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .preview-container {
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            padding: 25px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .approved-message {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .approved-message:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .approved-message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1));
+            border-radius: 0 0 0 60px;
+        }
+
+        .message-content {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            color: var(--dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        .message-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray);
+            font-size: 0.85rem;
+            padding-top: 15px;
+            border-top: 1px solid var(--light);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .control-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-header-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .admin-controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-buttons {
+                justify-content: center;
+            }
+            
+            .feedback-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .feedback-question {
+                min-width: 100%;
+            }
+            
+            .feedback-actions {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .password-box {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .password-box h1 {
+                font-size: 1.6rem;
+            }
+            
+            .admin-logo {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            .admin-info {
+                flex-direction: column;
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* ===== NOTIFICATIONS ===== */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideInRight 0.3s ease;
+            border-left: 4px solid var(--accent);
+            max-width: 400px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification.success {
+            border-left-color: var(--accent);
+        }
+
+        .notification.error {
+            border-left-color: var(--danger);
+        }
+
+        .notification i {
+            font-size: 1.5rem;
+        }
+
+        .notification.success i {
+            color: var(--accent);
+        }
+
+        .notification.error i {
+            color: var(--danger);
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== SECURITY BADGE ===== */
+        .security-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 99;
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        /* ===== SESSION TIMER ===== */
+        .session-timer {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--card-shadow);
+            z-index: 99;
+        }
+
+        .session-timer.warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .session-timer.danger {
+            background: #fee2e2;
+            color: #991b1b;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <!-- PASSWORD SCREEN -->
+    <div class="password-screen" id="passwordScreen">
+        <div class="password-box">
+            <i class="fas fa-lock"></i>
+            <h1>🔐 Admin Security Portal</h1>
+            <p>Authorized personnel only. Enter secure password to continue.</p>
+            
+            <div class="password-input-container">
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter secure password" autocomplete="off">
+                <button type="button" class="toggle-password" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+            
+            <button class="login-btn" id="loginBtn">
+                <i class="fas fa-fingerprint"></i> Verify & Login
+            </button>
+            
+            <div class="security-features">
+                <div class="security-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Encrypted Session</span>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-history"></i>
+                    <span>Auto-logout after 30 minutes</span>
+                </div>
+                <div class="security-item">
+                    <i class="fas fa-ban"></i>
+                    <span>3 failed attempts will lock access</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div class="admin-dashboard" id="adminDashboard">
+        <!-- HEADER -->
+        <header class="admin-header">
+            <div class="admin-header-content">
+                <div class="admin-logo">
+                    <i class="fas fa-user-shield"></i>
+                    <div>
+                        <h1>Baba Ahmad University Admin</h1>
+                        <p style="font-size: 0.9rem; opacity: 0.9;">Secure Feedback Management System</p>
+                    </div>
+                </div>
+                <div class="admin-controls">
+                    <div class="admin-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Administrator</span>
+                    </div>
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Secure Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <div class="container">
+            <!-- STATS -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pendingCount">0</h3>
+                        <p>Pending Review</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon approved">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="approvedCount">0</h3>
+                        <p>Approved</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon rejected">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="rejectedCount">0</h3>
+                        <p>Rejected</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon total">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="totalCount">0</h3>
+                        <p>Total Submissions</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <div class="controls">
+                <h2><i class="fas fa-cogs"></i> Administration Controls</h2>
+                <div class="control-buttons">
+                    <button class="btn btn-success" id="approveAllBtn">
+                        <i class="fas fa-check-double"></i> Approve All Pending
+                    </button>
+                    <button class="btn btn-danger" id="rejectAllBtn">
+                        <i class="fas fa-ban"></i> Reject All Pending
+                    </button>
+                    <button class="btn btn-warning" id="exportBtn">
+                        <i class="fas fa-file-export"></i> Export to CSV
+                    </button>
+                    <button class="btn btn-primary" id="changePasswordBtn">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
+                </div>
+            </div>
+
+            <!-- FEEDBACK LIST -->
+            <div class="feedback-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-comments"></i> Feedback Management</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fas fa-list"></i> All
+                        </button>
+                        <button class="filter-btn" data-filter="pending">
+                            <i class="fas fa-clock"></i> Pending
+                        </button>
+                        <button class="filter-btn" data-filter="approved">
+                            <i class="fas fa-check"></i> Approved
+                        </button>
+                        <button class="filter-btn" data-filter="rejected">
+                            <i class="fas fa-times"></i> Rejected
+                        </button>
+                    </div>
+                </div>
+
+                <div class="feedback-list-container">
+                    <div class="feedback-list" id="feedbackList">
+                        <div class="loading" id="loadingFeedback">
+                            <div class="spinner"></div>
+                            <p>Loading feedback data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PUBLIC WALL PREVIEW -->
+            <div class="wall-preview">
+                <h2><i class="fas fa-chalkboard"></i> Public Wall Preview</h2>
+                <p style="color: var(--gray); margin-bottom: 25px; font-size: 0.95rem;">
+                    This is what students see in the public feedback section. Only approved messages appear here.
+                </p>
+                <div class="preview-container" id="wallPreview">
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>No approved messages yet</h3>
+                        <p>Approve some feedback to see it here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECURITY BADGE -->
+    <div class="security-badge" id="securityBadge" style="display: none;">
+        <i class="fas fa-shield-alt"></i>
+        <span>Secure Session Active</span>
+    </div>
+
+    <!-- SESSION TIMER -->
+    <div class="session-timer" id="sessionTimer" style="display: none;">
+        <i class="fas fa-clock"></i>
+        <span id="timerText">Session: 30:00</span>
+    </div>
+
+    <!-- CHANGE PASSWORD MODAL -->
+    <div class="modal" id="changePasswordModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); align-items: center; justify-content: center; z-index: 1000;">
+        <div class="password-box" style="max-width: 400px;">
+            <i class="fas fa-key"></i>
+            <h1>Change Password</h1>
+            <p>Set a new secure password for admin access</p>
+            
+            <div class="password-input-container">
+                <input type="password" id="currentPassword" class="password-input" placeholder="Current password">
+            </div>
+            
+            <div class="password-input-container">
+                <input type="password" id="newPassword" class="password-input" placeholder="New password (min 8 chars)">
+            </div>
+            
+            <div class="password-input-container">
+                <input type="password" id="confirmPassword" class="password-input" placeholder="Confirm new password">
+            </div>
+            
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+                <button class="btn btn-success" id="savePasswordBtn" style="flex: 1;">
+                    <i class="fas fa-save"></i> Save
+                </button>
+                <button class="btn btn-danger" id="cancelPasswordBtn" style="flex: 1;">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+               // ===== ENHANCED SECURITY CONFIGURATION =====
+        const SECURITY_CONFIG = {
+            // Change this to your SECURE password (minimum 8 characters)
+            ADMIN_PASSWORD: 'BabaAdmin2024!',
+            MAX_ATTEMPTS: 3,
+            SESSION_TIMEOUT: 30 * 60 * 1000, // 30 minutes in milliseconds
+            LOCKOUT_TIME: 15 * 60 * 1000, // 15 minutes lockout after max attempts
+            ENCRYPTION_KEY: 'baba-uni-secure-2024'
+        };
+
+        // ===== STATE MANAGEMENT =====
+        let adminState = {
+            isAuthenticated: false,
+            failedAttempts: 0,
+            sessionStart: null,
+            sessionTimer: null,
+            lockoutUntil: null,
+            feedbackData: [],
+            filteredFeedback: []
+        };
+
+        // ===== PASSWORD PROTECTION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already authenticated
+            const savedSession = localStorage.getItem('admin_session');
+            if (savedSession) {
+                const session = JSON.parse(savedSession);
+                if (session.expires > Date.now()) {
+                    adminState.isAuthenticated = true;
+                    adminState.sessionStart = Date.now();
+                    showAdminDashboard();
+                    startSessionTimer();
+                } else {
+                    localStorage.removeItem('admin_session');
+                }
+            }
+
+            // Toggle password visibility
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                const passwordInput = document.getElementById('passwordInput');
+                const icon = this.querySelector('i');
+                
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+
+            // Login functionality
+            document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+            document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    attemptLogin();
+                }
+            });
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+
+            // Control buttons
+            document.getElementById('approveAllBtn').addEventListener('click', approveAllPending);
+            document.getElementById('rejectAllBtn').addEventListener('click', rejectAllPending);
+            document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+            document.getElementById('changePasswordBtn').addEventListener('click', showChangePasswordModal);
+
+            // Filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    filterFeedback(this.dataset.filter);
+                });
+            });
+
+            // Password modal buttons
+            document.getElementById('savePasswordBtn')?.addEventListener('click', changePassword);
+            document.getElementById('cancelPasswordBtn')?.addEventListener('click', hideChangePasswordModal);
+
+            // Initialize mock data if no data exists
+            if (!localStorage.getItem('feedback_data')) {
+                initializeMockData();
+            }
+
+            // Load feedback data
+            loadFeedbackData();
+        });
+
+        // ===== AUTHENTICATION FUNCTIONS =====
+        function attemptLogin() {
+            if (adminState.lockoutUntil && Date.now() < adminState.lockoutUntil) {
+                const remaining = Math.ceil((adminState.lockoutUntil - Date.now()) / 60000);
+                showNotification(`Account locked. Try again in ${remaining} minutes.`, 'error');
+                return;
+            }
+
+            const passwordInput = document.getElementById('passwordInput');
+            const enteredPassword = passwordInput.value.trim();
+
+            if (enteredPassword === SECURITY_CONFIG.ADMIN_PASSWORD) {
+                // Successful login
+                adminState.isAuthenticated = true;
+                adminState.failedAttempts = 0;
+                adminState.sessionStart = Date.now();
+                passwordInput.value = '';
+
+                // Save session
+                const session = {
+                    expires: Date.now() + SECURITY_CONFIG.SESSION_TIMEOUT
+                };
+                localStorage.setItem('admin_session', JSON.stringify(session));
+
+                showAdminDashboard();
+                startSessionTimer();
+                showNotification('✅ Secure login successful!', 'success');
+            } else {
+                // Failed attempt
+                adminState.failedAttempts++;
+                passwordInput.value = '';
+                passwordInput.focus();
+
+                const remainingAttempts = SECURITY_CONFIG.MAX_ATTEMPTS - adminState.failedAttempts;
+                
+                if (remainingAttempts > 0) {
+                    showNotification(`❌ Invalid password. ${remainingAttempts} attempts remaining.`, 'error');
+                } else {
+                    // Lockout
+                    adminState.lockoutUntil = Date.now() + SECURITY_CONFIG.LOCKOUT_TIME;
+                    showNotification('🔒 Too many failed attempts. Account locked for 15 minutes.', 'error');
+                }
+            }
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('passwordScreen').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            document.getElementById('securityBadge').style.display = 'flex';
+            document.getElementById('sessionTimer').style.display = 'flex';
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                adminState.isAuthenticated = false;
+                clearInterval(adminState.sessionTimer);
+                
+                localStorage.removeItem('admin_session');
+                
+                document.getElementById('adminDashboard').style.display = 'none';
+                document.getElementById('passwordScreen').style.display = 'flex';
+                document.getElementById('securityBadge').style.display = 'none';
+                document.getElementById('sessionTimer').style.display = 'none';
+                
+                showNotification('Logged out successfully', 'success');
+            }
+        }
+
+        // ===== SESSION MANAGEMENT =====
+        function startSessionTimer() {
+            const timerElement = document.getElementById('timerText');
+            const timerContainer = document.getElementById('sessionTimer');
+            
+            let timeLeft = SECURITY_CONFIG.SESSION_TIMEOUT / 1000; // Convert to seconds
+            
+            adminState.sessionTimer = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                timerElement.textContent = `Session: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Update styling based on time left
+                timerContainer.className = 'session-timer';
+                if (timeLeft < 300) { // 5 minutes
+                    timerContainer.classList.add('danger');
+                } else if (timeLeft < 600) { // 10 minutes
+                    timerContainer.classList.add('warning');
+                }
+                
+                // Auto logout when time expires
+                if (timeLeft <= 0) {
+                    clearInterval(adminState.sessionTimer);
+                    showNotification('Session expired. Please login again.', 'error');
+                    logout();
+                }
+            }, 1000);
+        }
+
+        // ===== FEEDBACK MANAGEMENT =====
+        function loadFeedbackData() {
+            const loadingElement = document.getElementById('loadingFeedback');
+            const feedbackList = document.getElementById('feedbackList');
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                const savedData = localStorage.getItem('feedback_data');
+                if (savedData) {
+                    adminState.feedbackData = JSON.parse(savedData);
+                }
+                
+                loadingElement.style.display = 'none';
+                updateFeedbackDisplay();
+                updateStats();
+                updateWallPreview();
+            }, 800);
+        }
+
+        function updateFeedbackDisplay() {
+            const feedbackList = document.getElementById('feedbackList');
+            feedbackList.innerHTML = '';
+            
+            const filter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            adminState.filteredFeedback = adminState.feedbackData.filter(item => {
+                if (filter === 'all') return true;
+                return item.status === filter;
+            });
+            
+            if (adminState.filteredFeedback.length === 0) {
+                feedbackList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>No feedback found</h3>
+                        <p>${filter === 'all' ? 'No feedback submissions yet' : `No ${filter} feedback`}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            adminState.filteredFeedback.forEach((feedback, index) => {
+                const item = document.createElement('div');
+                item.className = `feedback-item ${feedback.status}`;
+                item.innerHTML = `
+                    <div class="feedback-header">
+                        <div class="feedback-question">
+                            <i class="fas fa-question-circle" style="color: var(--primary); margin-right: 8px;"></i>
+                            ${feedback.question}
+                        </div>
+                        <div class="feedback-meta">
+                            <span><i class="fas fa-calendar"></i> ${feedback.date}</span>
+                            <span><i class="fas fa-user"></i> ${feedback.student}</span>
+                            <span class="status-badge status-${feedback.status}">
+                                <i class="fas fa-${feedback.status === 'pending' ? 'clock' : feedback.status === 'approved' ? 'check' : 'times'}"></i>
+                                ${feedback.status.charAt(0).toUpperCase() + feedback.status.slice(1)}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="feedback-answer">
+                        ${feedback.answer}
+                    </div>
+                    <div class="feedback-actions">
+                        ${feedback.status !== 'approved' ? `
+                            <button class="action-btn approve" onclick="approveFeedback(${index})">
+                                <i class="fas fa-check"></i> Approve
+                            </button>
+                        ` : ''}
+                        ${feedback.status !== 'rejected' ? `
+                            <button class="action-btn reject" onclick="rejectFeedback(${index})">
+                                <i class="fas fa-times"></i> Reject
+                            </button>
+                        ` : ''}
+                        <button class="action-btn delete" onclick="deleteFeedback(${index})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                `;
+                feedbackList.appendChild(item);
+            });
+        }
+
+        function filterFeedback(filterType) {
+            updateFeedbackDisplay();
+        }
+
+        function approveFeedback(index) {
+            const feedback = adminState.filteredFeedback[index];
+            const actualIndex = adminState.feedbackData.findIndex(f => 
+                f.id === feedback.id
+            );
+            
+            if (actualIndex !== -1) {
+                adminState.feedbackData[actualIndex].status = 'approved';
+                saveFeedbackData();
+                showNotification('Feedback approved successfully!', 'success');
+            }
+        }
+
+        function rejectFeedback(index) {
+            const feedback = adminState.filteredFeedback[index];
+            const actualIndex = adminState.feedbackData.findIndex(f => 
+                f.id === feedback.id
+            );
+            
+            if (actualIndex !== -1) {
+                adminState.feedbackData[actualIndex].status = 'rejected';
+                saveFeedbackData();
+                showNotification('Feedback rejected.', 'warning');
+            }
+        }
+
+        function deleteFeedback(index) {
+            if (confirm('Are you sure you want to delete this feedback?')) {
+                const feedback = adminState.filteredFeedback[index];
+                adminState.feedbackData = adminState.feedbackData.filter(f => f.id !== feedback.id);
+                saveFeedbackData();
+                showNotification('Feedback deleted successfully!', 'success');
+            }
+        }
+
+        function approveAllPending() {
+            if (!confirm('Approve ALL pending feedback?')) return;
+            
+            let approvedCount = 0;
+            adminState.feedbackData.forEach(feedback => {
+                if (feedback.status === 'pending') {
+                    feedback.status = 'approved';
+                    approvedCount++;
+                }
+            });
+            
+            saveFeedbackData();
+            showNotification(`Approved ${approvedCount} feedback items!`, 'success');
+        }
+
+        function rejectAllPending() {
+            if (!confirm('Reject ALL pending feedback?')) return;
+            
+            let rejectedCount = 0;
+            adminState.feedbackData.forEach(feedback => {
+                if (feedback.status === 'pending') {
+                    feedback.status = 'rejected';
+                    rejectedCount++;
+                }
+            });
+            
+            saveFeedbackData();
+            showNotification(`Rejected ${rejectedCount} feedback items.`, 'warning');
+        }
+
+        function saveFeedbackData() {
+            localStorage.setItem('feedback_data', JSON.stringify(adminState.feedbackData));
+            updateFeedbackDisplay();
+            updateStats();
+            updateWallPreview();
+        }
+
+        function updateStats() {
+            const pending = adminState.feedbackData.filter(f => f.status === 'pending').length;
+            const approved = adminState.feedbackData.filter(f => f.status === 'approved').length;
+            const rejected = adminState.feedbackData.filter(f => f.status === 'rejected').length;
+            const total = adminState.feedbackData.length;
+            
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('approvedCount').textContent = approved;
+            document.getElementById('rejectedCount').textContent = rejected;
+            document.getElementById('totalCount').textContent = total;
+        }
+
+        function updateWallPreview() {
+            const previewContainer = document.getElementById('wallPreview');
+            const approvedFeedback = adminState.feedbackData.filter(f => f.status === 'approved');
+            
+            if (approvedFeedback.length === 0) {
+                previewContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <h3>No approved messages yet</h3>
+                        <p>Approve some feedback to see it here</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            previewContainer.innerHTML = approvedFeedback.map(feedback => `
+                <div class="approved-message">
+                    <div class="message-content">
+                        <strong>Q:</strong> ${feedback.question}<br><br>
+                        <strong>A:</strong> ${feedback.answer}
+                    </div>
+                    <div class="message-meta">
+                        <span><i class="fas fa-user-graduate"></i> ${feedback.student}</span>
+                        <span><i class="fas fa-calendar"></i> ${feedback.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== EXPORT FUNCTIONALITY =====
+        function exportToCSV() {
+            const headers = ['Question', 'Answer', 'Student', 'Date', 'Status'];
+            const csvData = adminState.feedbackData.map(f => [
+                `"${f.question}"`,
+                `"${f.answer}"`,
+                f.student,
+                f.date,
+                f.status
+            ]);
+            
+            const csvContent = [
+                headers.join(','),
+                ...csvData.map(row => row.join(','))
+            ].join('\n');
+            
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `feedback_export_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            showNotification('CSV export completed!', 'success');
+        }
+
+        // ===== PASSWORD CHANGE FUNCTIONALITY =====
+        function showChangePasswordModal() {
+            document.getElementById('changePasswordModal').style.display = 'flex';
+        }
+
+        function hideChangePasswordModal() {
+            document.getElementById('changePasswordModal').style.display = 'none';
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+
+        function changePassword() {
+            const current = document.getElementById('currentPassword').value;
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (current !== SECURITY_CONFIG.ADMIN_PASSWORD) {
+                showNotification('Current password is incorrect', 'error');
+                return;
+            }
+            
+            if (newPass.length < 8) {
+                showNotification('New password must be at least 8 characters', 'error');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                showNotification('New passwords do not match', 'error');
+                return;
+            }
+            
+            SECURITY_CONFIG.ADMIN_PASSWORD = newPass;
+            hideChangePasswordModal();
+            showNotification('Password changed successfully!', 'success');
+            
+            // Save new password to localStorage (in real app, this would go to server)
+            localStorage.setItem('admin_password', newPass);
+        }
+
+        // ===== NOTIFICATION SYSTEM =====
+        function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            document.querySelectorAll('.notification').forEach(n => n.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                <div>${message}</div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Trigger animation
+            setTimeout(() => notification.classList.add('show'), 10);
+            
+            // Auto remove
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 5000);
+        }
+
+        // ===== MOCK DATA INITIALIZATION =====
+        function initializeMockData() {
+            const mockData = [
+                {
+                    id: 1,
+                    question: "How can we improve campus Wi-Fi connectivity?",
+                    answer: "The university should invest in more access points and upgrade existing infrastructure to support more concurrent users, especially during peak hours.",
+                    student: "Ahmed Khan",
+                    date: "2024-03-15",
+                    status: "approved"
+                },
+                {
+                    id: 2,
+                    question: "Are there plans for more computer science electives?",
+                    answer: "We need more specialized courses in AI and cybersecurity to stay competitive in the job market.",
+                    student: "Sara Ahmed",
+                    date: "2024-03-14",
+                    status: "pending"
+                },
+                {
+                    id: 3,
+                    question: "Can the library extend its operating hours during exams?",
+                    answer: "24/7 access to the library during finals week would greatly help students with different study schedules.",
+                    student: "Mohammed Ali",
+                    date: "2024-03-13",
+                    status: "approved"
+                },
+                {
+                    id: 4,
+                    question: "What about internship opportunities for engineering students?",
+                    answer: "The career services should establish more partnerships with local tech companies for summer internships.",
+                    student: "Fatima Zahra",
+                    date: "2024-03-12",
+                    status: "rejected"
+                },
+                {
+                    id: 5,
+                    question: "How can student feedback be better incorporated?",
+                    answer: "Create a digital platform where students can submit and vote on improvement suggestions for the university.",
+                    student: "Omar Farooq",
+                    date: "2024-03-11",
+                    status: "pending"
+                }
+            ];
+            
+            localStorage.setItem('feedback_data', JSON.stringify(mockData));
+            adminState.feedbackData = mockData;
+        }
+
+        // ===== SECURITY ENHANCEMENTS =====
+        // Prevent right-click
+        document.addEventListener('contextmenu', function(e) {
+            if (adminState.isAuthenticated) {
+                e.preventDefault();
+                showNotification('Right-click disabled for security', 'error');
+            }
+        });
+
+        // Prevent F12 and Ctrl+Shift+I
+        document.addEventListener('keydown', function(e) {
+            if (adminState.isAuthenticated && 
+                (e.key === 'F12' || 
+                 (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                 (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                 (e.ctrlKey && e.key === 'U'))) {
+                e.preventDefault();
+                showNotification('Developer tools disabled for security', 'error');
+            }
+        });
+
+        // Auto logout on tab/window close
+        window.addEventListener('beforeunload', function() {
+            if (adminState.isAuthenticated) {
+                localStorage.removeItem('admin_session');
+            }
+        });
+    </script>
+</body>
+</html>
