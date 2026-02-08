@@ -4,7 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Baba Ahmad University</title>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* ===== ADMIN STYLES ===== */
         :root {
@@ -1172,14 +1179,13 @@
     </div>
 
     <script>
-               // ===== ENHANCED SECURITY CONFIGURATION =====
+        // ===== ENHANCED SECURITY CONFIGURATION =====
         const SECURITY_CONFIG = {
             // Change this to your SECURE password (minimum 8 characters)
             ADMIN_PASSWORD: 'BabaAdmin2024!',
             MAX_ATTEMPTS: 3,
             SESSION_TIMEOUT: 30 * 60 * 1000, // 30 minutes in milliseconds
             LOCKOUT_TIME: 15 * 60 * 1000, // 15 minutes lockout after max attempts
-            ENCRYPTION_KEY: 'baba-uni-secure-2024'
         };
 
         // ===== STATE MANAGEMENT =====
@@ -1188,9 +1194,7 @@
             failedAttempts: 0,
             sessionStart: null,
             sessionTimer: null,
-            lockoutUntil: null,
-            feedbackData: [],
-            filteredFeedback: []
+            lockoutUntil: null
         };
 
         // ===== PASSWORD PROTECTION =====
@@ -1207,6 +1211,12 @@
                 } else {
                     localStorage.removeItem('admin_session');
                 }
+            }
+
+            // Check for saved password
+            const savedPassword = localStorage.getItem('admin_password');
+            if (savedPassword) {
+                SECURITY_CONFIG.ADMIN_PASSWORD = savedPassword;
             }
 
             // Toggle password visibility
@@ -1254,11 +1264,6 @@
             // Password modal buttons
             document.getElementById('savePasswordBtn')?.addEventListener('click', changePassword);
             document.getElementById('cancelPasswordBtn')?.addEventListener('click', hideChangePasswordModal);
-
-            // Initialize mock data if no data exists
-            if (!localStorage.getItem('feedback_data')) {
-                initializeMockData();
-            }
 
             // Load feedback data
             loadFeedbackData();
@@ -1367,15 +1372,9 @@
         // ===== FEEDBACK MANAGEMENT =====
         function loadFeedbackData() {
             const loadingElement = document.getElementById('loadingFeedback');
-            const feedbackList = document.getElementById('feedbackList');
             
             // Simulate loading delay
             setTimeout(() => {
-                const savedData = localStorage.getItem('feedback_data');
-                if (savedData) {
-                    adminState.feedbackData = JSON.parse(savedData);
-                }
-                
                 loadingElement.style.display = 'none';
                 updateFeedbackDisplay();
                 updateStats();
@@ -1387,25 +1386,48 @@
             const feedbackList = document.getElementById('feedbackList');
             feedbackList.innerHTML = '';
             
-            const filter = document.querySelector('.filter-btn.active').dataset.filter;
+            // Get REAL feedback data from localStorage
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
             
-            adminState.filteredFeedback = adminState.feedbackData.filter(item => {
-                if (filter === 'all') return true;
-                return item.status === filter;
-            });
-            
-            if (adminState.filteredFeedback.length === 0) {
+            if (feedbackData.length === 0) {
                 feedbackList.innerHTML = `
                     <div class="empty-state">
                         <i class="fas fa-comment-slash"></i>
-                        <h3>No feedback found</h3>
-                        <p>${filter === 'all' ? 'No feedback submissions yet' : `No ${filter} feedback`}</p>
+                        <h3>No feedback submissions yet</h3>
+                        <p>Waiting for students to submit feedback...</p>
                     </div>
                 `;
                 return;
             }
             
-            adminState.filteredFeedback.forEach((feedback, index) => {
+            // Sort by timestamp (newest first)
+            feedbackData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            // Get current filter
+            const filter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            // Filter feedback
+            const filteredFeedback = filter === 'all' 
+                ? feedbackData 
+                : feedbackData.filter(item => item.status === filter);
+            
+            if (filteredFeedback.length === 0) {
+                feedbackList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-filter"></i>
+                        <h3>No ${filter} feedback</h3>
+                        <p>Try a different filter</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Display feedback items
+            filteredFeedback.forEach((feedback, index) => {
+                const date = new Date(feedback.timestamp);
+                const timeAgo = getTimeAgo(date);
+                const formattedDate = date.toLocaleString();
+                
                 const item = document.createElement('div');
                 item.className = `feedback-item ${feedback.status}`;
                 item.innerHTML = `
@@ -1415,8 +1437,8 @@
                             ${feedback.question}
                         </div>
                         <div class="feedback-meta">
-                            <span><i class="fas fa-calendar"></i> ${feedback.date}</span>
-                            <span><i class="fas fa-user"></i> ${feedback.student}</span>
+                            <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
+                            <span><i class="fas fa-clock"></i> ${timeAgo}</span>
                             <span class="status-badge status-${feedback.status}">
                                 <i class="fas fa-${feedback.status === 'pending' ? 'clock' : feedback.status === 'approved' ? 'check' : 'times'}"></i>
                                 ${feedback.status.charAt(0).toUpperCase() + feedback.status.slice(1)}
@@ -1428,16 +1450,16 @@
                     </div>
                     <div class="feedback-actions">
                         ${feedback.status !== 'approved' ? `
-                            <button class="action-btn approve" onclick="approveFeedback(${index})">
+                            <button class="action-btn approve" onclick="approveFeedback('${feedback.id}')">
                                 <i class="fas fa-check"></i> Approve
                             </button>
                         ` : ''}
                         ${feedback.status !== 'rejected' ? `
-                            <button class="action-btn reject" onclick="rejectFeedback(${index})">
+                            <button class="action-btn reject" onclick="rejectFeedback('${feedback.id}')">
                                 <i class="fas fa-times"></i> Reject
                             </button>
                         ` : ''}
-                        <button class="action-btn delete" onclick="deleteFeedback(${index})">
+                        <button class="action-btn delete" onclick="deleteFeedback('${feedback.id}')">
                             <i class="fas fa-trash"></i> Delete
                         </button>
                     </div>
@@ -1450,37 +1472,45 @@
             updateFeedbackDisplay();
         }
 
-        function approveFeedback(index) {
-            const feedback = adminState.filteredFeedback[index];
-            const actualIndex = adminState.feedbackData.findIndex(f => 
-                f.id === feedback.id
-            );
+        function approveFeedback(id) {
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            const index = feedbackData.findIndex(f => f.id === id);
             
-            if (actualIndex !== -1) {
-                adminState.feedbackData[actualIndex].status = 'approved';
-                saveFeedbackData();
+            if (index !== -1) {
+                feedbackData[index].status = 'approved';
+                localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedbackData));
+                
+                updateFeedbackDisplay();
+                updateStats();
+                updateWallPreview();
                 showNotification('Feedback approved successfully!', 'success');
             }
         }
 
-        function rejectFeedback(index) {
-            const feedback = adminState.filteredFeedback[index];
-            const actualIndex = adminState.feedbackData.findIndex(f => 
-                f.id === feedback.id
-            );
+        function rejectFeedback(id) {
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            const index = feedbackData.findIndex(f => f.id === id);
             
-            if (actualIndex !== -1) {
-                adminState.feedbackData[actualIndex].status = 'rejected';
-                saveFeedbackData();
+            if (index !== -1) {
+                feedbackData[index].status = 'rejected';
+                localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedbackData));
+                
+                updateFeedbackDisplay();
+                updateStats();
+                updateWallPreview();
                 showNotification('Feedback rejected.', 'warning');
             }
         }
 
-        function deleteFeedback(index) {
+        function deleteFeedback(id) {
             if (confirm('Are you sure you want to delete this feedback?')) {
-                const feedback = adminState.filteredFeedback[index];
-                adminState.feedbackData = adminState.feedbackData.filter(f => f.id !== feedback.id);
-                saveFeedbackData();
+                let feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+                feedbackData = feedbackData.filter(f => f.id !== id);
+                localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedbackData));
+                
+                updateFeedbackDisplay();
+                updateStats();
+                updateWallPreview();
                 showNotification('Feedback deleted successfully!', 'success');
             }
         }
@@ -1488,45 +1518,52 @@
         function approveAllPending() {
             if (!confirm('Approve ALL pending feedback?')) return;
             
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
             let approvedCount = 0;
-            adminState.feedbackData.forEach(feedback => {
+            
+            feedbackData.forEach(feedback => {
                 if (feedback.status === 'pending') {
                     feedback.status = 'approved';
                     approvedCount++;
                 }
             });
             
-            saveFeedbackData();
+            localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedbackData));
+            
+            updateFeedbackDisplay();
+            updateStats();
+            updateWallPreview();
             showNotification(`Approved ${approvedCount} feedback items!`, 'success');
         }
 
         function rejectAllPending() {
             if (!confirm('Reject ALL pending feedback?')) return;
             
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
             let rejectedCount = 0;
-            adminState.feedbackData.forEach(feedback => {
+            
+            feedbackData.forEach(feedback => {
                 if (feedback.status === 'pending') {
                     feedback.status = 'rejected';
                     rejectedCount++;
                 }
             });
             
-            saveFeedbackData();
-            showNotification(`Rejected ${rejectedCount} feedback items.`, 'warning');
-        }
-
-        function saveFeedbackData() {
-            localStorage.setItem('feedback_data', JSON.stringify(adminState.feedbackData));
+            localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedbackData));
+            
             updateFeedbackDisplay();
             updateStats();
             updateWallPreview();
+            showNotification(`Rejected ${rejectedCount} feedback items.`, 'warning');
         }
 
         function updateStats() {
-            const pending = adminState.feedbackData.filter(f => f.status === 'pending').length;
-            const approved = adminState.feedbackData.filter(f => f.status === 'approved').length;
-            const rejected = adminState.feedbackData.filter(f => f.status === 'rejected').length;
-            const total = adminState.feedbackData.length;
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            
+            const pending = feedbackData.filter(f => f.status === 'pending').length;
+            const approved = feedbackData.filter(f => f.status === 'approved').length;
+            const rejected = feedbackData.filter(f => f.status === 'rejected').length;
+            const total = feedbackData.length;
             
             document.getElementById('pendingCount').textContent = pending;
             document.getElementById('approvedCount').textContent = approved;
@@ -1536,7 +1573,9 @@
 
         function updateWallPreview() {
             const previewContainer = document.getElementById('wallPreview');
-            const approvedFeedback = adminState.feedbackData.filter(f => f.status === 'approved');
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            
+            const approvedFeedback = feedbackData.filter(f => f.status === 'approved');
             
             if (approvedFeedback.length === 0) {
                 previewContainer.innerHTML = `
@@ -1549,28 +1588,45 @@
                 return;
             }
             
-            previewContainer.innerHTML = approvedFeedback.map(feedback => `
-                <div class="approved-message">
-                    <div class="message-content">
-                        <strong>Q:</strong> ${feedback.question}<br><br>
-                        <strong>A:</strong> ${feedback.answer}
+            // Sort approved feedback by timestamp (newest first) and limit to 10
+            approvedFeedback.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const recentApproved = approvedFeedback.slice(0, 10);
+            
+            previewContainer.innerHTML = recentApproved.map(feedback => {
+                const date = new Date(feedback.timestamp);
+                const timeAgo = getTimeAgo(date);
+                
+                return `
+                    <div class="approved-message">
+                        <div class="message-content">
+                            <strong>Q:</strong> ${feedback.question}<br><br>
+                            <strong>A:</strong> ${feedback.answer}
+                        </div>
+                        <div class="message-meta">
+                            <span><i class="fas fa-user-graduate"></i> Anonymous Student</span>
+                            <span><i class="fas fa-clock"></i> ${timeAgo}</span>
+                        </div>
                     </div>
-                    <div class="message-meta">
-                        <span><i class="fas fa-user-graduate"></i> ${feedback.student}</span>
-                        <span><i class="fas fa-calendar"></i> ${feedback.date}</span>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // ===== EXPORT FUNCTIONALITY =====
         function exportToCSV() {
-            const headers = ['Question', 'Answer', 'Student', 'Date', 'Status'];
-            const csvData = adminState.feedbackData.map(f => [
-                `"${f.question}"`,
-                `"${f.answer}"`,
-                f.student,
-                f.date,
+            const feedbackData = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            
+            if (feedbackData.length === 0) {
+                showNotification('No feedback to export', 'error');
+                return;
+            }
+            
+            // Create CSV content
+            const headers = ['ID', 'Timestamp', 'Question', 'Answer', 'Status'];
+            const csvData = feedbackData.map(f => [
+                f.id,
+                new Date(f.timestamp).toLocaleString(),
+                `"${f.question.replace(/"/g, '""')}"`,
+                `"${f.answer.replace(/"/g, '""')}"`,
                 f.status
             ]);
             
@@ -1579,11 +1635,12 @@
                 ...csvData.map(row => row.join(','))
             ].join('\n');
             
+            // Create download link
             const blob = new Blob([csvContent], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `feedback_export_${new Date().toISOString().split('T')[0]}.csv`;
+            a.download = `baba_ahmad_feedback_${new Date().toISOString().split('T')[0]}.csv`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -1625,11 +1682,28 @@
             }
             
             SECURITY_CONFIG.ADMIN_PASSWORD = newPass;
+            localStorage.setItem('admin_password', newPass);
+            
             hideChangePasswordModal();
             showNotification('Password changed successfully!', 'success');
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
             
-            // Save new password to localStorage (in real app, this would go to server)
-            localStorage.setItem('admin_password', newPass);
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            if (seconds < 60) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days < 7) return `${days}d ago`;
+            
+            return date.toLocaleDateString();
         }
 
         // ===== NOTIFICATION SYSTEM =====
@@ -1656,57 +1730,8 @@
             }, 5000);
         }
 
-        // ===== MOCK DATA INITIALIZATION =====
-        function initializeMockData() {
-            const mockData = [
-                {
-                    id: 1,
-                    question: "How can we improve campus Wi-Fi connectivity?",
-                    answer: "The university should invest in more access points and upgrade existing infrastructure to support more concurrent users, especially during peak hours.",
-                    student: "Ahmed Khan",
-                    date: "2024-03-15",
-                    status: "approved"
-                },
-                {
-                    id: 2,
-                    question: "Are there plans for more computer science electives?",
-                    answer: "We need more specialized courses in AI and cybersecurity to stay competitive in the job market.",
-                    student: "Sara Ahmed",
-                    date: "2024-03-14",
-                    status: "pending"
-                },
-                {
-                    id: 3,
-                    question: "Can the library extend its operating hours during exams?",
-                    answer: "24/7 access to the library during finals week would greatly help students with different study schedules.",
-                    student: "Mohammed Ali",
-                    date: "2024-03-13",
-                    status: "approved"
-                },
-                {
-                    id: 4,
-                    question: "What about internship opportunities for engineering students?",
-                    answer: "The career services should establish more partnerships with local tech companies for summer internships.",
-                    student: "Fatima Zahra",
-                    date: "2024-03-12",
-                    status: "rejected"
-                },
-                {
-                    id: 5,
-                    question: "How can student feedback be better incorporated?",
-                    answer: "Create a digital platform where students can submit and vote on improvement suggestions for the university.",
-                    student: "Omar Farooq",
-                    date: "2024-03-11",
-                    status: "pending"
-                }
-            ];
-            
-            localStorage.setItem('feedback_data', JSON.stringify(mockData));
-            adminState.feedbackData = mockData;
-        }
-
         // ===== SECURITY ENHANCEMENTS =====
-        // Prevent right-click
+        // Prevent right-click in admin area
         document.addEventListener('contextmenu', function(e) {
             if (adminState.isAuthenticated) {
                 e.preventDefault();
@@ -1714,7 +1739,7 @@
             }
         });
 
-        // Prevent F12 and Ctrl+Shift+I
+        // Prevent developer tools
         document.addEventListener('keydown', function(e) {
             if (adminState.isAuthenticated && 
                 (e.key === 'F12' || 
@@ -1726,7 +1751,7 @@
             }
         });
 
-        // Auto logout on tab/window close
+        // Auto logout on window close
         window.addEventListener('beforeunload', function() {
             if (adminState.isAuthenticated) {
                 localStorage.removeItem('admin_session');
