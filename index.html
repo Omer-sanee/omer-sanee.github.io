@@ -987,170 +987,215 @@
             }
         }
 
-        /* ===== SHARE IMAGE CONTAINER (HIDDEN) ===== */
+        /* ===== FULL-PAGE SHARE IMAGE CONTAINER ===== */
         .share-image-container {
             position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 600px;
-            height: 600px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .share-image-wrapper {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            min-height: 600px;
+            max-height: 90vh;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
             border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            z-index: -9999;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            position: relative;
+            padding: 40px;
         }
 
         .share-image-content {
-            background: white;
-            border-radius: 20px;
-            padding: 35px;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
         .share-image-header {
             text-align: center;
-            margin-bottom: 30px;
+            padding-bottom: 25px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 25px;
             position: relative;
         }
 
         .share-image-header::after {
             content: '';
             position: absolute;
-            bottom: -15px;
-            left: 25%;
-            width: 50%;
-            height: 3px;
+            bottom: -3px;
+            left: 35%;
+            width: 30%;
+            height: 6px;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             border-radius: 3px;
         }
 
         .share-image-logo {
-            font-size: 4rem;
-            margin-bottom: 15px;
+            font-size: 5rem;
             color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
         }
 
         .share-image-title {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--dark);
-            font-weight: 800;
+            font-weight: 900;
             margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .share-image-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--gray);
             font-weight: 600;
+            opacity: 0.9;
         }
 
         .share-question-container {
-            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-            border-radius: 15px;
-            padding: 25px;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            padding: 35px;
             margin-bottom: 25px;
-            border-left: 5px solid var(--primary);
+            border-left: 8px solid var(--primary);
             position: relative;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.15);
         }
 
         .share-question-container::before {
             content: '💬 QUESTION';
             position: absolute;
-            top: -12px;
-            left: 25px;
+            top: -15px;
+            left: 35px;
             background: var(--primary);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
         }
 
         .share-question-text {
-            font-size: 1.4rem;
+            font-size: 1.8rem;
             color: var(--dark);
             font-weight: 700;
-            line-height: 1.4;
+            line-height: 1.5;
             margin-top: 10px;
+            text-align: left;
         }
 
         .share-answer-container {
-            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
-            border-radius: 15px;
-            padding: 25px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1));
+            border-radius: 20px;
+            padding: 35px;
             margin-bottom: 25px;
-            border-left: 5px solid var(--accent);
+            border-left: 8px solid var(--accent);
             position: relative;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.15);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .share-answer-container::before {
             content: '💭 ANSWER';
             position: absolute;
-            top: -12px;
-            left: 25px;
+            top: -15px;
+            left: 35px;
             background: var(--accent);
             color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
         }
 
         .share-answer-text {
-            font-size: 1.3rem;
+            font-size: 1.6rem;
             color: var(--dark);
-            line-height: 1.5;
+            line-height: 1.6;
             margin-top: 10px;
+            text-align: left;
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .share-answer-text::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .share-answer-text::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 4px;
+        }
+
+        .share-answer-text::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
         }
 
         .share-footer {
-            position: absolute;
-            bottom: 25px;
-            left: 35px;
-            right: 35px;
+            margin-top: auto;
+            padding-top: 25px;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 20px;
-            border-top: 2px solid var(--light);
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
         .share-watermark {
-            color: var(--gray);
-            font-size: 1.1rem;
-            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.3rem;
+            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .share-watermark i {
             color: var(--primary);
+            font-size: 1.8rem;
         }
 
         .share-qr-code {
-            background: #f8fafc;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1rem;
             color: var(--dark);
-            font-weight: 600;
+            font-weight: 700;
             text-align: center;
-            min-width: 150px;
+            border: 2px dashed var(--primary);
+            min-width: 200px;
         }
 
         .share-qr-code i {
-            font-size: 1.5rem;
+            font-size: 2rem;
             color: var(--primary);
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .share-image-decorations {
@@ -1165,8 +1210,47 @@
 
         .share-decoration {
             position: absolute;
-            font-size: 3rem;
-            opacity: 0.1;
+            font-size: 4rem;
+            opacity: 0.08;
+        }
+
+        .share-controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            gap: 15px;
+        }
+
+        .share-control-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 12px;
+            padding: 15px 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .share-control-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-control-btn.share {
+            background: linear-gradient(135deg, var(--accent), #34d399);
+            color: white;
+        }
+
+        .share-control-btn.close {
+            background: linear-gradient(135deg, var(--danger), #f87171);
+            color: white;
         }
 
         /* ===== SHARE LOADING OVERLAY ===== */
@@ -1176,75 +1260,184 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 3000;
+            z-index: 10001;
             flex-direction: column;
-            gap: 25px;
+            gap: 30px;
         }
 
         .share-loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.2);
+            width: 80px;
+            height: 80px;
+            border: 6px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             border-top-color: var(--primary);
-            animation: spin 1s linear infinite;
+            animation: spin 1.2s linear infinite;
         }
 
         .share-loading-text {
             color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-            max-width: 300px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            max-width: 400px;
             text-align: center;
-            line-height: 1.5;
+            line-height: 1.6;
+        }
+
+        /* ===== RESPONSIVE FOR SHARE IMAGE ===== */
+        @media (max-width: 768px) {
+            .share-image-wrapper {
+                padding: 30px 20px;
+                max-width: 95%;
+                min-height: 500px;
+            }
+            
+            .share-image-title {
+                font-size: 2.2rem;
+            }
+            
+            .share-image-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .share-question-text {
+                font-size: 1.5rem;
+            }
+            
+            .share-answer-text {
+                font-size: 1.3rem;
+            }
+            
+            .share-watermark {
+                font-size: 1.1rem;
+            }
+            
+            .share-qr-code {
+                min-width: 150px;
+                padding: 12px 20px;
+            }
+            
+            .share-controls {
+                top: 10px;
+                right: 10px;
+                flex-direction: column;
+            }
+            
+            .share-control-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .share-image-wrapper {
+                padding: 25px 15px;
+                max-width: 100%;
+                border-radius: 15px;
+            }
+            
+            .share-image-title {
+                font-size: 1.8rem;
+            }
+            
+            .share-image-subtitle {
+                font-size: 1rem;
+            }
+            
+            .share-question-container,
+            .share-answer-container {
+                padding: 25px 20px;
+            }
+            
+            .share-question-text {
+                font-size: 1.3rem;
+            }
+            
+            .share-answer-text {
+                font-size: 1.1rem;
+            }
+            
+            .share-question-container::before,
+            .share-answer-container::before {
+                left: 20px;
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .share-footer {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .share-controls {
+                top: 5px;
+                right: 5px;
+            }
+            
+            .share-control-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- SHARE IMAGE CONTAINER (HIDDEN) -->
+    <!-- FULL-PAGE SHARE IMAGE CONTAINER -->
     <div class="share-image-container" id="shareImageContainer">
-        <div class="share-image-content">
+        <div class="share-image-wrapper">
             <div class="share-image-decorations">
-                <div class="share-decoration" style="top: 10%; left: 5%;">🎓</div>
-                <div class="share-decoration" style="top: 15%; right: 10%;">💬</div>
-                <div class="share-decoration" style="bottom: 20%; left: 15%;">✨</div>
-                <div class="share-decoration" style="bottom: 15%; right: 5%;">🌟</div>
+                <div class="share-decoration" style="top: 5%; left: 5%;">🎓</div>
+                <div class="share-decoration" style="top: 10%; right: 8%;">💬</div>
+                <div class="share-decoration" style="bottom: 15%; left: 10%;">✨</div>
+                <div class="share-decoration" style="bottom: 10%; right: 5%;">🌟</div>
+                <div class="share-decoration" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">🎯</div>
             </div>
             
-            <div class="share-image-header">
-                <div class="share-image-logo">
-                    <i class="fas fa-graduation-cap"></i>
+            <div class="share-image-content">
+                <div class="share-image-header">
+                    <div class="share-image-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="share-image-title">Baba Ahmad University</div>
+                    <div class="share-image-subtitle">Anonymous Feedback System</div>
                 </div>
-                <div class="share-image-title">Baba Ahmad University</div>
-                <div class="share-image-subtitle">Anonymous Feedback System</div>
+                
+                <div class="share-question-container" id="shareQuestionContainer">
+                    <div class="share-question-text" id="shareQuestionText">
+                        Loading question...
+                    </div>
+                </div>
+                
+                <div class="share-answer-container" id="shareAnswerContainer">
+                    <div class="share-answer-text" id="shareAnswerText">
+                        Loading answer...
+                    </div>
+                </div>
+                
+                <div class="share-footer">
+                    <div class="share-watermark">
+                        <i class="fas fa-shield-alt"></i>
+                        Shared via Baba Ahmad Feedback
+                    </div>
+                    <div class="share-qr-code">
+                        <i class="fas fa-qrcode"></i>
+                        Scan to share your thoughts
+                    </div>
+                </div>
             </div>
-            
-            <div class="share-question-container" id="shareQuestionContainer">
-                <div class="share-question-text" id="shareQuestionText">
-                    Loading question...
-                </div>
-            </div>
-            
-            <div class="share-answer-container" id="shareAnswerContainer">
-                <div class="share-answer-text" id="shareAnswerText">
-                    Loading answer...
-                </div>
-            </div>
-            
-            <div class="share-footer">
-                <div class="share-watermark">
-                    <i class="fas fa-shield-alt"></i>
-                    Shared via Baba Ahmad Feedback
-                </div>
-                <div class="share-qr-code">
-                    <i class="fas fa-qrcode"></i>
-                    Scan to share your thoughts
-                </div>
-            </div>
+        </div>
+        
+        <div class="share-controls">
+            <button class="share-control-btn share" id="shareImageBtn">
+                <i class="fas fa-share-alt"></i> Share Image
+            </button>
+            <button class="share-control-btn close" id="closeShareBtn">
+                <i class="fas fa-times"></i> Close
+            </button>
         </div>
     </div>
 
@@ -1535,6 +1728,8 @@
         const shareAnswerText = document.getElementById('shareAnswerText');
         const shareLoading = document.getElementById('shareLoading');
         const shareLoadingText = document.getElementById('shareLoadingText');
+        const shareImageBtn = document.getElementById('shareImageBtn');
+        const closeShareBtn = document.getElementById('closeShareBtn');
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1574,6 +1769,12 @@
             
             // Refresh wall button
             refreshWallBtn.addEventListener('click', loadApprovedAnswers);
+            
+            // Share image button
+            shareImageBtn.addEventListener('click', createAndShareImage);
+            
+            // Close share button
+            closeShareBtn.addEventListener('click', closeShareImage);
             
             // Load approved answers on view tab
             loadApprovedAnswers();
@@ -1834,8 +2035,8 @@
                         <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${feedback.id}, this)">
                             <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
                         </button>
-                        <button class="action-btn share-btn" onclick="createAndShareImage(${feedback.id})">
-                            <i class="fas fa-share"></i> Share as Image
+                        <button class="action-btn share-btn" onclick="showShareImage(${feedback.id})">
+                            <i class="fas fa-image"></i> Share as Image
                         </button>
                     </div>
                 </div>
@@ -1844,8 +2045,11 @@
             return div;
         }
 
-        // ===== IMAGE SHARING SYSTEM =====
-        async function createAndShareImage(feedbackId) {
+        // ===== FULL-PAGE SHARE IMAGE SYSTEM =====
+        let currentSharingFeedbackId = null;
+
+        function showShareImage(feedbackId) {
+            currentSharingFeedbackId = feedbackId;
             const feedback = getFeedbackById(feedbackId);
             if (!feedback) return;
             
@@ -1853,28 +2057,61 @@
             feedback.shares = (feedback.shares || 0) + 1;
             updateFeedbackInStorage(feedback);
             
-            // Show loading overlay
-            shareLoading.style.display = 'flex';
-            shareLoadingText.textContent = 'Creating beautiful share image...';
-            
             // Update the share image content
             shareQuestionText.textContent = feedback.question;
             shareAnswerText.textContent = feedback.answer;
             
+            // Show the full-page share image container
+            shareImageContainer.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Auto-scroll answer if needed
+            setTimeout(() => {
+                shareAnswerText.scrollTop = 0;
+            }, 100);
+        }
+
+        function closeShareImage() {
+            shareImageContainer.style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+            currentSharingFeedbackId = null;
+            
+            // Refresh wall to update share counts
+            loadApprovedAnswers();
+        }
+
+        async function createAndShareImage() {
+            if (!currentSharingFeedbackId) return;
+            
+            const feedback = getFeedbackById(currentSharingFeedbackId);
+            if (!feedback) return;
+            
+            // Show loading overlay
+            shareLoading.style.display = 'flex';
+            shareLoadingText.textContent = 'Creating beautiful full-page image...';
+            
             try {
-                // Wait a bit for rendering
+                // Hide share controls temporarily
+                document.querySelector('.share-controls').style.display = 'none';
+                
+                // Wait for any animations to complete
                 await new Promise(resolve => setTimeout(resolve, 500));
                 
-                // Create the image
-                const canvas = await html2canvas(shareImageContainer, {
+                // Create the image - capture the entire share image container
+                const canvas = await html2canvas(shareImageContainer.querySelector('.share-image-wrapper'), {
                     scale: 2,
                     backgroundColor: null,
                     useCORS: true,
                     allowTaint: true,
-                    width: 600,
+                    logging: false,
+                    width: 800,
                     height: 600,
-                    logging: false
+                    windowWidth: 800,
+                    windowHeight: 600
                 });
+                
+                // Show share controls again
+                document.querySelector('.share-controls').style.display = 'flex';
                 
                 // Convert to blob
                 const blob = await new Promise(resolve => {
@@ -1897,7 +2134,7 @@
                         })
                     ],
                     title: 'Baba Ahmad University Feedback',
-                    text: `Check out this feedback from Baba Ahmad University!\n\nQuestion: ${feedback.question.substring(0, 100)}...\n\n💬 Share your thoughts too!`,
+                    text: `🎓 Check out this feedback from Baba Ahmad University!\n\n💬 Question: ${feedback.question.substring(0, 100)}...\n\nShare your thoughts too!\n${window.location.href}`,
                     url: window.location.href
                 };
                 
@@ -1908,51 +2145,56 @@
                 if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
                     try {
                         await navigator.share(shareData);
-                        showAlert('✅ Shared successfully!');
-                        loadApprovedAnswers(); // Refresh to update share count
+                        showAlert('✅ Image shared successfully!');
+                        closeShareImage();
                     } catch (err) {
                         console.log('Web Share API error:', err);
-                        fallbackShare(imageUrl, feedback);
+                        fallbackImageShare(imageUrl, feedback);
                     }
                 } else {
-                    fallbackShare(imageUrl, feedback);
+                    fallbackImageShare(imageUrl, feedback);
                 }
                 
-                // Clean up after 10 seconds
+                // Clean up after 30 seconds
                 setTimeout(() => {
                     URL.revokeObjectURL(imageUrl);
-                }, 10000);
+                }, 30000);
                 
             } catch (error) {
                 console.error('Error creating share image:', error);
                 shareLoading.style.display = 'none';
+                document.querySelector('.share-controls').style.display = 'flex';
                 showAlert('⚠️ Could not create image. Sharing as text instead.');
                 fallbackTextShare(feedback);
             }
         }
 
-        function fallbackShare(imageUrl, feedback) {
+        function fallbackImageShare(imageUrl, feedback) {
             // Create a temporary download link
             const link = document.createElement('a');
             link.href = imageUrl;
             link.download = `BabaAhmad_Feedback_${Date.now()}.png`;
             link.click();
             
-            // Show instructions for WhatsApp
+            // Show success message
+            showAlert('✅ Image saved to your device! You can now share it.');
+            
+            // Prepare WhatsApp message
             const whatsappMessage = encodeURIComponent(
                 `🎓 *Baba Ahmad University Feedback*\n\n` +
-                `💬 *Question:* ${feedback.question}\n\n` +
-                `💭 *Answer:* ${feedback.answer}\n\n` +
-                `🌟 *Share your thoughts:* ${window.location.href}\n\n` +
-                `📸 *Image attached!* Check your downloads for a beautiful shareable image.`
+                `💬 *QUESTION:* ${feedback.question}\n\n` +
+                `💭 *ANSWER:* ${feedback.answer}\n\n` +
+                `📸 *Check the attached image!*\n\n` +
+                `👇 *Share Your Thoughts:*\n${window.location.href}`
             );
             
-            // Open WhatsApp
+            // Auto-open WhatsApp after delay
             setTimeout(() => {
-                const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
-                window.open(whatsappUrl, '_blank');
-                showAlert('✅ Image saved! Opening WhatsApp to share...');
-            }, 1000);
+                if (confirm('Open WhatsApp to share the image?')) {
+                    const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
+                    window.open(whatsappUrl, '_blank');
+                }
+            }, 1500);
         }
 
         function fallbackTextShare(feedback) {
@@ -1966,7 +2208,7 @@
             
             window.open(`https://wa.me/?text=${text}`, '_blank');
             showAlert('✅ Shared to WhatsApp!');
-            loadApprovedAnswers();
+            closeShareImage();
         }
 
         // ===== LIKE SYSTEM =====
@@ -2192,8 +2434,9 @@
         window.submitReport = submitReport;
         window.toggleLike = toggleLike;
         window.submitReply = submitReply;
+        window.showShareImage = showShareImage;
         window.createAndShareImage = createAndShareImage;
-        window.shareAnswer = fallbackTextShare; // Legacy support
+        window.closeShareImage = closeShareImage;
     </script>
 </body>
 </html>
