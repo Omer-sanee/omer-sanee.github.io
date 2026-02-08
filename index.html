@@ -9,6 +9,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2canvas library for creating images -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <style>
         /* ===== RESET & VARIABLES ===== */
         * {
@@ -984,9 +986,274 @@
                 opacity: 0;
             }
         }
+
+        /* ===== SHARE IMAGE CONTAINER (HIDDEN) ===== */
+        .share-image-container {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: -9999;
+        }
+
+        .share-image-content {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .share-image-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .share-image-header::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .share-image-logo {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .share-image-title {
+            font-size: 2.5rem;
+            color: var(--dark);
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .share-image-subtitle {
+            font-size: 1.3rem;
+            color: var(--gray);
+            font-weight: 600;
+        }
+
+        .share-question-container {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary);
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .share-question-container::before {
+            content: '💬 QUESTION';
+            position: absolute;
+            top: -12px;
+            left: 25px;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .share-question-text {
+            font-size: 1.4rem;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 10px;
+        }
+
+        .share-answer-container {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--accent);
+            position: relative;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .share-answer-container::before {
+            content: '💭 ANSWER';
+            position: absolute;
+            top: -12px;
+            left: 25px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .share-answer-text {
+            font-size: 1.3rem;
+            color: var(--dark);
+            line-height: 1.5;
+            margin-top: 10px;
+        }
+
+        .share-footer {
+            position: absolute;
+            bottom: 25px;
+            left: 35px;
+            right: 35px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 2px solid var(--light);
+        }
+
+        .share-watermark {
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .share-watermark i {
+            color: var(--primary);
+        }
+
+        .share-qr-code {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 600;
+            text-align: center;
+            min-width: 150px;
+        }
+
+        .share-qr-code i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .share-image-decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .share-decoration {
+            position: absolute;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        /* ===== SHARE LOADING OVERLAY ===== */
+        .share-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .share-loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+        }
+
+        .share-loading-text {
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+            max-width: 300px;
+            text-align: center;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
+    <!-- SHARE IMAGE CONTAINER (HIDDEN) -->
+    <div class="share-image-container" id="shareImageContainer">
+        <div class="share-image-content">
+            <div class="share-image-decorations">
+                <div class="share-decoration" style="top: 10%; left: 5%;">🎓</div>
+                <div class="share-decoration" style="top: 15%; right: 10%;">💬</div>
+                <div class="share-decoration" style="bottom: 20%; left: 15%;">✨</div>
+                <div class="share-decoration" style="bottom: 15%; right: 5%;">🌟</div>
+            </div>
+            
+            <div class="share-image-header">
+                <div class="share-image-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="share-image-title">Baba Ahmad University</div>
+                <div class="share-image-subtitle">Anonymous Feedback System</div>
+            </div>
+            
+            <div class="share-question-container" id="shareQuestionContainer">
+                <div class="share-question-text" id="shareQuestionText">
+                    Loading question...
+                </div>
+            </div>
+            
+            <div class="share-answer-container" id="shareAnswerContainer">
+                <div class="share-answer-text" id="shareAnswerText">
+                    Loading answer...
+                </div>
+            </div>
+            
+            <div class="share-footer">
+                <div class="share-watermark">
+                    <i class="fas fa-shield-alt"></i>
+                    Shared via Baba Ahmad Feedback
+                </div>
+                <div class="share-qr-code">
+                    <i class="fas fa-qrcode"></i>
+                    Scan to share your thoughts
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SHARE LOADING OVERLAY -->
+    <div class="share-loading" id="shareLoading">
+        <div class="share-loading-spinner"></div>
+        <div class="share-loading-text" id="shareLoadingText">Creating beautiful share image...</div>
+    </div>
+
     <!-- MAIN CONTAINER -->
     <div class="container">
         <!-- HEADER -->
@@ -1263,6 +1530,11 @@
         const wallSection = document.getElementById('wallSection');
         const wallLoading = document.getElementById('wallLoading');
         const reportModal = document.getElementById('reportModal');
+        const shareImageContainer = document.getElementById('shareImageContainer');
+        const shareQuestionText = document.getElementById('shareQuestionText');
+        const shareAnswerText = document.getElementById('shareAnswerText');
+        const shareLoading = document.getElementById('shareLoading');
+        const shareLoadingText = document.getElementById('shareLoadingText');
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1562,14 +1834,139 @@
                         <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${feedback.id}, this)">
                             <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
                         </button>
-                        <button class="action-btn share-btn" onclick="shareAnswer(${feedback.id})">
-                            <i class="fas fa-share"></i> Share
+                        <button class="action-btn share-btn" onclick="createAndShareImage(${feedback.id})">
+                            <i class="fas fa-share"></i> Share as Image
                         </button>
                     </div>
                 </div>
             `;
             
             return div;
+        }
+
+        // ===== IMAGE SHARING SYSTEM =====
+        async function createAndShareImage(feedbackId) {
+            const feedback = getFeedbackById(feedbackId);
+            if (!feedback) return;
+            
+            // Update share count
+            feedback.shares = (feedback.shares || 0) + 1;
+            updateFeedbackInStorage(feedback);
+            
+            // Show loading overlay
+            shareLoading.style.display = 'flex';
+            shareLoadingText.textContent = 'Creating beautiful share image...';
+            
+            // Update the share image content
+            shareQuestionText.textContent = feedback.question;
+            shareAnswerText.textContent = feedback.answer;
+            
+            try {
+                // Wait a bit for rendering
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                // Create the image
+                const canvas = await html2canvas(shareImageContainer, {
+                    scale: 2,
+                    backgroundColor: null,
+                    useCORS: true,
+                    allowTaint: true,
+                    width: 600,
+                    height: 600,
+                    logging: false
+                });
+                
+                // Convert to blob
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/png', 1.0);
+                });
+                
+                if (!blob) {
+                    throw new Error('Failed to create image');
+                }
+                
+                // Create object URL
+                const imageUrl = URL.createObjectURL(blob);
+                
+                // Prepare share data
+                const shareData = {
+                    files: [
+                        new File([blob], `BabaAhmad_Feedback_${Date.now()}.png`, {
+                            type: blob.type,
+                            lastModified: new Date().getTime()
+                        })
+                    ],
+                    title: 'Baba Ahmad University Feedback',
+                    text: `Check out this feedback from Baba Ahmad University!\n\nQuestion: ${feedback.question.substring(0, 100)}...\n\n💬 Share your thoughts too!`,
+                    url: window.location.href
+                };
+                
+                // Hide loading
+                shareLoading.style.display = 'none';
+                
+                // Try Web Share API with files
+                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                    try {
+                        await navigator.share(shareData);
+                        showAlert('✅ Shared successfully!');
+                        loadApprovedAnswers(); // Refresh to update share count
+                    } catch (err) {
+                        console.log('Web Share API error:', err);
+                        fallbackShare(imageUrl, feedback);
+                    }
+                } else {
+                    fallbackShare(imageUrl, feedback);
+                }
+                
+                // Clean up after 10 seconds
+                setTimeout(() => {
+                    URL.revokeObjectURL(imageUrl);
+                }, 10000);
+                
+            } catch (error) {
+                console.error('Error creating share image:', error);
+                shareLoading.style.display = 'none';
+                showAlert('⚠️ Could not create image. Sharing as text instead.');
+                fallbackTextShare(feedback);
+            }
+        }
+
+        function fallbackShare(imageUrl, feedback) {
+            // Create a temporary download link
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `BabaAhmad_Feedback_${Date.now()}.png`;
+            link.click();
+            
+            // Show instructions for WhatsApp
+            const whatsappMessage = encodeURIComponent(
+                `🎓 *Baba Ahmad University Feedback*\n\n` +
+                `💬 *Question:* ${feedback.question}\n\n` +
+                `💭 *Answer:* ${feedback.answer}\n\n` +
+                `🌟 *Share your thoughts:* ${window.location.href}\n\n` +
+                `📸 *Image attached!* Check your downloads for a beautiful shareable image.`
+            );
+            
+            // Open WhatsApp
+            setTimeout(() => {
+                const whatsappUrl = `https://wa.me/?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+                showAlert('✅ Image saved! Opening WhatsApp to share...');
+            }, 1000);
+        }
+
+        function fallbackTextShare(feedback) {
+            const text = encodeURIComponent(
+                `🎓 *Baba Ahmad University Feedback*\n\n` +
+                `💬 *QUESTION:* ${feedback.question}\n\n` +
+                `💭 *ANSWER:* ${feedback.answer}\n\n` +
+                `👇 *Share Your Thoughts:*\n${window.location.href}\n\n` +
+                `#BabaAhmadUniversity #StudentFeedback #CampusLife`
+            );
+            
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            showAlert('✅ Shared to WhatsApp!');
+            loadApprovedAnswers();
         }
 
         // ===== LIKE SYSTEM =====
@@ -1647,40 +2044,6 @@
             
             // Show success
             showAlert('Reply submitted! It will appear after admin approval.');
-        }
-
-        // ===== SHARING FUNCTIONS =====
-        function shareAnswer(feedbackId) {
-            const feedback = getFeedbackById(feedbackId);
-            if (!feedback) return;
-            
-            // Create share data
-            const shareData = {
-                title: 'Baba Ahmad University Feedback',
-                text: `💬 Question: ${feedback.question}\n\n💭 Answer: ${feedback.answer.substring(0, 100)}...\n\n📱 Share your thoughts too!`,
-                url: window.location.href
-            };
-            
-            // Try Web Share API first
-            if (navigator.share) {
-                navigator.share(shareData)
-                    .then(() => {
-                        // Track share count
-                        feedback.shares = (feedback.shares || 0) + 1;
-                        updateFeedbackInStorage(feedback);
-                        loadApprovedAnswers();
-                    })
-                    .catch(err => console.log('Error sharing:', err));
-            } else {
-                // Fallback to WhatsApp
-                const text = encodeURIComponent(shareData.text + '\n\n' + shareData.url);
-                window.open(`https://wa.me/?text=${text}`, '_blank');
-                
-                // Track share count
-                feedback.shares = (feedback.shares || 0) + 1;
-                updateFeedbackInStorage(feedback);
-                loadApprovedAnswers();
-            }
         }
 
         function getFeedbackById(id) {
@@ -1829,7 +2192,8 @@
         window.submitReport = submitReport;
         window.toggleLike = toggleLike;
         window.submitReply = submitReply;
-        window.shareAnswer = shareAnswer;
+        window.createAndShareImage = createAndShareImage;
+        window.shareAnswer = fallbackTextShare; // Legacy support
     </script>
 </body>
 </html>
