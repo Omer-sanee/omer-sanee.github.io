@@ -276,6 +276,61 @@
             font-size: 0.9rem;
         }
 
+        /* ===== SECRET CODE INPUT ===== */
+        .secret-code-input {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f9ff;
+            border-radius: 12px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .secret-code-input.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .secret-code-input label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .secret-code-input label i {
+            color: var(--warning);
+        }
+
+        .secret-code {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            background: white;
+        }
+
+        .secret-code:focus {
+            outline: none;
+            border-color: var(--warning);
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        .secret-hint {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-align: center;
+            font-style: italic;
+        }
+
         /* ===== SUBMIT BUTTON ===== */
         .submit-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
@@ -851,6 +906,17 @@
             transform: translateY(-2px);
         }
 
+        .footer-link.admin-link {
+            display: none; /* Hidden by default */
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-link.admin-link.show {
+            display: inline-flex;
+            animation: bounce 1s;
+        }
+
         /* ===== LOADING ===== */
         .loading {
             text-align: center;
@@ -922,6 +988,10 @@
             .contact-info {
                 grid-template-columns: 1fr;
             }
+            
+            .footer-links {
+                gap: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -963,6 +1033,15 @@
             
             .celebration {
                 padding: 30px 20px;
+            }
+            
+            .footer-links {
+                gap: 10px;
+            }
+            
+            .footer-link {
+                padding: 6px 12px;
+                font-size: 0.8rem;
             }
         }
 
@@ -1517,6 +1596,17 @@
                     </div>
                 </div>
 
+                <!-- SECRET CODE INPUT -->
+                <div class="secret-code-input" id="secretCodeInput">
+                    <label for="secretCode">
+                        <i class="fas fa-key"></i> Enter Secret Code to Access Admin Panel:
+                    </label>
+                    <input type="text" id="secretCode" class="secret-code" placeholder="Enter secret code..." maxlength="20">
+                    <div class="secret-hint">
+                        Hint: Type "admin123" to unlock admin access
+                    </div>
+                </div>
+
                 <button class="submit-btn" id="submitBtn">
                     <i class="fas fa-paper-plane"></i> Submit Anonymously
                 </button>
@@ -1634,9 +1724,6 @@
         <!-- FOOTER -->
         <footer class="footer">
             <div class="footer-links">
-                <a href="admin.html" class="footer-link" target="_blank">
-                    <i class="fas fa-user-shield"></i> Admin Panel
-                </a>
                 <a href="#" class="footer-link" onclick="showReportModal()">
                     <i class="fas fa-flag"></i> Report Issue
                 </a>
@@ -1645,6 +1732,9 @@
                 </a>
                 <a href="https://wa.me/2348135103329" class="footer-link" target="_blank">
                     <i class="fab fa-whatsapp"></i> Developer
+                </a>
+                <a href="admin.html" class="footer-link admin-link" id="adminPanelLink" target="_blank">
+                    <i class="fas fa-user-shield"></i> Admin Panel
                 </a>
             </div>
             <p>© 2026 Baba Ahmad University • Anonymous Feedback System</p>
@@ -1704,6 +1794,7 @@
             "Together we can build a better campus.",
             "Your opinion helps shape our university's future."
         ];
+        const SECRET_CODE = "admin123"; // Secret code to unlock admin panel
 
         // ===== DOM ELEMENTS =====
         const questionSelect = document.getElementById('questionSelect');
@@ -1730,6 +1821,9 @@
         const shareLoadingText = document.getElementById('shareLoadingText');
         const shareImageBtn = document.getElementById('shareImageBtn');
         const closeShareBtn = document.getElementById('closeShareBtn');
+        const secretCodeInput = document.getElementById('secretCodeInput');
+        const secretCodeField = document.getElementById('secretCode');
+        const adminPanelLink = document.getElementById('adminPanelLink');
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1776,6 +1870,26 @@
             // Close share button
             closeShareBtn.addEventListener('click', closeShareImage);
             
+            // Secret code input
+            secretCodeField.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    checkSecretCode();
+                }
+            });
+            
+            // Auto-show secret input when typing in answer field
+            answerText.addEventListener('input', function() {
+                const answer = this.value.toLowerCase();
+                if (answer.includes('admin') || answer.includes('secret') || answer.includes('code')) {
+                    secretCodeInput.classList.add('show');
+                }
+            });
+            
+            // Check if admin panel was already unlocked
+            if (localStorage.getItem('adminUnlocked') === 'true') {
+                adminPanelLink.classList.add('show');
+            }
+            
             // Load approved answers on view tab
             loadApprovedAnswers();
             
@@ -1805,6 +1919,36 @@
                     }
                 }
             });
+        }
+
+        // ===== SECRET CODE SYSTEM =====
+        function checkSecretCode() {
+            const enteredCode = secretCodeField.value.trim();
+            
+            if (enteredCode === SECRET_CODE) {
+                // Unlock admin panel
+                adminPanelLink.classList.add('show');
+                localStorage.setItem('adminUnlocked', 'true');
+                
+                // Show success message
+                showAlert('✅ Admin panel unlocked! You can now access it from the footer.', 'success');
+                secretCodeField.value = '';
+                secretCodeInput.classList.remove('show');
+                
+                // Create celebration effect
+                createConfetti();
+                
+                // Save to history
+                const adminLogs = JSON.parse(localStorage.getItem('adminAccessLogs') || '[]');
+                adminLogs.push({
+                    timestamp: new Date().toISOString(),
+                    action: 'admin_panel_unlocked',
+                    ip: generateFakeIP()
+                });
+                localStorage.setItem('adminAccessLogs', JSON.stringify(adminLogs));
+            } else {
+                showAlert('❌ Invalid secret code. Try: admin123', 'error');
+            }
         }
 
         // ===== FORM VALIDATION =====
@@ -2174,17 +2318,18 @@
             const link = document.createElement('a');
             link.href = imageUrl;
             link.download = `BabaAhmad_Feedback_${Date.now()}.png`;
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
             
             // Show success message
-            showAlert('✅ Image saved to your device! You can now share it.');
+            showAlert('✅ Image saved to your device! You can now share it from your gallery.', 'success');
             
             // Prepare WhatsApp message
             const whatsappMessage = encodeURIComponent(
                 `🎓 *Baba Ahmad University Feedback*\n\n` +
                 `💬 *QUESTION:* ${feedback.question}\n\n` +
                 `💭 *ANSWER:* ${feedback.answer}\n\n` +
-                `📸 *Check the attached image!*\n\n` +
                 `👇 *Share Your Thoughts:*\n${window.location.href}`
             );
             
@@ -2195,6 +2340,9 @@
                     window.open(whatsappUrl, '_blank');
                 }
             }, 1500);
+            
+            // Close share image
+            closeShareImage();
         }
 
         function fallbackTextShare(feedback) {
@@ -2382,8 +2530,12 @@
         }
 
         // ===== UTILITY FUNCTIONS =====
-        function showAlert(message) {
+        function showAlert(message, type = 'error') {
             alertMessage.textContent = message;
+            warningAlert.className = 'alert alert-warning';
+            if (type === 'success') {
+                warningAlert.className = 'alert alert-success';
+            }
             warningAlert.style.display = 'flex';
             
             // Auto-hide after 5 seconds
@@ -2437,6 +2589,7 @@
         window.showShareImage = showShareImage;
         window.createAndShareImage = createAndShareImage;
         window.closeShareImage = closeShareImage;
+        window.checkSecretCode = checkSecretCode;
     </script>
 </body>
 </html>
