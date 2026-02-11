@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baba Ahmed Student Voices</title>
+    <title>Baba Ahmed Student Voices - Complete Edition</title>
     
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- html2canvas for image sharing -->
+    
+    <!-- html2canvas for premium image sharing -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <style>
@@ -48,7 +49,6 @@
             margin: 0 auto;
         }
 
-        /* ===== HEADER ===== */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -57,14 +57,8 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
@@ -105,7 +99,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* ===== NAV TABS ===== */
         .nav-tabs {
             display: flex;
             background: white;
@@ -141,7 +134,6 @@
             box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
         }
 
-        /* ===== SECTIONS ===== */
         .section {
             display: none;
             animation: slideUp 0.6s ease;
@@ -152,17 +144,10 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ===== ASK CARD ===== */
         .feedback-card {
             background: white;
             border-radius: 20px;
@@ -191,11 +176,6 @@
             100% { background-position: calc(200px + 100%) 0; }
         }
 
-        /* ===== QUESTION SECTION ===== */
-        .question-section {
-            margin-bottom: 30px;
-        }
-
         .question-header {
             display: flex;
             align-items: center;
@@ -222,25 +202,6 @@
             font-size: 1.5rem;
             line-height: 1.4;
             flex: 1;
-        }
-
-        .answer-section {
-            margin-bottom: 30px;
-        }
-
-        .answer-section label {
-            display: block;
-            margin-bottom: 12px;
-            font-weight: 700;
-            color: var(--dark);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .answer-section label i {
-            color: var(--accent);
         }
 
         textarea {
@@ -274,7 +235,6 @@
             font-weight: 500;
         }
 
-        /* ===== SUBMIT BUTTON ===== */
         .submit-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
@@ -300,10 +260,6 @@
             box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
         }
 
-        .submit-btn:active:not(:disabled) {
-            transform: translateY(-2px);
-        }
-
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -311,23 +267,6 @@
             box-shadow: none !important;
         }
 
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: transform 0.6s;
-        }
-
-        .submit-btn:hover:not(:disabled)::after {
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
-        /* ===== PUBLIC WALL SECTION ===== */
         .wall-section {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -362,6 +301,22 @@
             height: 80px;
             background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), rgba(139, 92, 246, 0.1));
             border-radius: 0 0 0 80px;
+        }
+
+        .question-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 6px 15px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        .your-question-badge {
+            background: linear-gradient(135deg, #10b981, #0da271);
         }
 
         .wall-question {
@@ -519,40 +474,10 @@
 
         .like-btn.liked {
             background: linear-gradient(135deg, #dc2626, #991b1b);
-            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
         }
 
         .share-btn {
             background: linear-gradient(135deg, var(--accent), #0da271);
-        }
-
-        .share-btn:hover, .like-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .empty-wall {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 80px 30px;
-            color: var(--gray);
-            background: white;
-            border-radius: 20px;
-            box-shadow: var(--card-shadow);
-            border: 2px dashed #e2e8f0;
-        }
-
-        .empty-wall i {
-            font-size: 5rem;
-            margin-bottom: 25px;
-            color: #cbd5e1;
-            opacity: 0.5;
-        }
-
-        .empty-wall h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark);
         }
 
         .refresh-wall {
@@ -583,123 +508,30 @@
             box-shadow: 0 12px 25px rgba(124, 58, 237, 0.3);
         }
 
-        /* ===== CONTACT SECTION ===== */
-        .contact-card {
-            background: white;
-            border-radius: 25px;
-            padding: 35px;
-            margin-bottom: 30px;
-            box-shadow: var(--card-shadow);
+        .empty-wall {
+            grid-column: 1 / -1;
             text-align: center;
-            border-left: 6px solid var(--info);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
-            border-radius: 0 0 0 100px;
-        }
-
-        .contact-card h2 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            font-size: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 35px;
-        }
-
-        .contact-item {
-            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: var(--transition);
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
-
-        .contact-item i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .contact-item h3 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .contact-item p {
+            padding: 80px 30px;
             color: var(--gray);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.6;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 2px dashed #e2e8f0;
         }
 
-        .contact-link {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), #0da271);
-            color: white;
-            text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 12px;
-            font-weight: 700;
-            transition: var(--transition);
-            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        .empty-wall i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: #cbd5e1;
+            opacity: 0.5;
         }
 
-        .contact-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
-        }
-
-        .developer-note {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 35px;
-            text-align: center;
-            border-left: 5px solid var(--warning);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .developer-note h4 {
-            color: #92400e;
+        .empty-wall h3 {
+            font-size: 1.8rem;
             margin-bottom: 15px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
+            color: var(--dark);
         }
 
-        /* ===== SUCCESS ANIMATION ===== */
         .success-animation {
             position: fixed;
             top: 0;
@@ -711,13 +543,7 @@
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            animation: fadeIn 0.3s ease;
             backdrop-filter: blur(5px);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .celebration {
@@ -727,53 +553,31 @@
             text-align: center;
             max-width: 450px;
             width: 90%;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: popIn 0.5s ease;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             border: 2px solid var(--primary);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .celebration::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
         }
 
         @keyframes popIn {
-            0% {
-                transform: scale(0.5) rotate(-5deg);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1) rotate(0);
-                opacity: 1;
-            }
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .celebration-icon {
             font-size: 6rem;
             margin-bottom: 25px;
-            display: block;
-            animation: bounce 1s infinite;
         }
 
         .celebration h2 {
             color: var(--primary);
             margin-bottom: 20px;
             font-size: 2rem;
-            font-weight: 800;
         }
 
         .celebration p {
             color: var(--gray);
             margin-bottom: 30px;
             line-height: 1.6;
-            font-size: 1.1rem;
         }
 
         .celebration-btn {
@@ -787,317 +591,8 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            transition: var(--transition);
-            font-size: 1.1rem;
-            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
         }
 
-        .celebration-btn:hover {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(124, 58, 237, 0.4);
-        }
-
-        /* ===== WHATSAPP OPTIMIZED SHARE IMAGE ===== */
-        .share-image-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-            padding: 15px;
-        }
-
-        .share-image-wrapper {
-            width: 100%;
-            max-width: 1080px; /* WhatsApp Status optimal width */
-            height: auto;
-            min-height: 1920px; /* WhatsApp Status optimal height */
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 20px;
-            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
-            position: relative;
-            padding: 60px 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .share-image-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .share-image-header {
-            text-align: center;
-            padding-bottom: 30px;
-            border-bottom: 3px solid var(--primary);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .share-image-header::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 30%;
-            width: 40%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 3px;
-        }
-
-        .share-image-logo {
-            font-size: 6rem;
-            color: white;
-            margin-bottom: 25px;
-            display: block;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .share-image-title {
-            font-size: 4.5rem;
-            color: white;
-            font-weight: 900;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
-            line-height: 1.1;
-        }
-
-        .share-image-subtitle {
-            font-size: 2.2rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            opacity: 0.9;
-        }
-
-        .share-question-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            padding: 45px;
-            margin-bottom: 30px;
-            border-left: 10px solid var(--primary);
-            position: relative;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .share-question-container::before {
-            content: '💬 STUDENT QUESTION';
-            position: absolute;
-            top: -20px;
-            left: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            padding: 12px 30px;
-            border-radius: 35px;
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
-        }
-
-        .share-question-text {
-            font-size: 2.8rem;
-            color: white;
-            font-weight: 700;
-            line-height: 1.4;
-            margin-top: 20px;
-            text-align: left;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Add replies to share image */
-        .share-replies-container {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 3px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .share-reply-item {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 25px;
-            border-left: 6px solid var(--info);
-            font-size: 2rem;
-            color: white;
-            line-height: 1.5;
-            position: relative;
-        }
-
-        .share-reply-item::before {
-            content: '↳';
-            position: absolute;
-            left: -25px;
-            top: 30px;
-            color: var(--info);
-            font-size: 2.2rem;
-            font-weight: bold;
-        }
-
-        .share-reply-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.5rem;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .share-footer {
-            margin-top: auto;
-            padding-top: 30px;
-            border-top: 3px solid rgba(255, 255, 255, 0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .share-watermark {
-            color: white;
-            font-size: 2rem;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
-
-        .share-watermark i {
-            color: var(--primary);
-            font-size: 2.5rem;
-        }
-
-        .share-qr-code {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px 35px;
-            border-radius: 20px;
-            font-size: 1.8rem;
-            color: white;
-            font-weight: 800;
-            text-align: center;
-            border: 3px dashed var(--primary);
-            min-width: 250px;
-            backdrop-filter: blur(10px);
-        }
-
-        .share-qr-code i {
-            font-size: 3rem;
-            color: white;
-            display: block;
-            margin-bottom: 10px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        .share-image-decorations {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .share-decoration {
-            position: absolute;
-            font-size: 6rem;
-            opacity: 0.1;
-            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .share-controls {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            z-index: 10000;
-            display: flex;
-            gap: 20px;
-        }
-
-        .share-control-btn {
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            border-radius: 15px;
-            padding: 20px 30px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        .share-control-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .share-control-btn.share {
-            background: linear-gradient(135deg, var(--accent), #0da271);
-            color: white;
-        }
-
-        .share-control-btn.close {
-            background: linear-gradient(135deg, var(--danger), #dc2626);
-            color: white;
-        }
-
-        /* ===== SHARE LOADING OVERLAY ===== */
-        .share-loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10001;
-            flex-direction: column;
-            gap: 40px;
-            backdrop-filter: blur(10px);
-        }
-
-        .share-loading-spinner {
-            width: 100px;
-            height: 100px;
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 1.2s linear infinite;
-        }
-
-        .share-loading-text {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 800;
-            max-width: 400px;
-            text-align: center;
-            line-height: 1.5;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        /* ===== ALERTS ===== */
         .alert {
             position: fixed;
             top: 20px;
@@ -1116,54 +611,21 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        .alert.success {
-            border-left: 5px solid var(--accent);
-        }
+        .alert.success { border-left: 5px solid var(--accent); }
+        .alert.error { border-left: 5px solid var(--danger); }
+        .alert.success i { color: var(--accent); }
+        .alert.error i { color: var(--danger); }
 
-        .alert.error {
-            border-left: 5px solid var(--danger);
-        }
-
-        .alert i {
-            font-size: 1.8rem;
-        }
-
-        .alert.success i {
-            color: var(--accent);
-        }
-
-        .alert.error i {
-            color: var(--danger);
-        }
-
-        /* ===== ABOUT SECTION ===== */
-        .about-section {
+        .contact-card, .about-section {
             background: white;
             border-radius: 20px;
             padding: 35px;
             margin-bottom: 20px;
             box-shadow: var(--card-shadow);
-        }
-
-        .about-section h2 {
-            color: var(--primary);
-            margin-bottom: 25px;
-            font-size: 2rem;
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
         }
 
         .about-grid {
@@ -1179,7 +641,6 @@
             border-radius: 15px;
             text-align: center;
             transition: var(--transition);
-            border: 2px solid transparent;
         }
 
         .about-item:hover {
@@ -1192,87 +653,269 @@
             font-size: 3rem;
             color: var(--primary);
             margin-bottom: 20px;
-            display: block;
         }
 
-        .about-item h3 {
-            color: var(--dark);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 35px;
         }
 
-        .about-item p {
-            color: var(--gray);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* ===== FOOTER ===== */
-        .footer {
+        .contact-item {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            padding: 25px;
+            border-radius: 15px;
             text-align: center;
-            margin-top: 60px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1rem;
-            padding: 40px 20px;
-            border-top: 2px solid rgba(255, 255, 255, 0.15);
-            position: relative;
-            overflow: hidden;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
+        .contact-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #0da271);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        /* ===== PREMIUM SHARE MODAL ===== */
+        .share-modal {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            pointer-events: none;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 35px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-
-        .footer-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            display: inline-flex;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
             align-items: center;
-            gap: 10px;
-            padding: 12px 25px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 25px;
-            transition: var(--transition);
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
             backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .footer-link:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .footer p {
+        .share-modal-content {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid var(--primary);
             position: relative;
-            z-index: 1;
-            margin: 15px 0;
         }
 
-        /* ===== LOADING ===== */
+        @keyframes modalPop {
+            0% { transform: scale(0.7); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .share-modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--light);
+        }
+
+        .share-modal-header i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .share-modal-header h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: 800;
+        }
+
+        .share-preview {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            color: white;
+            position: relative;
+            border-left: 8px solid var(--primary);
+        }
+
+        .share-preview::before {
+            content: '💬';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .share-preview-text {
+            font-size: 1.3rem;
+            line-height: 1.5;
+            font-weight: 600;
+            margin-top: 10px;
+            word-break: break-word;
+        }
+
+        .share-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .share-option-btn {
+            padding: 18px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .share-option-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-option-btn.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
+        .share-option-btn.facebook { background: linear-gradient(135deg, #1877F2, #0d65d9); }
+        .share-option-btn.twitter { background: linear-gradient(135deg, #1DA1F2, #0c85d0); }
+        .share-option-btn.instagram { background: linear-gradient(135deg, #E4405F, #d62e4e); }
+        .share-option-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); }
+        .share-option-btn.download { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
+        .share-option-btn.copy { background: linear-gradient(135deg, var(--gray), #4b5563); }
+
+        .share-close-btn {
+            width: 100%;
+            padding: 15px;
+            background: #f1f5f9;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: var(--transition);
+            color: var(--dark);
+            margin-top: 10px;
+        }
+
+        .share-close-btn:hover {
+            background: #e2e8f0;
+            transform: translateY(-3px);
+        }
+
+        /* ===== PREMIUM IMAGE PREVIEW ===== */
+        .image-preview-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 20000;
+            padding: 20px;
+        }
+
+        .image-preview-wrapper {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .image-preview-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
+            border: 3px solid var(--primary);
+        }
+
+        .image-preview-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .image-preview-btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
+
+        .image-preview-btn.download {
+            background: linear-gradient(135deg, var(--accent), #0da271);
+            color: white;
+        }
+
+        .image-preview-btn.close {
+            background: #f1f5f9;
+            color: var(--dark);
+        }
+
+        /* ===== HIDDEN IMAGE TEMPLATE ===== */
+        .share-image-template {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1080px;
+            height: 1920px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 40px 20px;
+            border-top: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
         .loading {
             text-align: center;
             padding: 60px 30px;
-            color: var(--gray);
         }
 
         .spinner {
@@ -1283,142 +926,12 @@
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .wall-section {
-                grid-template-columns: 1fr;
-                gap: 25px;
-            }
-            
-            .nav-tabs {
-                flex-direction: column;
-                border-radius: 20px;
-                padding: 0;
-                max-width: 100%;
-            }
-            
-            .nav-tab {
-                border-radius: 0;
-                padding: 18px;
-                min-width: 100%;
-            }
-            
-            .nav-tab:first-child {
-                border-radius: 20px 20px 0 0;
-            }
-            
-            .nav-tab:last-child {
-                border-radius: 0 0 20px 20px;
-            }
-            
-            .header h1 {
-                font-size: 2rem;
-            }
-            
-            .header p {
-                font-size: 1.1rem;
-            }
-            
-            .feedback-card {
-                padding: 30px 25px;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                width: 100%;
-                gap: 12px;
-            }
-            
-            .action-btn {
-                width: 100%;
-                justify-content: center;
-                padding: 15px;
-            }
-            
-            .contact-info, .about-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .footer-links {
-                gap: 20px;
-            }
-            
-            .footer-link {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .header p {
-                font-size: 1rem;
-                padding: 0 10px;
-            }
-            
-            .logo {
-                font-size: 3.5rem;
-            }
-            
-            .header-tagline {
-                font-size: 0.9rem;
-                padding: 6px 15px;
-            }
-            
-            .feedback-card {
-                padding: 25px 20px;
-            }
-            
-            .question-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-            
-            textarea {
-                padding: 18px;
-                min-height: 140px;
-            }
-            
-            .submit-btn {
-                padding: 18px;
-                font-size: 1.1rem;
-            }
-            
-            .celebration {
-                padding: 35px 25px;
-            }
-            
-            .footer-links {
-                gap: 15px;
-            }
-            
-            .footer-link {
-                padding: 8px 15px;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* ===== CONFETTI ===== */
         .confetti {
             position: fixed;
             top: -10px;
@@ -1426,175 +939,27 @@
             opacity: 0;
             z-index: 1001;
             pointer-events: none;
+            animation: confettiFall 3s linear forwards;
         }
 
         @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
         }
 
-        /* ===== RESPONSIVE FOR SHARE IMAGE ===== */
         @media (max-width: 768px) {
-            .share-image-wrapper {
-                padding: 40px 25px;
-                max-width: 95%;
-                min-height: 1400px;
-            }
-            
-            .share-image-title {
-                font-size: 3.5rem;
-            }
-            
-            .share-image-subtitle {
-                font-size: 1.8rem;
-            }
-            
-            .share-question-text {
-                font-size: 2.2rem;
-            }
-            
-            .share-reply-item {
-                font-size: 1.6rem;
-                padding: 25px;
-            }
-            
-            .share-watermark {
-                font-size: 1.6rem;
-            }
-            
-            .share-qr-code {
-                min-width: 200px;
-                padding: 20px;
-                font-size: 1.5rem;
-            }
-            
-            .share-controls {
-                top: 15px;
-                right: 15px;
-                flex-direction: column;
-            }
-            
-            .share-control-btn {
-                padding: 15px 25px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .share-image-wrapper {
-                padding: 30px 20px;
-                max-width: 100%;
-                min-height: 1200px;
-                border-radius: 15px;
-            }
-            
-            .share-image-title {
-                font-size: 2.8rem;
-            }
-            
-            .share-image-subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .share-question-container {
-                padding: 30px 25px;
-            }
-            
-            .share-question-text {
-                font-size: 1.8rem;
-            }
-            
-            .share-question-container::before {
-                left: 25px;
-                padding: 10px 20px;
-                font-size: 1.2rem;
-            }
-            
-            .share-footer {
-                flex-direction: column;
-                align-items: stretch;
-                text-align: center;
-            }
-            
-            .share-controls {
-                top: 10px;
-                right: 10px;
-            }
-            
-            .share-control-btn {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-            }
+            .wall-section { grid-template-columns: 1fr; }
+            .nav-tabs { flex-direction: column; border-radius: 20px; }
+            .nav-tab { border-radius: 0; min-width: 100%; }
+            .nav-tab:first-child { border-radius: 20px 20px 0 0; }
+            .nav-tab:last-child { border-radius: 0 0 20px 20px; }
+            .action-buttons { flex-direction: column; width: 100%; }
+            .action-btn { width: 100%; justify-content: center; }
+            .share-options { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- WHATSAPP OPTIMIZED SHARE IMAGE CONTAINER -->
-    <div class="share-image-container" id="shareImageContainer">
-        <div class="share-image-wrapper">
-            <div class="share-image-decorations">
-                <div class="share-decoration" style="top: 5%; left: 5%;">🎓</div>
-                <div class="share-decoration" style="top: 10%; right: 8%;">💬</div>
-                <div class="share-decoration" style="bottom: 15%; left: 10%;">✨</div>
-                <div class="share-decoration" style="bottom: 10%; right: 5%;">🌟</div>
-                <div class="share-decoration" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">🎯</div>
-            </div>
-            
-            <div class="share-image-content">
-                <div class="share-image-header">
-                    <div class="share-image-logo">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="share-image-title">Baba Ahmed Student Voices</div>
-                    <div class="share-image-subtitle">Anonymous Questions • Instant Posting</div>
-                </div>
-                
-                <div class="share-question-container" id="shareQuestionContainer">
-                    <div class="share-question-text" id="shareQuestionText">
-                        Loading question...
-                    </div>
-                </div>
-                
-                <!-- Replies section for share image -->
-                <div class="share-replies-container" id="shareRepliesContainer" style="display: none;">
-                    <!-- Replies will be added here dynamically -->
-                </div>
-                
-                <div class="share-footer">
-                    <div class="share-watermark">
-                        <i class="fas fa-shield-alt"></i>
-                        Shared via Baba Ahmed Student Voices
-                    </div>
-                    <div class="share-qr-code">
-                        <i class="fas fa-qrcode"></i>
-                        Scan to ask your question
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="share-controls">
-            <button class="share-control-btn share" id="shareImageBtn">
-                <i class="fas fa-share-alt"></i> Share to WhatsApp
-            </button>
-            <button class="share-control-btn close" id="closeShareBtn">
-                <i class="fas fa-times"></i> Close
-            </button>
-        </div>
-    </div>
-
-    <!-- SHARE LOADING OVERLAY -->
-    <div class="share-loading" id="shareLoading">
-        <div class="share-loading-spinner"></div>
-        <div class="share-loading-text" id="shareLoadingText">Creating WhatsApp status image...</div>
-    </div>
-
     <!-- ALERT -->
     <div class="alert" id="alert">
         <i class="fas fa-check-circle"></i>
@@ -1606,10 +971,98 @@
         <div class="celebration">
             <div class="celebration-icon" id="celebrationEmoji">🎉</div>
             <h2 id="celebrationTitle">Question Posted!</h2>
-            <p id="celebrationText">Your anonymous question has been posted instantly.</p>
+            <p id="celebrationText">Your anonymous question has been posted to Google Sheet.</p>
             <button class="celebration-btn" id="celebrationClose">
                 <i class="fas fa-check"></i> View Questions
             </button>
+        </div>
+    </div>
+
+    <!-- PREMIUM SHARE MODAL -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <div class="share-modal-header">
+                <i class="fas fa-share-alt"></i>
+                <h3>Share This Question</h3>
+            </div>
+            
+            <div class="share-preview" id="sharePreview">
+                <div class="share-preview-text" id="sharePreviewText">Loading...</div>
+            </div>
+            
+            <div class="share-options">
+                <button class="share-option-btn whatsapp" onclick="shareToWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-option-btn facebook" onclick="shareToFacebook()">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+                <button class="share-option-btn twitter" onclick="shareToTwitter()">
+                    <i class="fab fa-twitter"></i> Twitter
+                </button>
+                <button class="share-option-btn instagram" onclick="shareToInstagram()">
+                    <i class="fab fa-instagram"></i> Instagram
+                </button>
+                <button class="share-option-btn telegram" onclick="shareToTelegram()">
+                    <i class="fab fa-telegram"></i> Telegram
+                </button>
+                <button class="share-option-btn download" onclick="downloadShareImage()">
+                    <i class="fas fa-download"></i> Save Image
+                </button>
+                <button class="share-option-btn copy" onclick="copyShareText()">
+                    <i class="fas fa-copy"></i> Copy Text
+                </button>
+            </div>
+            
+            <button class="share-close-btn" onclick="closeShareModal()">
+                <i class="fas fa-times"></i> Close
+            </button>
+        </div>
+    </div>
+
+    <!-- IMAGE PREVIEW CONTAINER -->
+    <div class="image-preview-container" id="imagePreviewContainer">
+        <div class="image-preview-wrapper">
+            <img id="previewImage" class="image-preview-img" src="" alt="Share Image">
+            <div class="image-preview-buttons">
+                <button class="image-preview-btn download" onclick="downloadGeneratedImage()">
+                    <i class="fas fa-download"></i> Download
+                </button>
+                <button class="image-preview-btn close" onclick="closeImagePreview()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- HIDDEN IMAGE TEMPLATE -->
+    <div id="shareImageTemplate" class="share-image-template">
+        <div style="text-align: center; margin-bottom: 50px;">
+            <div style="font-size: 120px; margin-bottom: 30px;">🎓</div>
+            <h1 style="font-size: 80px; font-weight: 900; margin-bottom: 20px; color: white;">Baba Ahmed</h1>
+            <h2 style="font-size: 60px; font-weight: 700; margin-bottom: 40px; color: #8b5cf6;">Student Voices</h2>
+        </div>
+        
+        <div style="background: rgba(124, 58, 237, 0.2); border-radius: 40px; padding: 50px; margin-bottom: 50px; border-left: 15px solid #7c3aed;">
+            <div style="background: linear-gradient(135deg, #7c3aed, #8b5cf6); display: inline-block; padding: 20px 50px; border-radius: 50px; margin-bottom: 30px;">
+                <span style="font-size: 30px; font-weight: 800; color: white;">💬 STUDENT QUESTION</span>
+            </div>
+            <p id="templateQuestion" style="font-size: 50px; line-height: 1.5; font-weight: 700; color: white; word-break: break-word;">
+                Loading...
+            </p>
+        </div>
+        
+        <div style="margin-top: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 40px; border-top: 3px solid rgba(255,255,255,0.2);">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <i class="fas fa-shield-alt" style="font-size: 50px; color: #7c3aed;"></i>
+                    <span style="font-size: 35px; font-weight: 700; color: white;">100% Anonymous</span>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 30px; color: #10b981;">OSO GROUP</span><br>
+                    <span style="font-size: 25px; color: rgba(255,255,255,0.7);">08135103329</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1621,9 +1074,9 @@
                 <i class="fas fa-graduation-cap"></i>
             </div>
             <h1>Baba Ahmed Student Voices</h1>
-            <p>Ask anonymous questions and share them instantly. No login, no approval needed!</p>
+            <p>Ask anonymous questions. They appear instantly in Google Sheets for everyone to see!</p>
             <div class="header-tagline">
-                <i class="fas fa-user-shield"></i> 100% Anonymous • Instant Posting
+                <i class="fas fa-user-shield"></i> 100% Anonymous • Real Likes • Share Counter • Replies
             </div>
         </div>
 
@@ -1646,29 +1099,25 @@
         <!-- ASK SECTION -->
         <div class="section active" id="askSection">
             <div class="feedback-card">
-                <div class="question-section">
-                    <div class="question-header">
-                        <div class="question-icon">
-                            <i class="fas fa-question-circle"></i>
-                        </div>
-                        <h2>Ask Your Anonymous Question</h2>
+                <div class="question-header">
+                    <div class="question-icon">
+                        <i class="fas fa-question-circle"></i>
                     </div>
+                    <h2>Ask Your Anonymous Question</h2>
                 </div>
 
-                <div class="answer-section">
-                    <label for="questionInput"><i class="fas fa-pen"></i> Type your question (be respectful):</label>
-                    <textarea id="questionInput" placeholder="Type your anonymous question here... Be respectful and constructive!" maxlength="500"></textarea>
-                    <div class="char-counter">
-                        <span id="charCount">0</span>/500 characters
-                    </div>
+                <textarea id="questionInput" placeholder="Type your anonymous question here... Be respectful!" maxlength="500"></textarea>
+                
+                <div class="char-counter">
+                    <span id="charCount">0</span>/500 characters
                 </div>
 
                 <button class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> Post Question Instantly
+                    <i class="fas fa-paper-plane"></i> Post Question to Google Sheet
                 </button>
 
-                <div class="privacy-note" style="text-align: center; margin-top: 25px; color: var(--gray); font-size: 0.95rem;">
-                    <i class="fas fa-user-shield"></i> No personal data collected • Posted instantly
+                <div class="privacy-note" style="text-align: center; margin-top: 25px; color: var(--gray);">
+                    <i class="fas fa-user-shield"></i> No personal data collected • Saved to Google Sheets
                 </div>
             </div>
         </div>
@@ -1679,12 +1128,15 @@
                 <button class="refresh-btn" id="refreshBtn">
                     <i class="fas fa-sync-alt"></i> Refresh Questions
                 </button>
+                <span style="display: inline-block; margin-left: 15px; color: white; background: rgba(0,0,0,0.2); padding: 8px 15px; border-radius: 20px;">
+                    <i class="fas fa-file-excel"></i> Google Sheets Database
+                </span>
             </div>
             
             <div class="wall-section" id="wallSection">
                 <div class="loading" id="wallLoading">
                     <div class="spinner"></div>
-                    <p>Loading questions...</p>
+                    <p>Loading questions from Google Sheets...</p>
                 </div>
             </div>
         </div>
@@ -1692,43 +1144,50 @@
         <!-- ABOUT SECTION -->
         <div class="section" id="aboutSection">
             <div class="about-section">
-                <h2><i class="fas fa-info-circle"></i> How It Works</h2>
+                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
+                    <i class="fas fa-info-circle"></i> How It Works
+                </h2>
                 
                 <div class="about-grid">
                     <div class="about-item">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>Google Sheets Database</h3>
+                        <p>Your questions are saved directly to a Google Sheet. Everyone sees the same data!</p>
+                    </div>
+                    <div class="about-item">
                         <i class="fas fa-bolt"></i>
                         <h3>Instant Posting</h3>
-                        <p>Your questions appear immediately for everyone to see without any approval delay.</p>
+                        <p>Questions appear immediately after you click submit.</p>
                     </div>
-                    
                     <div class="about-item">
                         <i class="fas fa-user-shield"></i>
                         <h3>100% Anonymous</h3>
-                        <p>We don't collect any personal information. Your identity is completely protected.</p>
+                        <p>No names, no emails, no personal data collected.</p>
                     </div>
-                    
-                    <div class="about-item">
-                        <i class="fas fa-share-alt"></i>
-                        <h3>Share Anywhere</h3>
-                        <p>Share questions as beautiful images on WhatsApp, Instagram, or any social media.</p>
-                    </div>
-                    
                     <div class="about-item">
                         <i class="fas fa-heart"></i>
-                        <h3>Like & Reply</h3>
-                        <p>Like questions you find interesting and reply to them anonymously.</p>
+                        <h3>Real Likes</h3>
+                        <p>Like questions and they stay liked forever! No random numbers.</p>
                     </div>
-                    
                     <div class="about-item">
-                        <i class="fas fa-comments"></i>
-                        <h3>Community</h3>
-                        <p>Join other students in sharing thoughts, questions, and ideas about school life.</p>
+                        <i class="fas fa-share-alt"></i>
+                        <h3>Share Counter</h3>
+                        <p>Each share is counted. See how many times a question was shared!</p>
                     </div>
-                    
                     <div class="about-item">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>School Focused</h3>
-                        <p>Designed specifically for Baba Ahmed School students to voice their thoughts.</p>
+                        <i class="fas fa-reply"></i>
+                        <h3>Anonymous Replies</h3>
+                        <p>Reply to any question and start conversations!</p>
+                    </div>
+                    <div class="about-item">
+                        <i class="fas fa-image"></i>
+                        <h3>Premium Image Sharing</h3>
+                        <p>Share questions as beautiful images on WhatsApp, Facebook, Instagram, Twitter, Telegram!</p>
+                    </div>
+                    <div class="about-item">
+                        <i class="fas fa-id-badge"></i>
+                        <h3>Your Questions</h3>
+                        <p>Questions YOU posted are marked with "Your Question" badge!</p>
                     </div>
                 </div>
             </div>
@@ -1737,105 +1196,89 @@
         <!-- CONTACT SECTION -->
         <div class="section" id="contactSection">
             <div class="contact-card">
-                <h2><i class="fas fa-headset"></i> Contact & Support</h2>
-                <p style="color: var(--gray); margin-bottom: 25px; line-height: 1.6; font-size: 1.1rem;">
-                    Need help? Have questions? Contact our support team directly.
-                </p>
+                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
+                    <i class="fas fa-headset"></i> Contact & Support
+                </h2>
                 
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fab fa-whatsapp"></i>
                         <h3>WhatsApp Support</h3>
-                        <p>Direct chat with admin for quick responses</p>
+                        <p>Direct chat with admin</p>
                         <a href="https://wa.me/2348135103329" class="contact-link" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                            Chat on WhatsApp
                         </a>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <h3>Phone Support</h3>
-                        <p>Call during office hours (9 AM - 5 PM)</p>
+                        <p>Call for assistance</p>
                         <a href="tel:+2348135103329" class="contact-link">
-                            <i class="fas fa-phone"></i> Call Now
+                            Call: 08135103329
                         </a>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-code"></i>
                         <h3>Developer</h3>
-                        <p>Technical support and custom development</p>
-                        <div style="margin-top: 15px;">
-                            <strong style="color: var(--dark);">OSO GROUP</strong><br>
-                            <span style="color: var(--gray);">08135103329</span>
-                        </div>
+                        <p>OSO GROUP</p>
+                        <div style="margin-top: 15px; font-weight: bold;">08135103329</div>
                     </div>
-                </div>
-
-                <div class="developer-note">
-                    <h4><i class="fas fa-code"></i> System Developer</h4>
-                    <p style="color: #92400e; margin-bottom: 15px; font-size: 1.1rem;">
-                        This student voice system was developed by <strong>OSO GROUP</strong>
-                    </p>
-                    <p style="color: #92400e; font-size: 1rem;">
-                        For technical support or custom development, contact: 08135103329
-                    </p>
                 </div>
             </div>
         </div>
 
         <!-- FOOTER -->
         <footer class="footer">
-            <div class="footer-links">
-                <a href="#" class="footer-link" onclick="showReportModal()">
-                    <i class="fas fa-flag"></i> Report Content
-                </a>
-                <a href="#" class="footer-link" onclick="switchTab('contact')">
-                    <i class="fas fa-headset"></i> Get Help
-                </a>
-                <a href="https://wa.me/2348135103329" class="footer-link" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Developer
-                </a>
-            </div>
             <p>© 2026 Baba Ahmed School • Student Voices System</p>
-            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
-                Developed by <strong>OSO GROUP</strong> • 08135103329
+            <p style="margin-top: 10px;">Developed by <strong>OSO GROUP</strong> • 08135103329</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">
+                <i class="fas fa-file-excel"></i> Google Sheets • <i class="fas fa-heart"></i> Real Likes • <i class="fas fa-share-alt"></i> Share Counter • <i class="fas fa-reply"></i> Replies
             </p>
         </footer>
     </div>
 
     <script>
-        // ===== CONFIGURATION =====
-        const API_URL = "https://script.google.com/macros/s/AKfycbzqJ8Oj3oio8iVuxzWksSnHMckY4wYQJASMZpaLW-d6D-FQBGrZEcXTZEnhfPB2QXhS/exec";
-        const GOOGLE_FORM_ID = "1X3R-7ebnxzSTkbQclTVnsqB4AM3KjPXAYcJwAQlR60Q";
-        const GOOGLE_FORM_ENTRY = "entry.189395460";
+        // ==============================================
+        // BABA AHMED STUDENT VOICES - COMPLETE EDITION
+        // All Features: Real Likes, Share Counter, Replies, Your Questions
+        // Google Sheets Integration - Works Globally!
+        // ==============================================
+
+        // ===== CONFIGURATION - YOUR APPS SCRIPT URL =====
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwX2rTUYgu8lISMuv80g5AlzTXwTXadXgrD0pbv7x_sCSya5KMIJ1BgGEnerN4uCSS2/exec";
         
-        // Celebration elements
+        // ===== STATE MANAGEMENT =====
+        let allQuestions = [];
+        let myQuestions = JSON.parse(localStorage.getItem('myQuestions') || '[]');
+        let likedQuestions = JSON.parse(localStorage.getItem('likedQuestions') || '[]');
+        let sharedQuestions = JSON.parse(localStorage.getItem('sharedQuestions') || '{}');
+        let currentShareQuestion = null;
+        let currentShareId = null;
+        let generatedImageBlob = null;
+        let generatedImageUrl = null;
+        
+        // Get this user's unique ID (stored in localStorage)
+        let userId = localStorage.getItem('userId');
+        if (!userId) {
+            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 15);
+            localStorage.setItem('userId', userId);
+        }
+        
+        // Celebration emojis
         const CELEBRATION_EMOJIS = ['🎉', '✨', '🎊', '👍', '💫', '🌟', '💖', '🎯', '🏆', '⭐'];
-        const CELEBRATION_TEXTS = [
-            "Question Posted!",
-            "Voice Heard!",
-            "Shared Successfully!",
-            "Thank You!",
-            "You're Awesome!",
-            "Anonymous Voice Shared!"
-        ];
+        const CELEBRATION_TEXTS = ["Question Posted!", "Voice Heard!", "Shared Successfully!", "Thank You!"];
         const CELEBRATION_MESSAGES = [
-            "Your question is now live for everyone to see.",
-            "Students can now see and reply to your question.",
-            "Your anonymous contribution is appreciated.",
-            "Together we can build a better school environment.",
-            "Your voice helps make our school community better."
+            "Your question is now in Google Sheets - everyone can see it!",
+            "Your anonymous voice has been saved to the database.",
+            "Questions appear instantly for all students.",
+            "Your contribution helps make our school better."
         ];
         
         // Bad words filter
         const BAD_WORDS = ['jaki', 'banza', 'fool', 'idiot', 'stupid', 'hate', 'kill'];
-
-        // ===== STATE =====
-        let myQuestions = JSON.parse(localStorage.getItem('myQuestions') || '[]');
-        let likedQuestions = JSON.parse(localStorage.getItem('likedQuestions') || '[]');
-        let currentSharingQuestion = null;
-
+        
         // ===== DOM ELEMENTS =====
         const questionInput = document.getElementById('questionInput');
         const submitBtn = document.getElementById('submitBtn');
@@ -1847,18 +1290,18 @@
         const wallLoading = document.getElementById('wallLoading');
         const alert = document.getElementById('alert');
         const alertMessage = document.getElementById('alertMessage');
-        const shareImageContainer = document.getElementById('shareImageContainer');
-        const shareQuestionText = document.getElementById('shareQuestionText');
-        const shareRepliesContainer = document.getElementById('shareRepliesContainer');
-        const shareLoading = document.getElementById('shareLoading');
-        const shareLoadingText = document.getElementById('shareLoadingText');
-        const shareImageBtn = document.getElementById('shareImageBtn');
-        const closeShareBtn = document.getElementById('closeShareBtn');
         const successAnimation = document.getElementById('successAnimation');
         const celebrationEmoji = document.getElementById('celebrationEmoji');
         const celebrationTitle = document.getElementById('celebrationTitle');
         const celebrationText = document.getElementById('celebrationText');
         const celebrationClose = document.getElementById('celebrationClose');
+        
+        // Share modal elements
+        const shareModal = document.getElementById('shareModal');
+        const sharePreviewText = document.getElementById('sharePreviewText');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+        const previewImage = document.getElementById('previewImage');
+        const templateQuestion = document.getElementById('templateQuestion');
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
@@ -1868,23 +1311,18 @@
                 validateForm();
             });
             
-            // Form submission
+            // Submit button
             submitBtn.addEventListener('click', submitQuestion);
             
             // Navigation tabs
             navTabs.forEach(tab => {
                 tab.addEventListener('click', function() {
-                    const tabName = this.dataset.tab;
-                    switchTab(tabName);
+                    switchTab(this.dataset.tab);
                 });
             });
             
             // Refresh button
-            refreshBtn.addEventListener('click', loadQuestions);
-            
-            // Share buttons
-            shareImageBtn.addEventListener('click', createAndShareImage);
-            closeShareBtn.addEventListener('click', closeShareImage);
+            refreshBtn.addEventListener('click', fetchQuestions);
             
             // Celebration close
             celebrationClose.addEventListener('click', function() {
@@ -1894,30 +1332,22 @@
                 switchTab('view');
             });
             
-            // Enter key to submit
+            // Ctrl+Enter to submit
             questionInput.addEventListener('keydown', function(e) {
                 if (e.ctrlKey && e.key === 'Enter') {
                     submitQuestion();
                 }
             });
             
-            // Load initial questions
-            loadQuestions();
-            
             // Initial validation
             validateForm();
             
-            // Auto-refresh every 30 seconds
-            setInterval(() => {
-                if (document.getElementById('viewSection').classList.contains('active')) {
-                    loadQuestions();
-                }
-            }, 30000);
+            // Load questions on startup
+            fetchQuestions();
         });
 
         // ===== TAB NAVIGATION =====
         function switchTab(tabName) {
-            // Update active tab
             navTabs.forEach(tab => {
                 tab.classList.remove('active');
                 if (tab.dataset.tab === tabName) {
@@ -1925,16 +1355,11 @@
                 }
             });
             
-            // Show active section
             sections.forEach(section => {
                 section.classList.remove('active');
                 if (section.id === tabName + 'Section') {
                     section.classList.add('active');
-                    
-                    // Load questions when switching to view tab
-                    if (tabName === 'view') {
-                        loadQuestions();
-                    }
+                    if (tabName === 'view') fetchQuestions();
                 }
             });
         }
@@ -1942,14 +1367,7 @@
         // ===== FORM VALIDATION =====
         function validateForm() {
             const question = questionInput.value.trim();
-            
-            if (question.length >= 10 && question.length <= 500) {
-                submitBtn.disabled = false;
-                return true;
-            } else {
-                submitBtn.disabled = true;
-                return false;
-            }
+            submitBtn.disabled = question.length < 10 || question.length > 500;
         }
 
         function containsBadWords(text) {
@@ -1959,11 +1377,10 @@
             });
         }
 
-        // ===== SUBMIT QUESTION =====
+        // ===== SUBMIT QUESTION TO GOOGLE SHEETS =====
         async function submitQuestion() {
             const question = questionInput.value.trim();
             
-            // Validate
             if (question.length < 10) {
                 showAlert('Question must be at least 10 characters', 'error');
                 return;
@@ -1979,104 +1396,137 @@
                 return;
             }
             
-            // Show loading
-            submitBtn.innerHTML = '<div class="spinner" style="width: 24px; height: 24px; border-width: 3px;"></div> Posting...';
+            submitBtn.innerHTML = '<div class="spinner" style="width: 24px; height: 24px;"></div> Sending to Google Sheets...';
             submitBtn.disabled = true;
             
             try {
-                // Submit to Google Form
-                const formData = new URLSearchParams();
-                formData.append(GOOGLE_FORM_ENTRY, question);
-                
-                await fetch(`https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`, {
+                await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: formData.toString()
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: question })
                 });
                 
-                // Store in localStorage for instant display
-                const myQuestion = {
-                    id: Date.now(),
+                // Create local question with ID
+                const questionId = 'q_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10);
+                const questionData = {
+                    id: questionId,
                     question: question,
-                    timestamp: 'Just now',
+                    timestamp: new Date().toISOString(),
+                    timeAgo: 'Just now',
                     likes: 0,
-                    views: Math.floor(Math.random() * 100) + 10,
-                    isMine: true,
-                    replies: []
+                    views: 0,
+                    shares: 0,
+                    replies: [],
+                    replyCount: 0,
+                    userId: userId,
+                    isUserQuestion: true
                 };
                 
-                myQuestions.unshift(myQuestion);
+                myQuestions.unshift(questionData);
                 localStorage.setItem('myQuestions', JSON.stringify(myQuestions));
                 
-                // Create confetti effect
                 createConfetti();
-                
-                // Show success animation
                 showSuccessAnimation();
+                
+                questionInput.value = '';
+                charCount.textContent = '0';
+                
+                setTimeout(() => { fetchQuestions(); }, 2000);
                 
             } catch (error) {
-                // Still store locally on error
-                const myQuestion = {
-                    id: Date.now(),
-                    question: question,
-                    timestamp: 'Just now',
-                    likes: 0,
-                    views: Math.floor(Math.random() * 100) + 10,
-                    isMine: true,
-                    replies: []
-                };
-                
-                myQuestions.unshift(myQuestion);
-                localStorage.setItem('myQuestions', JSON.stringify(myQuestions));
-                
-                // Create confetti effect
-                createConfetti();
-                
-                // Show success animation
-                showSuccessAnimation();
+                console.error('Error submitting question:', error);
+                showAlert('❌ Failed to post. Check your Apps Script URL.', 'error');
                 
             } finally {
-                // Reset button after delay
                 setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Question Instantly';
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Question to Google Sheet';
                     submitBtn.disabled = false;
                 }, 1000);
             }
         }
 
-        // ===== LOAD QUESTIONS =====
-        async function loadQuestions() {
+        // ===== FETCH QUESTIONS FROM GOOGLE SHEETS =====
+        async function fetchQuestions() {
             wallLoading.style.display = 'block';
             wallSection.innerHTML = '';
             wallSection.appendChild(wallLoading);
+            refreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Loading from Google Sheets...';
             
-            // Show loading animation on button
-            refreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Loading...';
-            
-            setTimeout(async () => {
-                try {
-                    // Fetch from API
-                    const response = await fetch(API_URL);
-                    const data = await response.json();
-                    
-                    if (data.success) {
-                        displayQuestions(data.questions);
-                    } else {
-                        throw new Error(data.error || 'Failed to load');
-                    }
-                    
-                } catch (error) {
-                    console.log('Using cached questions:', error);
-                    // Use cached questions as fallback
-                    displayQuestions(myQuestions);
-                } finally {
-                    wallLoading.style.display = 'none';
-                    refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Questions';
+            try {
+                const response = await fetch(APPS_SCRIPT_URL + '?t=' + Date.now());
+                const data = await response.json();
+                
+                let googleQuestions = [];
+                if (data.success && data.questions) {
+                    googleQuestions = data.questions.map(q => ({
+                        ...q,
+                        likes: 0,
+                        views: 0,
+                        shares: sharedQuestions[q.id] || 0,
+                        replies: [],
+                        replyCount: 0,
+                        isUserQuestion: false
+                    }));
                 }
-            }, 1000);
+                
+                // Merge Google questions with local questions
+                let mergedQuestions = [...googleQuestions];
+                
+                // Add local questions that aren't in Google Sheets yet
+                myQuestions.forEach(localQ => {
+                    if (!mergedQuestions.find(q => q.id === localQ.id)) {
+                        mergedQuestions.unshift({
+                            ...localQ,
+                            shares: sharedQuestions[localQ.id] || 0
+                        });
+                    }
+                });
+                
+                // Add share counts from localStorage
+                mergedQuestions = mergedQuestions.map(q => ({
+                    ...q,
+                    shares: sharedQuestions[q.id] || 0
+                }));
+                
+                allQuestions = mergedQuestions;
+                displayQuestions(allQuestions);
+                
+                if (allQuestions.length === 0) {
+                    showAlert('📭 No questions yet. Be the first to ask!', 'success');
+                } else {
+                    showAlert(`✅ Loaded ${allQuestions.length} questions`, 'success');
+                }
+                
+            } catch (error) {
+                console.error('Error fetching questions:', error);
+                
+                // Use local questions as fallback
+                if (myQuestions.length > 0) {
+                    const localWithShares = myQuestions.map(q => ({
+                        ...q,
+                        shares: sharedQuestions[q.id] || 0
+                    }));
+                    displayQuestions(localWithShares);
+                    showAlert('⚠️ Using local database. Google Sheets connection failed.', 'error');
+                } else {
+                    wallSection.innerHTML = `
+                        <div class="empty-wall">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h3>Cannot Connect to Google Sheets</h3>
+                            <p>Error: ${error.message}</p>
+                            <p style="margin-top: 20px;">Check that your Apps Script is deployed with "Anyone" access</p>
+                            <button class="refresh-btn" onclick="fetchQuestions()" style="margin-top: 30px;">
+                                <i class="fas fa-sync-alt"></i> Try Again
+                            </button>
+                        </div>
+                    `;
+                }
+                
+            } finally {
+                wallLoading.style.display = 'none';
+                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Questions';
+            }
         }
 
         // ===== DISPLAY QUESTIONS =====
@@ -2086,8 +1536,8 @@
                     <div class="empty-wall">
                         <i class="fas fa-comment-slash"></i>
                         <h3>No questions yet</h3>
-                        <p>Be the first to ask something!</p>
-                        <button class="submit-btn" style="margin-top: 20px;" onclick="switchTab('ask')">
+                        <p>Be the first to ask something in Google Sheets!</p>
+                        <button class="submit-btn" style="margin-top: 20px; width: auto;" onclick="switchTab('ask')">
                             <i class="fas fa-plus"></i> Ask First Question
                         </button>
                     </div>
@@ -2095,286 +1545,93 @@
                 return;
             }
             
-            // Combine API questions with my local questions
-            let allQuestions = [...questions];
+            questions.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
             
-            // Add my local questions that might not be in API yet
-            myQuestions.forEach(myQ => {
-                if (!allQuestions.find(q => q.id === myQ.id)) {
-                    allQuestions.unshift(myQ);
+            wallSection.innerHTML = questions.map(q => {
+                const isLiked = likedQuestions.includes(q.id);
+                const isUserQuestion = q.userId === userId || q.isUserQuestion;
+                const timeAgo = q.timeAgo || formatTimeAgo(q.timestamp);
+                const shareCount = sharedQuestions[q.id] || 0;
+                
+                // Generate replies HTML
+                let repliesHTML = '';
+                if (q.replies && q.replies.length > 0) {
+                    repliesHTML = q.replies.slice(-3).map(reply => `
+                        <div class="reply-item">
+                            ${escapeHTML(reply.text)}
+                            <div class="reply-meta">
+                                <span>Anonymous Student</span>
+                                <span>${reply.timeAgo || 'Just now'}</span>
+                            </div>
+                        </div>
+                    `).join('');
                 }
-            });
-            
-            // Sort by newest first
-            allQuestions.sort((a, b) => b.id - a.id);
-            
-            // Display
-            wallSection.innerHTML = '';
-            allQuestions.forEach(item => {
-                const wallCard = createWallCard(item);
-                wallSection.appendChild(wallCard);
-            });
-        }
-
-        function createWallCard(question) {
-            const div = document.createElement('div');
-            div.className = 'wall-card';
-            div.dataset.id = question.id;
-            
-            const date = question.timestamp || 'Recently';
-            
-            // Check if user liked this
-            const isLiked = likedQuestions.includes(question.id);
-            
-            // Format replies for display
-            let repliesHTML = '';
-            if (question.replies && question.replies.length > 0) {
-                repliesHTML = question.replies.slice(-3).map(reply => `
-                    <div class="reply-item">
-                        ${reply.text}
-                        <div class="reply-meta">
-                            <span>Anonymous Student</span>
-                            <span>${reply.timestamp || 'Recently'}</span>
+                
+                return `
+                    <div class="wall-card" data-id="${q.id}">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="question-badge">
+                                <i class="fas fa-question-circle"></i> Student Question
+                            </span>
+                            ${isUserQuestion ? '<span class="question-badge your-question-badge"><i class="fas fa-user-check"></i> Your Question</span>' : ''}
+                        </div>
+                        
+                        <div class="wall-question">${escapeHTML(q.question)}</div>
+                        
+                        <div class="stats-bar">
+                            <div class="stat-item">
+                                <i class="fas fa-heart"></i>
+                                <span>${q.likes || 0} likes</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-eye"></i>
+                                <span>${q.views || 0} views</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-share-alt"></i>
+                                <span>${shareCount} shares</span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-reply"></i>
+                                <span>${q.replies?.length || 0} replies</span>
+                            </div>
+                        </div>
+                        
+                        <div class="reply-section">
+                            <textarea class="reply-input" placeholder="Add your anonymous reply... (max 200 chars)" maxlength="200" data-id="${q.id}"></textarea>
+                            <button class="reply-btn" onclick="submitReply('${q.id}')">
+                                <i class="fas fa-reply"></i> Reply Anonymously
+                            </button>
+                            
+                            ${repliesHTML ? `
+                                <div class="replies-container">
+                                    ${repliesHTML}
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="wall-meta">
+                            <span><i class="far fa-clock"></i> ${timeAgo}</span>
+                            <div class="action-buttons">
+                                <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${q.id}', this)">
+                                    <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
+                                </button>
+                                <button class="action-btn share-btn" onclick="openShareModal('${q.id}', '${escapeHTML(q.question)}')">
+                                    <i class="fas fa-share-alt"></i> Share (${shareCount})
+                                </button>
+                            </div>
                         </div>
                     </div>
-                `).join('');
-            }
-            
-            div.innerHTML = `
-                <div class="wall-question">${question.question}</div>
-                
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <i class="fas fa-heart"></i>
-                        <span>${question.likes || 0} likes</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-eye"></i>
-                        <span>${question.views || 0} views</span>
-                    </div>
-                    <div class="stat-item">
-                        <i class="fas fa-reply"></i>
-                        <span>${question.replies?.length || 0} replies</span>
-                    </div>
-                </div>
-                
-                <div class="reply-section">
-                    <textarea class="reply-input" placeholder="Add your reply... (max 200 chars)" maxlength="200" data-id="${question.id}"></textarea>
-                    <button class="reply-btn" onclick="submitReply(${question.id})">
-                        <i class="fas fa-reply"></i> Reply Anonymously
-                    </button>
-                    
-                    ${repliesHTML ? `
-                        <div class="replies-container">
-                            ${repliesHTML}
-                        </div>
-                    ` : ''}
-                </div>
-                
-                <div class="wall-meta">
-                    <span><i class="far fa-clock"></i> ${date}</span>
-                    ${question.isMine ? '<span style="color: #10b981;"><i class="fas fa-user-check"></i> Your question</span>' : ''}
-                    <div class="action-buttons">
-                        <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${question.id}, this)">
-                            <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
-                        </button>
-                        <button class="action-btn share-btn" onclick="showShareImage(${question.id})">
-                            <i class="fas fa-image"></i> Share
-                        </button>
-                    </div>
-                </div>
-            `;
-            
-            return div;
+                `;
+            }).join('');
         }
 
-        // ===== WHATSAPP SHARE IMAGE SYSTEM =====
-        let currentSharingQuestionId = null;
-
-        function showShareImage(questionId) {
-            currentSharingQuestionId = questionId;
-            const question = getQuestionById(questionId);
-            if (!question) return;
-            
-            // Update share image content
-            shareQuestionText.textContent = question.question;
-            
-            // Add replies to share image if they exist
-            if (question.replies && question.replies.length > 0) {
-                shareRepliesContainer.style.display = 'block';
-                shareRepliesContainer.innerHTML = question.replies.slice(-2).map(reply => `
-                    <div class="share-reply-item">
-                        ${reply.text}
-                        <div class="share-reply-meta">
-                            <span>Student Reply</span>
-                            <span>${reply.timestamp || 'Recently'}</span>
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                shareRepliesContainer.style.display = 'none';
-                shareRepliesContainer.innerHTML = '';
-            }
-            
-            // Show the WhatsApp optimized share image container
-            shareImageContainer.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeShareImage() {
-            shareImageContainer.style.display = 'none';
-            document.body.style.overflow = '';
-            currentSharingQuestionId = null;
-        }
-
-        async function createAndShareImage() {
-            if (!currentSharingQuestionId) return;
-            
-            const question = getQuestionById(currentSharingQuestionId);
-            if (!question) return;
-            
-            // Show loading overlay
-            shareLoading.style.display = 'flex';
-            shareLoadingText.textContent = 'Creating WhatsApp status image...';
-            
-            try {
-                // Hide share controls temporarily
-                document.querySelector('.share-controls').style.display = 'none';
-                
-                // Wait for any animations to complete
-                await new Promise(resolve => setTimeout(resolve, 800));
-                
-                // Create the WhatsApp optimized image (1080x1920)
-                const canvas = await html2canvas(shareImageContainer.querySelector('.share-image-wrapper'), {
-                    scale: 3,
-                    backgroundColor: null,
-                    useCORS: true,
-                    allowTaint: true,
-                    logging: false,
-                    width: 1080,
-                    height: 1920,
-                    windowWidth: 1080,
-                    windowHeight: 1920,
-                    onclone: function(clonedDoc) {
-                        // Ensure all text is visible
-                        const textElements = clonedDoc.querySelectorAll('.share-question-text, .share-reply-item');
-                        textElements.forEach(el => {
-                            el.style.whiteSpace = 'pre-wrap';
-                            el.style.wordBreak = 'break-word';
-                            el.style.overflow = 'visible';
-                        });
-                    }
-                });
-                
-                // Show share controls again
-                document.querySelector('.share-controls').style.display = 'flex';
-                
-                // Convert to blob
-                const blob = await new Promise(resolve => {
-                    canvas.toBlob(resolve, 'image/jpeg', 0.95);
-                });
-                
-                if (!blob) {
-                    throw new Error('Failed to create image');
-                }
-                
-                // Create object URL
-                const imageUrl = URL.createObjectURL(blob);
-                
-                // Prepare share data for WhatsApp
-                const shareData = {
-                    files: [
-                        new File([blob], `BabaAhmed_Question_${Date.now()}.jpg`, {
-                            type: blob.type,
-                            lastModified: new Date().getTime()
-                        })
-                    ],
-                    title: 'Baba Ahmed Student Voice',
-                    text: `🎓 Check out this student question from Baba Ahmed School!\n\n${question.question.substring(0, 50)}...\n\nAsk your own question!\n${window.location.href}`,
-                    url: window.location.href
-                };
-                
-                // Hide loading
-                shareLoading.style.display = 'none';
-                
-                // Try Web Share API with files
-                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
-                    try {
-                        await navigator.share(shareData);
-                        showAlert('✅ WhatsApp status created successfully!', 'success');
-                        closeShareImage();
-                    } catch (err) {
-                        console.log('Web Share API error:', err);
-                        fallbackWhatsAppShare(imageUrl, question);
-                    }
-                } else {
-                    fallbackWhatsAppShare(imageUrl, question);
-                }
-                
-                // Clean up after 30 seconds
-                setTimeout(() => {
-                    URL.revokeObjectURL(imageUrl);
-                }, 30000);
-                
-            } catch (error) {
-                console.error('Error creating WhatsApp image:', error);
-                shareLoading.style.display = 'none';
-                document.querySelector('.share-controls').style.display = 'flex';
-                showAlert('⚠️ Could not create WhatsApp status. Sharing as text instead.', 'error');
-                fallbackTextShare(question);
-            }
-        }
-
-        function fallbackWhatsAppShare(imageUrl, question) {
-            // Create a temporary download link
-            const link = document.createElement('a');
-            link.href = imageUrl;
-            link.download = `BabaAhmed_WhatsApp_Status_${Date.now()}.jpg`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Show success message
-            showAlert('✅ WhatsApp status saved to your gallery! You can now share it as your WhatsApp status.', 'success');
-            
-            // Prepare WhatsApp status share message
-            const whatsappMessage = encodeURIComponent(
-                `🎓 *Baba Ahmed Student Voices*\n\n` +
-                `💬 *STUDENT QUESTION:* ${question.question}\n\n` +
-                `👇 *Ask Your Question:*\n${window.location.href}`
-            );
-            
-            // Auto-open WhatsApp after delay
-            setTimeout(() => {
-                if (confirm('Open WhatsApp to share this as your status?')) {
-                    const whatsappStatusUrl = 'https://wa.me/?text=' + whatsappMessage;
-                    window.open(whatsappStatusUrl, '_blank');
-                }
-            }, 2000);
-            
-            // Close share image
-            closeShareImage();
-        }
-
-        function fallbackTextShare(question) {
-            const text = encodeURIComponent(
-                `🎓 *Baba Ahmed Student Voices*\n\n` +
-                `💬 *STUDENT QUESTION:* ${question.question}\n\n` +
-                `👇 *Ask Your Own Question:*\n${window.location.href}\n\n` +
-                `#BabaAhmedSchool #StudentVoices #AnonymousQuestions`
-            );
-            
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-            showAlert('✅ Shared to WhatsApp!', 'success');
-            closeShareImage();
-        }
-
-        // ===== LIKE SYSTEM =====
+        // ===== LIKE SYSTEM - REAL LIKES (NO RANDOM!) =====
         function toggleLike(questionId, button) {
-            const question = getQuestionById(questionId);
-            if (!question) return;
-            
             const isLiked = likedQuestions.includes(questionId);
+            const question = findQuestionById(questionId);
+            
+            if (!question) return;
             
             if (isLiked) {
                 // Unlike
@@ -2390,8 +1647,10 @@
                 question.likes = (question.likes || 0) + 1;
             }
             
-            // Update storage
+            // Save to localStorage
             localStorage.setItem('likedQuestions', JSON.stringify(likedQuestions));
+            
+            // Update question in storage
             updateQuestionInStorage(question);
             
             // Update UI
@@ -2415,19 +1674,25 @@
                 return;
             }
             
+            if (replyText.length > 200) {
+                showAlert('Reply too long (max 200 characters)', 'error');
+                return;
+            }
+            
             if (containsBadWords(replyText)) {
                 showAlert('Please remove inappropriate language', 'error');
                 return;
             }
             
-            const question = getQuestionById(questionId);
+            const question = findQuestionById(questionId);
             if (!question) return;
             
             // Add reply
             if (!question.replies) question.replies = [];
             question.replies.push({
                 text: replyText,
-                timestamp: 'Just now'
+                timestamp: new Date().toISOString(),
+                timeAgo: 'Just now'
             });
             
             // Update storage
@@ -2436,77 +1701,233 @@
             // Clear input
             input.value = '';
             
-            // Refresh the card
-            loadQuestions();
+            // Refresh display
+            fetchQuestions();
             
-            // Show success
-            showAlert('Reply submitted!', 'success');
+            showAlert('✅ Reply posted anonymously!', 'success');
         }
 
-        function getQuestionById(id) {
-            // First check my local questions
-            let question = myQuestions.find(q => q.id === id);
+        // ===== SHARE COUNTER SYSTEM =====
+        function incrementShareCount(questionId) {
+            sharedQuestions[questionId] = (sharedQuestions[questionId] || 0) + 1;
+            localStorage.setItem('sharedQuestions', JSON.stringify(sharedQuestions));
             
-            // If not found, check API questions (we'll need to fetch or store separately)
-            if (!question) {
-                // For now, just return null if not in local storage
-                return null;
+            const question = findQuestionById(questionId);
+            if (question) {
+                question.shares = sharedQuestions[questionId];
+                updateQuestionInStorage(question);
             }
+        }
+
+        // ===== PREMIUM SHARE SYSTEM =====
+        function openShareModal(questionId, questionText) {
+            currentShareId = questionId;
+            currentShareQuestion = questionText;
+            sharePreviewText.textContent = questionText;
+            templateQuestion.textContent = questionText;
+            shareModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeShareModal() {
+            shareModal.style.display = 'none';
+            document.body.style.overflow = '';
+            currentShareQuestion = null;
+            currentShareId = null;
+            generatedImageBlob = null;
+            generatedImageUrl = null;
+        }
+
+        // Share to WhatsApp
+        function shareToWhatsApp() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
             
-            return question;
+            const text = encodeURIComponent(
+                `🎓 *Baba Ahmed Student Voices*\n\n` +
+                `💬 *QUESTION:* ${currentShareQuestion}\n\n` +
+                `👇 *Ask your own question:*\n${window.location.href}`
+            );
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            showAlert('✅ Opening WhatsApp... Share count +1', 'success');
+            closeShareModal();
+        }
+
+        // Share to Facebook
+        function shareToFacebook() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            const url = encodeURIComponent(window.location.href);
+            const quote = encodeURIComponent(`🎓 Baba Ahmed Student Voices - ${currentShareQuestion}`);
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
+            showAlert('✅ Opening Facebook... Share count +1', 'success');
+            closeShareModal();
+        }
+
+        // Share to Twitter
+        function shareToTwitter() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            const text = encodeURIComponent(`🎓 Baba Ahmed Student Voices\n\n${currentShareQuestion}\n\nAsk your own question:`);
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+            showAlert('✅ Opening Twitter... Share count +1', 'success');
+            closeShareModal();
+        }
+
+        // Share to Instagram (copy text)
+        function shareToInstagram() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            const text = `🎓 Baba Ahmed Student Voices\n\nQUESTION: ${currentShareQuestion}\n\nAsk your own question: ${window.location.href}`;
+            navigator.clipboard.writeText(text).then(() => {
+                showAlert('📋 Text copied! Paste in Instagram. Share count +1', 'success');
+            });
+            closeShareModal();
+        }
+
+        // Share to Telegram
+        function shareToTelegram() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            const text = encodeURIComponent(
+                `🎓 *Baba Ahmed Student Voices*\n\n` +
+                `💬 *QUESTION:* ${currentShareQuestion}\n\n` +
+                `👇 *Ask your own question:*\n${window.location.href}`
+            );
+            window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
+            showAlert('✅ Opening Telegram... Share count +1', 'success');
+            closeShareModal();
+        }
+
+        // Copy text to clipboard
+        function copyShareText() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            const text = `🎓 Baba Ahmed Student Voices\n\nQUESTION: ${currentShareQuestion}\n\nAsk your own question: ${window.location.href}`;
+            navigator.clipboard.writeText(text).then(() => {
+                showAlert('📋 Copied to clipboard! Share count +1', 'success');
+            });
+            closeShareModal();
+        }
+
+        // ===== PREMIUM IMAGE GENERATION =====
+        async function downloadShareImage() {
+            if (!currentShareQuestion || !currentShareId) return;
+            incrementShareCount(currentShareId);
+            
+            showAlert('🎨 Creating premium image...', 'success');
+            
+            try {
+                const template = document.getElementById('shareImageTemplate');
+                templateQuestion.textContent = currentShareQuestion;
+                
+                const canvas = await html2canvas(template, {
+                    scale: 2,
+                    backgroundColor: null,
+                    allowTaint: true,
+                    useCORS: true,
+                    logging: false,
+                    windowWidth: 1080,
+                    windowHeight: 1920
+                });
+                
+                const imageUrl = canvas.toDataURL('image/png');
+                
+                previewImage.src = imageUrl;
+                imagePreviewContainer.style.display = 'flex';
+                generatedImageUrl = imageUrl;
+                
+                closeShareModal();
+                
+            } catch (error) {
+                console.error('Error creating image:', error);
+                showAlert('❌ Failed to create image. Try again.', 'error');
+            }
+        }
+
+        function downloadGeneratedImage() {
+            if (generatedImageUrl) {
+                const link = document.createElement('a');
+                link.href = generatedImageUrl;
+                link.download = `BabaAhmed_Question_${Date.now()}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showAlert('✅ Image downloaded! Share count +1', 'success');
+                closeImagePreview();
+            }
+        }
+
+        function closeImagePreview() {
+            imagePreviewContainer.style.display = 'none';
+            previewImage.src = '';
+            generatedImageUrl = null;
+        }
+
+        // ===== HELPER FUNCTIONS =====
+        function findQuestionById(id) {
+            return allQuestions.find(q => q.id === id);
         }
 
         function updateQuestionInStorage(updatedQuestion) {
             const index = myQuestions.findIndex(q => q.id === updatedQuestion.id);
-            
             if (index !== -1) {
                 myQuestions[index] = updatedQuestion;
                 localStorage.setItem('myQuestions', JSON.stringify(myQuestions));
             }
         }
 
+        function formatTimeAgo(timestamp) {
+            if (!timestamp) return 'Recently';
+            try {
+                const date = new Date(timestamp);
+                const now = new Date();
+                const diff = Math.floor((now - date) / 1000);
+                
+                if (diff < 60) return 'Just now';
+                if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+                if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+                if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            } catch (e) {
+                return 'Recently';
+            }
+        }
+
         // ===== SUCCESS ANIMATION =====
         function showSuccessAnimation() {
-            // Random celebration elements
             const randomEmoji = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
             const randomTitle = CELEBRATION_TEXTS[Math.floor(Math.random() * CELEBRATION_TEXTS.length)];
             const randomMessage = CELEBRATION_MESSAGES[Math.floor(Math.random() * CELEBRATION_MESSAGES.length)];
             
-            // Update celebration content
             celebrationEmoji.textContent = randomEmoji;
             celebrationTitle.textContent = randomTitle;
             celebrationText.textContent = randomMessage;
             
-            // Show animation
             successAnimation.style.display = 'flex';
             
-            // Auto-hide after 8 seconds
-            setTimeout(() => {
-                if (successAnimation.style.display === 'flex') {
-                    successAnimation.style.display = 'none';
-                    questionInput.value = '';
-                    charCount.textContent = '0';
-                    switchTab('view');
-                }
-            }, 8000);
+            setTimeout(() => { successAnimation.style.display = 'none'; }, 5000);
         }
 
+        // ===== CONFETTI =====
         function createConfetti() {
-            for (let i = 0; i < 60; i++) {
+            for (let i = 0; i < 30; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     confetti.innerHTML = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
                     confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     confetti.style.fontSize = (Math.random() * 20 + 15) + 'px';
-                    
                     document.body.appendChild(confetti);
-                    
-                    setTimeout(() => {
-                        document.body.removeChild(confetti);
-                    }, 4000);
-                }, i * 40);
+                    setTimeout(() => { document.body.removeChild(confetti); }, 3000);
+                }, i * 50);
             }
         }
 
@@ -2515,42 +1936,32 @@
             alertMessage.textContent = message;
             alert.className = `alert ${type}`;
             alert.style.display = 'flex';
-            
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 5000);
+            setTimeout(() => { alert.style.display = 'none'; }, 4000);
         }
 
-        // ===== UTILITY FUNCTIONS =====
-        function getTimeAgo(date) {
-            const now = new Date();
-            const diff = now - new Date(date);
-            
-            const seconds = Math.floor(diff / 1000);
-            const minutes = Math.floor(seconds / 60);
-            const hours = Math.floor(minutes / 60);
-            const days = Math.floor(hours / 24);
-            
-            if (seconds < 60) return 'Just now';
-            if (minutes < 60) return `${minutes}m ago`;
-            if (hours < 24) return `${hours}h ago`;
-            if (days < 7) return `${days}d ago`;
-            
-            return new Date(date).toLocaleDateString();
-        }
-
-        function showReportModal() {
-            alert('Report feature coming soon!');
+        // ===== UTILITIES =====
+        function escapeHTML(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // ===== GLOBAL FUNCTIONS =====
         window.switchTab = switchTab;
         window.toggleLike = toggleLike;
         window.submitReply = submitReply;
-        window.showShareImage = showShareImage;
-        window.createAndShareImage = createAndShareImage;
-        window.closeShareImage = closeShareImage;
-        window.showReportModal = showReportModal;
+        window.openShareModal = openShareModal;
+        window.closeShareModal = closeShareModal;
+        window.shareToWhatsApp = shareToWhatsApp;
+        window.shareToFacebook = shareToFacebook;
+        window.shareToTwitter = shareToTwitter;
+        window.shareToInstagram = shareToInstagram;
+        window.shareToTelegram = shareToTelegram;
+        window.copyShareText = copyShareText;
+        window.downloadShareImage = downloadShareImage;
+        window.downloadGeneratedImage = downloadGeneratedImage;
+        window.closeImagePreview = closeImagePreview;
+        window.fetchQuestions = fetchQuestions;
     </script>
 </body>
 </html>
