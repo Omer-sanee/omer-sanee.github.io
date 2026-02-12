@@ -4,18 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baba Ahmed Student Voices</title>
-    
     <!-- FAVICON -->
     <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-    
+    <link rel="icon" type="image/png" sizes="16x16" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- html2canvas for image sharing -->
+    <!-- html2canvas library for creating images -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    
     <style>
-        /* ===== ALL YOUR EXISTING STYLES - KEEP EXACTLY THE SAME ===== */
+        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -44,11 +41,13 @@
             padding: 20px;
         }
 
+        /* ===== MAIN CONTAINER ===== */
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* ===== HEADER ===== */
         .header {
             text-align: center;
             margin-bottom: 30px;
@@ -57,8 +56,14 @@
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .logo {
@@ -85,6 +90,7 @@
             line-height: 1.6;
             max-width: 700px;
             margin: 0 auto 20px;
+            padding: 0 20px;
         }
 
         .header-tagline {
@@ -98,6 +104,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* ===== NAV TABS ===== */
         .nav-tabs {
             display: flex;
             background: white;
@@ -133,6 +140,7 @@
             box-shadow: 0 5px 15px rgba(124, 58, 237, 0.3);
         }
 
+        /* ===== SECTIONS ===== */
         .section {
             display: none;
             animation: slideUp 0.6s ease;
@@ -143,10 +151,17 @@
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
+        /* ===== FEEDBACK CARD ===== */
         .feedback-card {
             background: white;
             border-radius: 20px;
@@ -175,6 +190,11 @@
             100% { background-position: calc(200px + 100%) 0; }
         }
 
+        /* ===== QUESTION SECTION ===== */
+        .question-section {
+            margin-bottom: 30px;
+        }
+
         .question-header {
             display: flex;
             align-items: center;
@@ -201,6 +221,70 @@
             font-size: 1.5rem;
             line-height: 1.4;
             flex: 1;
+        }
+
+        .question-select {
+            margin-bottom: 30px;
+        }
+
+        .question-select label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question-select label i {
+            color: var(--primary);
+        }
+
+        .question-dropdown {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            background: white;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%237c3aed' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 20px;
+        }
+
+        .question-dropdown:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* ===== ANSWER SECTION ===== */
+        .answer-section {
+            margin-bottom: 30px;
+        }
+
+        .answer-section label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .answer-section label i {
+            color: var(--accent);
         }
 
         textarea {
@@ -234,6 +318,71 @@
             font-weight: 500;
         }
 
+        /* ===== SECRET CODE INPUT ===== */
+        .secret-code-input {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 15px;
+            border-left: 5px solid var(--warning);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secret-code-input.show {
+            display: block;
+            animation: slideDown 0.4s ease;
+        }
+
+        .secret-code-input label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .secret-code-input label i {
+            color: var(--warning);
+            font-size: 1.2rem;
+        }
+
+        .secret-code {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-align: center;
+            background: white;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .secret-code:focus {
+            outline: none;
+            border-color: var(--warning);
+            box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+        }
+
+        .secret-hint {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            font-style: italic;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+
+        /* ===== SUBMIT BUTTON ===== */
         .submit-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
@@ -259,6 +408,10 @@
             box-shadow: 0 15px 35px rgba(124, 58, 237, 0.4);
         }
 
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
         .submit-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
@@ -266,6 +419,63 @@
             box-shadow: none !important;
         }
 
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            transition: transform 0.6s;
+        }
+
+        .submit-btn:hover:not(:disabled)::after {
+            transform: rotate(45deg) translate(50%, 50%);
+        }
+
+        /* ===== ALERTS ===== */
+        .alert {
+            padding: 20px 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            display: none;
+            align-items: center;
+            gap: 18px;
+            animation: slideDown 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .alert i {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 5px solid var(--danger);
+            color: #92400e;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            border-left: 5px solid var(--accent);
+            color: #065f46;
+        }
+
+        /* ===== PUBLIC WALL SECTION ===== */
         .wall-section {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -302,20 +512,17 @@
             border-radius: 0 0 0 80px;
         }
 
-        .question-badge {
+        .question-tag {
             display: inline-block;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            padding: 6px 15px;
+            padding: 8px 20px;
             border-radius: 25px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.2);
             letter-spacing: 0.5px;
-        }
-
-        .your-question-badge {
-            background: linear-gradient(135deg, #10b981, #0da271);
         }
 
         .wall-question {
@@ -326,13 +533,40 @@
             line-height: 1.5;
             padding-bottom: 20px;
             border-bottom: 3px solid var(--light);
-            word-break: break-word;
+        }
+
+        .wall-answer {
+            color: var(--dark);
+            line-height: 1.7;
+            margin-bottom: 25px;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .wall-answer::before {
+            content: '💬';
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            background: var(--accent);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
         .stats-bar {
             display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 25px;
             margin-bottom: 20px;
             padding: 15px;
             background: #f8fafc;
@@ -379,13 +613,6 @@
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .reply-actions {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
         .reply-btn {
             background: linear-gradient(135deg, var(--info), #2563eb);
             color: white;
@@ -408,11 +635,9 @@
 
         .replies-container {
             margin-top: 20px;
-            max-height: 400px;
+            max-height: 250px;
             overflow-y: auto;
             padding-right: 10px;
-            border-top: 2px solid var(--light);
-            padding-top: 20px;
         }
 
         .reply-item {
@@ -424,12 +649,6 @@
             font-size: 1rem;
             line-height: 1.6;
             position: relative;
-            transition: var(--transition);
-        }
-
-        .reply-item:hover {
-            background: #e2e8f0;
-            transform: translateX(5px);
         }
 
         .reply-item::before {
@@ -453,29 +672,6 @@
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        .reply-meta-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .reply-share-small {
-            background: none;
-            border: none;
-            color: var(--accent);
-            cursor: pointer;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 10px;
-            border-radius: 20px;
-            transition: var(--transition);
-        }
-
-        .reply-share-small:hover {
-            background: rgba(16, 185, 129, 0.1);
-        }
-
         .wall-meta {
             display: flex;
             justify-content: space-between;
@@ -485,8 +681,6 @@
             margin-top: 20px;
             padding-top: 20px;
             border-top: 3px solid var(--light);
-            flex-wrap: wrap;
-            gap: 15px;
         }
 
         .action-buttons {
@@ -515,10 +709,40 @@
 
         .like-btn.liked {
             background: linear-gradient(135deg, #dc2626, #991b1b);
+            box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
         }
 
         .share-btn {
             background: linear-gradient(135deg, var(--accent), #0da271);
+        }
+
+        .share-btn:hover, .like-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .empty-wall {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 80px 30px;
+            color: var(--gray);
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 2px dashed #e2e8f0;
+        }
+
+        .empty-wall i {
+            font-size: 5rem;
+            margin-bottom: 25px;
+            color: #cbd5e1;
+            opacity: 0.5;
+        }
+
+        .empty-wall h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
         }
 
         .refresh-wall {
@@ -549,151 +773,38 @@
             box-shadow: 0 12px 25px rgba(124, 58, 237, 0.3);
         }
 
-        .empty-wall {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 80px 30px;
-            color: var(--gray);
+        /* ===== CONTACT SECTION ===== */
+        .contact-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 25px;
+            padding: 35px;
+            margin-bottom: 30px;
             box-shadow: var(--card-shadow);
-            border: 2px dashed #e2e8f0;
+            text-align: center;
+            border-left: 6px solid var(--info);
+            position: relative;
+            overflow: hidden;
         }
 
-        .empty-wall i {
-            font-size: 5rem;
-            margin-bottom: 25px;
-            color: #cbd5e1;
-            opacity: 0.5;
-        }
-
-        .empty-wall h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-
-        .success-animation {
-            position: fixed;
+        .contact-card::before {
+            content: '';
+            position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
+            border-radius: 0 0 0 100px;
+        }
+
+        .contact-card h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 2rem;
+            display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .celebration {
-            background: linear-gradient(135deg, white, #f8fafc);
-            border-radius: 25px;
-            padding: 50px;
-            text-align: center;
-            max-width: 450px;
-            width: 90%;
-            animation: popIn 0.5s ease;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--primary);
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .celebration-icon {
-            font-size: 6rem;
-            margin-bottom: 25px;
-        }
-
-        .celebration h2 {
-            color: var(--primary);
-            margin-bottom: 20px;
-            font-size: 2rem;
-        }
-
-        .celebration p {
-            color: var(--gray);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .celebration-btn {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .alert {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            padding: 20px 30px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            display: none;
-            align-items: center;
             gap: 15px;
-            z-index: 1000;
-            max-width: 90%;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateX(-50%) translateY(-30px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        .alert.success { border-left: 5px solid var(--accent); }
-        .alert.error { border-left: 5px solid var(--danger); }
-        .alert.success i { color: var(--accent); }
-        .alert.error i { color: var(--danger); }
-
-        .contact-card, .about-section {
-            background: white;
-            border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 20px;
-            box-shadow: var(--card-shadow);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .about-item {
-            background: #f8fafc;
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .about-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary);
-        }
-
-        .about-item i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 20px;
         }
 
         .contact-info {
@@ -708,6 +819,36 @@
             padding: 25px;
             border-radius: 15px;
             text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .contact-item i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .contact-item h3 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-item p {
+            color: var(--gray);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         .contact-link {
@@ -718,257 +859,299 @@
             padding: 12px 25px;
             border-radius: 12px;
             font-weight: 700;
-            margin-top: 15px;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
         }
 
-        .share-modal {
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .developer-note {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 35px;
+            text-align: center;
+            border-left: 5px solid var(--warning);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .developer-note h4 {
+            color: #92400e;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* ===== SUCCESS ANIMATION ===== */
+        .success-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.9);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 10000;
-            padding: 20px;
-            backdrop-filter: blur(10px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        .share-modal-content {
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .celebration {
+            background: linear-gradient(135deg, white, #f8fafc);
+            border-radius: 25px;
+            padding: 50px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .celebration::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.5) rotate(-5deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0);
+                opacity: 1;
+            }
+        }
+
+        .celebration-icon {
+            font-size: 6rem;
+            margin-bottom: 25px;
+            display: block;
+            animation: bounce 1s infinite;
+        }
+
+        .celebration h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .celebration p {
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .celebration-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
+        }
+
+        .celebration-btn:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
             background: white;
-            border-radius: 30px;
-            padding: 40px;
+            border-radius: 20px;
+            padding: 35px;
             max-width: 500px;
             width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: modalPop 0.4s ease;
-            border: 3px solid var(--primary);
+            animation: modalIn 0.4s ease;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes modalPop {
-            0% { transform: scale(0.7); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
         }
 
-        .share-modal-header {
-            text-align: center;
-            margin-bottom: 30px;
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
             padding-bottom: 20px;
             border-bottom: 3px solid var(--light);
         }
 
-        .share-modal-header i {
-            font-size: 4rem;
+        .modal-header h3 {
             color: var(--primary);
-            margin-bottom: 15px;
-            display: block;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .share-modal-header h3 {
-            font-size: 1.8rem;
-            color: var(--dark);
-            font-weight: 800;
-        }
-
-        .share-preview {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 30px;
-            color: white;
-            position: relative;
-            border-left: 8px solid var(--primary);
-            word-break: break-word;
-        }
-
-        .share-preview::before {
-            content: '💬';
-            position: absolute;
-            top: -15px;
-            left: 25px;
-            background: var(--primary);
-            color: white;
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
             width: 40px;
             height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 5px 15px rgba(124, 58, 237, 0.4);
         }
 
-        .share-preview-text {
-            font-size: 1.3rem;
-            line-height: 1.5;
-            font-weight: 600;
-            margin-top: 10px;
-            word-break: break-word;
+        .modal-close:hover {
+            background: var(--light);
+            color: var(--danger);
         }
 
-        .share-options {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .share-option-btn {
-            padding: 18px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: var(--transition);
-            color: white;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .share-option-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .share-option-btn.whatsapp { background: linear-gradient(135deg, #25D366, #128C7E); }
-        .share-option-btn.facebook { background: linear-gradient(135deg, #1877F2, #0d65d9); }
-        .share-option-btn.twitter { background: linear-gradient(135deg, #1DA1F2, #0c85d0); }
-        .share-option-btn.instagram { background: linear-gradient(135deg, #E4405F, #d62e4e); }
-        .share-option-btn.telegram { background: linear-gradient(135deg, #0088cc, #006699); }
-        .share-option-btn.download { background: linear-gradient(135deg, var(--primary), var(--primary-light)); }
-        .share-option-btn.copy { background: linear-gradient(135deg, var(--gray), #4b5563); }
-
-        .share-close-btn {
-            width: 100%;
-            padding: 15px;
-            background: #f1f5f9;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: var(--transition);
-            color: var(--dark);
-            margin-top: 10px;
-        }
-
-        .share-close-btn:hover {
-            background: #e2e8f0;
-            transform: translateY(-3px);
-        }
-
-        .image-preview-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.98);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 20000;
-            padding: 20px;
-        }
-
-        .image-preview-wrapper {
-            max-width: 500px;
-            width: 100%;
-            background: white;
-            border-radius: 30px;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .image-preview-img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            margin-bottom: 25px;
-            border: 3px solid var(--primary);
-        }
-
-        .image-preview-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .image-preview-btn {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: var(--transition);
-        }
-
-        .image-preview-btn.download {
-            background: linear-gradient(135deg, var(--accent), #0da271);
-            color: white;
-        }
-
-        .image-preview-btn.close {
-            background: #f1f5f9;
-            color: var(--dark);
-        }
-
-        .share-image-template {
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 1080px;
-            height: 1920px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .reply-image-template {
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 1080px;
-            height: 1920px;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            padding: 80px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            color: white;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
+        /* ===== FOOTER ===== */
         .footer {
             text-align: center;
             margin-top: 60px;
             color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
             padding: 40px 20px;
             border-top: 2px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
         }
 
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            pointer-events: none;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-link:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .footer-link.admin-link {
+            display: none; /* Hidden by default */
+            background: rgba(124, 58, 237, 0.3);
+            border-color: rgba(124, 58, 237, 0.5);
+        }
+
+        .footer-link.admin-link.show {
+            display: inline-flex;
+            animation: bounce 1s;
+        }
+
+        .footer p {
+            position: relative;
+            z-index: 1;
+            margin: 15px 0;
+        }
+
+        /* ===== LOADING ===== */
         .loading {
             text-align: center;
             padding: 60px 30px;
+            color: var(--gray);
         }
 
         .spinner {
@@ -979,12 +1162,142 @@
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s linear infinite;
+            margin-bottom: 20px;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .wall-section {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                border-radius: 20px;
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            .nav-tab {
+                border-radius: 0;
+                padding: 18px;
+                min-width: 100%;
+            }
+            
+            .nav-tab:first-child {
+                border-radius: 20px 20px 0 0;
+            }
+            
+            .nav-tab:last-child {
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+            
+            .feedback-card {
+                padding: 30px 25px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+            
+            .action-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 15px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .footer-links {
+                gap: 20px;
+            }
+            
+            .footer-link {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .header-tagline {
+                font-size: 0.9rem;
+                padding: 6px 15px;
+            }
+            
+            .feedback-card {
+                padding: 25px 20px;
+            }
+            
+            .question-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            textarea {
+                padding: 18px;
+                min-height: 140px;
+            }
+            
+            .submit-btn {
+                padding: 18px;
+                font-size: 1.1rem;
+            }
+            
+            .celebration {
+                padding: 35px 25px;
+            }
+            
+            .footer-links {
+                gap: 15px;
+            }
+            
+            .footer-link {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ===== CONFETTI ===== */
         .confetti {
             position: fixed;
             top: -10px;
@@ -992,163 +1305,545 @@
             opacity: 0;
             z-index: 1001;
             pointer-events: none;
-            animation: confettiFall 3s linear forwards;
         }
 
         @keyframes confettiFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
         }
 
+        /* ===== WHATSAPP OPTIMIZED SHARE IMAGE ===== */
+        .share-image-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 15px;
+        }
+
+        .share-image-wrapper {
+            width: 100%;
+            max-width: 1080px; /* WhatsApp Status optimal width */
+            height: auto;
+            min-height: 1920px; /* WhatsApp Status optimal height */
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            position: relative;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .share-image-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .share-image-header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .share-image-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 30%;
+            width: 40%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .share-image-logo {
+            font-size: 6rem;
+            color: white;
+            margin-bottom: 25px;
+            display: block;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-image-title {
+            font-size: 4.5rem;
+            color: white;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            line-height: 1.1;
+        }
+
+        .share-image-subtitle {
+            font-size: 2.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .share-question-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 45px;
+            margin-bottom: 30px;
+            border-left: 10px solid var(--primary);
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .share-question-container::before {
+            content: '💬 QUESTION';
+            position: absolute;
+            top: -20px;
+            left: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 12px 30px;
+            border-radius: 35px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        .share-question-text {
+            font-size: 2.8rem;
+            color: white;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-top: 20px;
+            text-align: left;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-answer-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 45px;
+            margin-bottom: 30px;
+            border-left: 10px solid var(--accent);
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .share-answer-container::before {
+            content: '💭 ANSWER';
+            position: absolute;
+            top: -20px;
+            left: 40px;
+            background: linear-gradient(135deg, var(--accent), #0da271);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 35px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .share-answer-text {
+            font-size: 2.5rem;
+            color: white;
+            line-height: 1.5;
+            margin-top: 20px;
+            text-align: left;
+            flex-grow: 1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+        .share-answer-text::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .share-answer-text::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+        }
+
+        .share-answer-text::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        /* Add replies to share image */
+        .share-replies-container {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .share-reply-item {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--info);
+            font-size: 2rem;
+            color: white;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .share-reply-item::before {
+            content: '↳';
+            position: absolute;
+            left: -25px;
+            top: 30px;
+            color: var(--info);
+            font-size: 2.2rem;
+            font-weight: bold;
+        }
+
+        .share-reply-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .share-footer {
+            margin-top: auto;
+            padding-top: 30px;
+            border-top: 3px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .share-watermark {
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-watermark i {
+            color: var(--primary);
+            font-size: 2.5rem;
+        }
+
+        .share-qr-code {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px 35px;
+            border-radius: 20px;
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 800;
+            text-align: center;
+            border: 3px dashed var(--primary);
+            min-width: 250px;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-qr-code i {
+            font-size: 3rem;
+            color: white;
+            display: block;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-image-decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .share-decoration {
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .share-controls {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 10000;
+            display: flex;
+            gap: 20px;
+        }
+
+        .share-control-btn {
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 15px;
+            padding: 20px 30px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .share-control-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .share-control-btn.share {
+            background: linear-gradient(135deg, var(--accent), #0da271);
+            color: white;
+        }
+
+        .share-control-btn.close {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: white;
+        }
+
+        /* ===== SHARE LOADING OVERLAY ===== */
+        .share-loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10001;
+            flex-direction: column;
+            gap: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .share-loading-spinner {
+            width: 100px;
+            height: 100px;
+            border: 8px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1.2s linear infinite;
+        }
+
+        .share-loading-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            max-width: 400px;
+            text-align: center;
+            line-height: 1.5;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== RESPONSIVE FOR SHARE IMAGE ===== */
         @media (max-width: 768px) {
-            .wall-section { grid-template-columns: 1fr; }
-            .nav-tabs { flex-direction: column; border-radius: 20px; }
-            .nav-tab { border-radius: 0; min-width: 100%; }
-            .nav-tab:first-child { border-radius: 20px 20px 0 0; }
-            .nav-tab:last-child { border-radius: 0 0 20px 20px; }
-            .action-buttons { flex-direction: column; width: 100%; }
-            .action-btn { width: 100%; justify-content: center; }
-            .share-options { grid-template-columns: 1fr; }
-            .stats-bar { flex-direction: column; gap: 10px; }
+            .share-image-wrapper {
+                padding: 40px 25px;
+                max-width: 95%;
+                min-height: 1400px;
+            }
+            
+            .share-image-title {
+                font-size: 3.5rem;
+            }
+            
+            .share-image-subtitle {
+                font-size: 1.8rem;
+            }
+            
+            .share-question-text {
+                font-size: 2.2rem;
+            }
+            
+            .share-answer-text {
+                font-size: 2rem;
+            }
+            
+            .share-reply-item {
+                font-size: 1.6rem;
+                padding: 25px;
+            }
+            
+            .share-watermark {
+                font-size: 1.6rem;
+            }
+            
+            .share-qr-code {
+                min-width: 200px;
+                padding: 20px;
+                font-size: 1.5rem;
+            }
+            
+            .share-controls {
+                top: 15px;
+                right: 15px;
+                flex-direction: column;
+            }
+            
+            .share-control-btn {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .share-image-wrapper {
+                padding: 30px 20px;
+                max-width: 100%;
+                min-height: 1200px;
+                border-radius: 15px;
+            }
+            
+            .share-image-title {
+                font-size: 2.8rem;
+            }
+            
+            .share-image-subtitle {
+                font-size: 1.5rem;
+            }
+            
+            .share-question-container,
+            .share-answer-container {
+                padding: 30px 25px;
+            }
+            
+            .share-question-text {
+                font-size: 1.8rem;
+            }
+            
+            .share-answer-text {
+                font-size: 1.6rem;
+            }
+            
+            .share-question-container::before,
+            .share-answer-container::before {
+                left: 25px;
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+            
+            .share-footer {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+            
+            .share-controls {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .share-control-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ALERT -->
-    <div class="alert" id="alert">
-        <i class="fas fa-check-circle"></i>
-        <span id="alertMessage">Success!</span>
-    </div>
-
-    <!-- SUCCESS ANIMATION -->
-    <div class="success-animation" id="successAnimation">
-        <div class="celebration">
-            <div class="celebration-icon" id="celebrationEmoji">🎉</div>
-            <h2 id="celebrationTitle">Question Posted!</h2>
-            <p id="celebrationText">Your anonymous question has been shared with everyone.</p>
-            <button class="celebration-btn" id="celebrationClose">
-                <i class="fas fa-check"></i> View Questions
-            </button>
+    <!-- WHATSAPP OPTIMIZED SHARE IMAGE CONTAINER -->
+    <div class="share-image-container" id="shareImageContainer">
+        <div class="share-image-wrapper">
+            <div class="share-image-decorations">
+                <div class="share-decoration" style="top: 5%; left: 5%;">🎓</div>
+                <div class="share-decoration" style="top: 10%; right: 8%;">💬</div>
+                <div class="share-decoration" style="bottom: 15%; left: 10%;">✨</div>
+                <div class="share-decoration" style="bottom: 10%; right: 5%;">🌟</div>
+                <div class="share-decoration" style="top: 50%; left: 50%; transform: translate(-50%, -50%);">🎯</div>
+                <div class="share-decoration" style="top: 20%; left: 20%;">🤫</div>
+                <div class="share-decoration" style="top: 30%; right: 15%;">😄</div>
+            </div>
+            
+            <div class="share-image-content">
+                <div class="share-image-header">
+                    <div class="share-image-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="share-image-title">Baba Ahmed Student Voices</div>
+                    <div class="share-image-subtitle">A safe, anonymous place to share your thoughts</div>
+                </div>
+                
+                <div class="share-question-container" id="shareQuestionContainer">
+                    <div class="share-question-text" id="shareQuestionText">
+                        Loading question...
+                    </div>
+                </div>
+                
+                <div class="share-answer-container" id="shareAnswerContainer">
+                    <div class="share-answer-text" id="shareAnswerText">
+                        Loading answer...
+                    </div>
+                </div>
+                
+                <!-- Replies section for share image -->
+                <div class="share-replies-container" id="shareRepliesContainer" style="display: none;">
+                    <!-- Replies will be added here dynamically -->
+                </div>
+                
+                <div class="share-footer">
+                    <div class="share-watermark">
+                        <i class="fas fa-shield-alt"></i>
+                        Shared via Baba Ahmed Student Voices
+                    </div>
+                    <div class="share-qr-code">
+                        <i class="fas fa-qrcode"></i>
+                        Scan to share your thoughts
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!-- PREMIUM SHARE MODAL -->
-    <div class="share-modal" id="shareModal">
-        <div class="share-modal-content">
-            <div class="share-modal-header">
-                <i class="fas fa-share-alt"></i>
-                <h3 id="shareModalTitle">Share This</h3>
-            </div>
-            
-            <div class="share-preview" id="sharePreview">
-                <div class="share-preview-text" id="sharePreviewText">Loading...</div>
-            </div>
-            
-            <div class="share-options">
-                <button class="share-option-btn whatsapp" onclick="shareToWhatsApp()">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </button>
-                <button class="share-option-btn facebook" onclick="shareToFacebook()">
-                    <i class="fab fa-facebook"></i> Facebook
-                </button>
-                <button class="share-option-btn twitter" onclick="shareToTwitter()">
-                    <i class="fab fa-twitter"></i> Twitter
-                </button>
-                <button class="share-option-btn instagram" onclick="shareToInstagram()">
-                    <i class="fab fa-instagram"></i> Instagram
-                </button>
-                <button class="share-option-btn telegram" onclick="shareToTelegram()">
-                    <i class="fab fa-telegram"></i> Telegram
-                </button>
-                <button class="share-option-btn download" onclick="downloadShareImage()">
-                    <i class="fas fa-download"></i> Save Image
-                </button>
-                <button class="share-option-btn copy" onclick="copyShareText()">
-                    <i class="fas fa-copy"></i> Copy Text
-                </button>
-            </div>
-            
-            <button class="share-close-btn" onclick="closeShareModal()">
+        
+        <div class="share-controls">
+            <button class="share-control-btn share" id="shareImageBtn">
+                <i class="fas fa-share-alt"></i> Share to WhatsApp
+            </button>
+            <button class="share-control-btn close" id="closeShareBtn">
                 <i class="fas fa-times"></i> Close
             </button>
         </div>
     </div>
 
-    <!-- IMAGE PREVIEW CONTAINER -->
-    <div class="image-preview-container" id="imagePreviewContainer">
-        <div class="image-preview-wrapper">
-            <img id="previewImage" class="image-preview-img" src="" alt="Share Image">
-            <div class="image-preview-buttons">
-                <button class="image-preview-btn download" onclick="downloadGeneratedImage()">
-                    <i class="fas fa-download"></i> Download
-                </button>
-                <button class="image-preview-btn close" onclick="closeImagePreview()">
-                    <i class="fas fa-times"></i> Close
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- HIDDEN IMAGE TEMPLATE - QUESTION -->
-    <div id="questionImageTemplate" class="share-image-template">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <div style="font-size: 120px; margin-bottom: 30px;">🎓</div>
-            <h1 style="font-size: 80px; font-weight: 900; margin-bottom: 20px; color: white;">Baba Ahmed</h1>
-            <h2 style="font-size: 60px; font-weight: 700; margin-bottom: 40px; color: #8b5cf6;">Student Voices</h2>
-        </div>
-        
-        <div style="background: rgba(124, 58, 237, 0.2); border-radius: 40px; padding: 50px; margin-bottom: 50px; border-left: 15px solid #7c3aed;">
-            <div style="background: linear-gradient(135deg, #7c3aed, #8b5cf6); display: inline-block; padding: 20px 50px; border-radius: 50px; margin-bottom: 30px;">
-                <span style="font-size: 30px; font-weight: 800; color: white;">💬 STUDENT QUESTION</span>
-            </div>
-            <p id="templateQuestion" style="font-size: 50px; line-height: 1.5; font-weight: 700; color: white; word-break: break-word;">
-                Loading...
-            </p>
-        </div>
-        
-        <div style="margin-top: auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 40px; border-top: 3px solid rgba(255,255,255,0.2);">
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <i class="fas fa-shield-alt" style="font-size: 50px; color: #7c3aed;"></i>
-                    <span style="font-size: 35px; font-weight: 700; color: white;">100% Anonymous</span>
-                </div>
-                <div style="text-align: right;">
-                    <span style="font-size: 30px; color: #10b981;">OSO GROUP</span><br>
-                    <span style="font-size: 25px; color: rgba(255,255,255,0.7);">08135103329</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- HIDDEN IMAGE TEMPLATE - REPLY -->
-    <div id="replyImageTemplate" class="reply-image-template">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <div style="font-size: 100px; margin-bottom: 30px;">💭</div>
-            <h1 style="font-size: 70px; font-weight: 900; margin-bottom: 20px; color: white;">Student Reply</h1>
-            <h2 style="font-size: 50px; font-weight: 700; margin-bottom: 40px; color: #3b82f6;">Baba Ahmed Voices</h2>
-        </div>
-        
-        <div style="background: rgba(59, 130, 246, 0.2); border-radius: 40px; padding: 50px; margin-bottom: 50px; border-left: 15px solid #3b82f6;">
-            <div style="background: linear-gradient(135deg, #3b82f6, #2563eb); display: inline-block; padding: 20px 50px; border-radius: 50px; margin-bottom: 30px;">
-                <span style="font-size: 30px; font-weight: 800; color: white;">↳ ANONYMOUS REPLY</span>
-            </div>
-            <p id="templateReply" style="font-size: 50px; line-height: 1.5; font-weight: 700; color: white; word-break: break-word;">
-                Loading...
-            </p>
-        </div>
-        
-        <div style="margin-top: auto;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 40px; border-top: 3px solid rgba(255,255,255,0.2);">
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <i class="fas fa-reply" style="font-size: 50px; color: #3b82f6;"></i>
-                    <span style="font-size: 35px; font-weight: 700; color: white;">Reply to Question</span>
-                </div>
-                <div style="text-align: right;">
-                    <span style="font-size: 30px; color: #10b981;">OSO GROUP</span><br>
-                    <span style="font-size: 25px; color: rgba(255,255,255,0.7);">08135103329</span>
-                </div>
-            </div>
-        </div>
+    <!-- SHARE LOADING OVERLAY -->
+    <div class="share-loading" id="shareLoading">
+        <div class="share-loading-spinner"></div>
+        <div class="share-loading-text" id="shareLoadingText">Creating beautiful WhatsApp status image...</div>
     </div>
 
     <!-- MAIN CONTAINER -->
@@ -1159,153 +1854,200 @@
                 <i class="fas fa-graduation-cap"></i>
             </div>
             <h1>Baba Ahmed Student Voices</h1>
-            <p>Ask anonymous questions. Everyone sees everything in real-time!</p>
+            <p>A safe, anonymous place to share your thoughts, ideas, and funny moments about school. All answers are anonymous—be honest and kind!</p>
             <div class="header-tagline">
-                <i class="fas fa-user-shield"></i> 100% Anonymous • Real-time Updates • Share Images
+                <i class="fas fa-user-shield"></i> 100% Anonymous • Admin Approved Only
             </div>
         </div>
 
         <!-- NAV TABS -->
         <div class="nav-tabs">
-            <div class="nav-tab active" data-tab="ask">
-                <i class="fas fa-comment-medical"></i> Ask Question
+            <div class="nav-tab active" data-tab="give">
+                <i class="fas fa-comment-medical"></i> Share Your Voice
             </div>
             <div class="nav-tab" data-tab="view">
-                <i class="fas fa-chalkboard"></i> View Questions
-            </div>
-            <div class="nav-tab" data-tab="about">
-                <i class="fas fa-info-circle"></i> How It Works
+                <i class="fas fa-chalkboard"></i> View Student Voices
             </div>
             <div class="nav-tab" data-tab="contact">
-                <i class="fas fa-headset"></i> Contact
+                <i class="fas fa-headset"></i> Contact Admin
+            </div>
+            <div class="nav-tab" data-tab="about">
+                <i class="fas fa-info-circle"></i> About
             </div>
         </div>
 
-        <!-- ASK SECTION -->
-        <div class="section active" id="askSection">
+        <!-- ALERTS -->
+        <div class="alert alert-warning" id="warningAlert">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div id="alertMessage">Please fill in all fields</div>
+        </div>
+
+        <!-- GIVE FEEDBACK SECTION -->
+        <div class="section active" id="giveSection">
             <div class="feedback-card">
-                <div class="question-header">
-                    <div class="question-icon">
-                        <i class="fas fa-question-circle"></i>
+                <div class="question-section">
+                    <div class="question-header">
+                        <div class="question-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h2>Share Your Anonymous Voice</h2>
                     </div>
-                    <h2>Ask Your Anonymous Question</h2>
+                    
+                    <div class="question-select">
+                        <label for="questionSelect"><i class="fas fa-list"></i> Choose a question:</label>
+                        <select id="questionSelect" class="question-dropdown">
+                            <option value="">Select a question...</option>
+                            <option value="change">If you could change one thing about school, what would it be?</option>
+                            <option value="like">What's one thing you really like about Baba Ahmed School?</option>
+                            <option value="feel">How do you feel about school today?</option>
+                            <option value="teacher">Is there a teacher or staff member who made your day better recently? Tell us how!</option>
+                            <option value="funny">What's the funniest or most memorable moment you've had at school?</option>
+                            <option value="skill">What's your "secret skill" at school that no one knows about?</option>
+                            <option value="mascot">If school had a mascot, what should it be?</option>
+                            <option value="class">Which class or subject makes you want to hide under your desk? Why?</option>
+                            <option value="cafeteria">Imagine your campus cafeteria turned into a fancy restaurant for a day—what dish would you order first?</option>
+                            <option value="custom">Do you have a question you want to ask anonymously for other students to answer?</option>
+                        </select>
+                    </div>
                 </div>
 
-                <textarea id="questionInput" placeholder="Type your anonymous question here... Be respectful!" maxlength="500"></textarea>
-                
-                <div class="char-counter">
-                    <span id="charCount">0</span>/500 characters
+                <div class="answer-section">
+                    <label for="answerText"><i class="fas fa-pen"></i> Your honest answer (be respectful):</label>
+                    <textarea id="answerText" placeholder="Type your answer here... Your answer will be 100% anonymous." maxlength="500"></textarea>
+                    <div class="char-counter">
+                        <span id="charCount">0</span>/500 characters
+                    </div>
+                </div>
+
+                <!-- SECRET CODE INPUT -->
+                <div class="secret-code-input" id="secretCodeInput">
+                    <label for="secretCode">
+                        <i class="fas fa-key"></i> Enter Secret Code to Access Admin Panel:
+                    </label>
+                    <input type="text" id="secretCode" class="secret-code" placeholder="Enter secret code..." maxlength="20">
+                    <div class="secret-hint">
+                        Hint: Type "admin123" to unlock admin access
+                    </div>
                 </div>
 
                 <button class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i> Post Question
+                    <i class="fas fa-paper-plane"></i> Submit Anonymously
                 </button>
 
-                <div class="privacy-note" style="text-align: center; margin-top: 25px; color: var(--gray);">
-                    <i class="fas fa-user-shield"></i> 100% Anonymous • No Login Required
+                <div class="privacy-note" style="text-align: center; margin-top: 25px; color: var(--gray); font-size: 0.95rem;">
+                    <i class="fas fa-user-shield"></i> Your identity is protected • All submissions reviewed by admin
                 </div>
             </div>
         </div>
 
-        <!-- VIEW SECTION -->
+        <!-- VIEW ANSWERS SECTION -->
         <div class="section" id="viewSection">
             <div class="refresh-wall">
-                <button class="refresh-btn" id="refreshBtn">
-                    <i class="fas fa-sync-alt"></i> Refresh Questions
+                <button class="refresh-btn" id="refreshWall">
+                    <i class="fas fa-sync-alt"></i> Refresh Student Voices
                 </button>
             </div>
             
             <div class="wall-section" id="wallSection">
                 <div class="loading" id="wallLoading">
                     <div class="spinner"></div>
-                    <p>Loading questions...</p>
+                    <p>Loading student voices...</p>
                 </div>
             </div>
         </div>
 
-        <!-- ABOUT SECTION -->
-        <div class="section" id="aboutSection">
-            <div class="about-section">
-                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
-                    <i class="fas fa-info-circle"></i> How It Works
-                </h2>
-                
-                <div class="about-grid">
-                    <div class="about-item">
-                        <i class="fas fa-bolt"></i>
-                        <h3>Instant Posting</h3>
-                        <p>Your questions appear immediately for everyone to see.</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-user-shield"></i>
-                        <h3>100% Anonymous</h3>
-                        <p>No names, no emails, no personal data collected.</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-heart"></i>
-                        <h3>Real Likes</h3>
-                        <p>Like questions and they stay liked forever!</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-eye"></i>
-                        <h3>Real Views</h3>
-                        <p>See how many people viewed each question.</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-share-alt"></i>
-                        <h3>Share Counter</h3>
-                        <p>Each share is counted for every question.</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-reply"></i>
-                        <h3>Unlimited Replies</h3>
-                        <p>Reply to any question. All replies are visible!</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-image"></i>
-                        <h3>Share as Images</h3>
-                        <p>Share questions and replies as beautiful images.</p>
-                    </div>
-                    <div class="about-item">
-                        <i class="fas fa-id-badge"></i>
-                        <h3>Your Questions</h3>
-                        <p>Questions you posted are marked with "Your Question" badge.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CONTACT SECTION -->
+        <!-- CONTACT ADMIN SECTION -->
         <div class="section" id="contactSection">
             <div class="contact-card">
-                <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px;">
-                    <i class="fas fa-headset"></i> Contact & Support
-                </h2>
+                <h2><i class="fas fa-headset"></i> Contact Administration</h2>
+                <p style="color: var(--gray); margin-bottom: 25px; line-height: 1.6; font-size: 1.1rem;">
+                    Need help? Have questions? Contact our administration team directly.
+                </p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
                         <i class="fab fa-whatsapp"></i>
                         <h3>WhatsApp Support</h3>
-                        <p>Direct chat with admin</p>
+                        <p>Direct chat with admin for quick responses</p>
                         <a href="https://wa.me/2348135103329" class="contact-link" target="_blank">
-                            Chat on WhatsApp
+                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Support</h3>
+                        <p>Send detailed inquiries via email</p>
+                        <a href="mailto:support@babaahmad.edu" class="contact-link">
+                            <i class="fas fa-envelope"></i> Send Email
                         </a>
                     </div>
                     
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <h3>Phone Support</h3>
-                        <p>Call for assistance</p>
+                        <p>Call during office hours (9 AM - 5 PM)</p>
                         <a href="tel:+2348135103329" class="contact-link">
-                            Call: 08135103329
+                            <i class="fas fa-phone"></i> Call Now
                         </a>
                     </div>
-                    
-                    <div class="contact-item">
-                        <i class="fas fa-code"></i>
-                        <h3>Developer</h3>
-                        <p>OSO GROUP</p>
-                        <div style="margin-top: 15px; font-weight: bold;">08135103329</div>
+                </div>
+
+                <div class="developer-note">
+                    <h4><i class="fas fa-code"></i> System Developer</h4>
+                    <p style="color: #92400e; margin-bottom: 15px; font-size: 1.1rem;">
+                        This student voice system was developed by <strong>OSO GROUP</strong>
+                    </p>
+                    <p style="color: #92400e; font-size: 1rem;">
+                        For technical support or custom development, contact: 08135103329
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABOUT SECTION -->
+        <div class="section" id="aboutSection">
+            <div class="feedback-card">
+                <div style="padding: 25px;">
+                    <h3 style="color: var(--primary); margin-bottom: 20px; text-align: center; font-size: 1.8rem;">
+                        <i class="fas fa-university"></i> About Baba Ahmed Student Voices
+                    </h3>
+                    <p style="margin-bottom: 20px; line-height: 1.6; text-align: left; font-size: 1.1rem;">
+                        This platform allows students to share honest, anonymous feedback about their school experience.
+                        All submissions are reviewed by admin before appearing publicly to ensure a safe environment.
+                    </p>
+                    <div style="background: var(--light); padding: 20px; border-radius: 15px; margin: 25px 0; text-align: left;">
+                        <p style="margin: 8px 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-shield-alt" style="color: var(--accent); font-size: 1.2rem;"></i>
+                            <strong style="font-size: 1.1rem;">100% Anonymous</strong> - No personal data collected
+                        </p>
+                        <p style="margin: 8px 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-check-circle" style="color: var(--accent); font-size: 1.2rem;"></i>
+                            <strong style="font-size: 1.1rem;">Admin Moderated</strong> - All content reviewed
+                        </p>
+                        <p style="margin: 8px 0; display: flex; align-items: center; gap: 10px;">
+                            <i class="fas fa-users" style="color: var(--accent); font-size: 1.2rem;"></i>
+                            <strong style="font-size: 1.1rem;">Student Community</strong> - Students helping students
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 35px; padding: 25px; background: #f0f9ff; border-radius: 15px;">
+                        <h4 style="color: var(--primary); margin-bottom: 20px; text-align: center; font-size: 1.5rem;">
+                            <i class="fas fa-scroll"></i> Community Guidelines
+                        </h4>
+                        <ol style="line-height: 1.6; padding-left: 25px; text-align: left; margin-bottom: 25px; font-size: 1.1rem;">
+                            <li><strong>Be respectful and constructive</strong> in your feedback</li>
+                            <li><strong>No personal attacks or hate speech</strong> will be tolerated</li>
+                            <li><strong>Focus on issues, not individuals</strong> when giving feedback</li>
+                            <li><strong>Helpful suggestions</strong> are encouraged</li>
+                            <li><strong>Admin reviews all submissions</strong> before publication</li>
+                        </ol>
+                        <div style="background: #fef3c7; padding: 20px; border-radius: 15px; text-align: center;">
+                            <p style="margin: 0; color: #92400e; font-size: 1.1rem; font-weight: 600;">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <strong>Important:</strong> Inappropriate content will be removed
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1313,111 +2055,249 @@
 
         <!-- FOOTER -->
         <footer class="footer">
+            <div class="footer-links">
+                <a href="#" class="footer-link" onclick="showReportModal()">
+                    <i class="fas fa-flag"></i> Report Issue
+                </a>
+                <a href="#" class="footer-link" onclick="switchTab('contact')">
+                    <i class="fas fa-headset"></i> Get Help
+                </a>
+                <a href="https://wa.me/2348135103329" class="footer-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Developer
+                </a>
+                <a href="admin.html" class="footer-link admin-link" id="adminPanelLink" target="_blank">
+                    <i class="fas fa-user-shield"></i> Admin Panel
+                </a>
+            </div>
             <p>© 2026 Baba Ahmed School • Student Voices System</p>
-            <p style="margin-top: 10px;">Developed by <strong>OSO GROUP</strong> • 08135103329</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+                Developed by <strong>OSO GROUP</strong> • 08135103329
+            </p>
         </footer>
     </div>
 
-    <script>
-        // ==============================================
-        // BABA AHMED STUDENT VOICES - 100% WORKING!
-        // FIXED: All fetch calls - NO MORE CORS ERRORS!
-        // ==============================================
+    <!-- SUCCESS ANIMATION -->
+    <div class="success-animation" id="successAnimation">
+        <div class="celebration">
+            <div class="celebration-icon" id="celebrationEmoji">🎉</div>
+            <h2 id="celebrationTitle">Thank You!</h2>
+            <p id="celebrationText">Your anonymous voice has been submitted successfully.</p>
+            <button class="celebration-btn" id="celebrationClose">
+                <i class="fas fa-check"></i> Done
+            </button>
+        </div>
+    </div>
 
-        // ===== CONFIGURATION - YOUR NEW DEPLOYED URL =====
-        const API_URL = "https://script.google.com/macros/s/AKfycbwG630bBOp3NOo6auNDzbR1AVR8B0zRKXXTsjFq3k-XIcRS0CrUPT8xO8CKwWYZ2wDF/exec";
-        
-        // ===== STATE MANAGEMENT =====
-        let allQuestions = [];
-        let myQuestions = JSON.parse(localStorage.getItem('myQuestions') || '[]');
-        let likedQuestions = JSON.parse(localStorage.getItem('likedQuestions') || '[]');
-        let currentShareQuestion = null;
-        let currentShareId = null;
-        let currentShareType = 'question';
-        let generatedImageUrl = null;
-        
-        // User ID for tracking
-        let userId = localStorage.getItem('userId');
-        if (!userId) {
-            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 15);
-            localStorage.setItem('userId', userId);
-        }
-        
-        // Celebration emojis
+    <!-- REPORT MODAL -->
+    <div class="modal" id="reportModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-flag"></i> Report Content</h3>
+                <button class="modal-close" onclick="closeReportModal()">&times;</button>
+            </div>
+            <div style="padding: 25px;">
+                <p style="margin-bottom: 20px; color: var(--gray); font-size: 1.1rem;">
+                    Report inappropriate content to admin
+                </p>
+                <textarea id="reportText" placeholder="Describe the issue..." style="width: 100%; padding: 15px; border: 2px solid #e2e8f0; border-radius: 12px; margin-bottom: 20px; min-height: 120px; font-size: 1rem; font-family: inherit;"></textarea>
+                <button class="submit-btn" onclick="submitReport()" style="width: 100%; padding: 18px;">
+                    <i class="fas fa-paper-plane"></i> Submit Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const BAD_WORDS = ['jaki', 'banza', 'fool', 'idiot', 'stupid'];
         const CELEBRATION_EMOJIS = ['🎉', '✨', '🎊', '👍', '💫', '🌟', '💖', '🎯', '🏆', '⭐'];
-        
-        // Bad words filter
-        const BAD_WORDS = ['jaki', 'banza', 'fool', 'idiot', 'stupid', 'hate', 'kill'];
-        
+        const CELEBRATION_TEXTS = [
+            "Thank you for sharing!",
+            "Your voice matters!",
+            "Making school better!",
+            "Anonymous voice received!",
+            "You're awesome!",
+            "Thanks for being honest!"
+        ];
+        const CELEBRATION_MESSAGES = [
+            "Your voice will help improve Baba Ahmed School.",
+            "Admin will review and approve your answer soon.",
+            "Your anonymous contribution is appreciated.",
+            "Together we can build a better school environment.",
+            "Your opinion helps shape our school's future."
+        ];
+        const SECRET_CODE = "admin123"; // Secret code to unlock admin panel
+
         // ===== DOM ELEMENTS =====
-        const questionInput = document.getElementById('questionInput');
+        const questionSelect = document.getElementById('questionSelect');
+        const answerText = document.getElementById('answerText');
         const submitBtn = document.getElementById('submitBtn');
+        const warningAlert = document.getElementById('warningAlert');
+        const alertMessage = document.getElementById('alertMessage');
         const charCount = document.getElementById('charCount');
+        const successAnimation = document.getElementById('successAnimation');
+        const celebrationEmoji = document.getElementById('celebrationEmoji');
+        const celebrationTitle = document.getElementById('celebrationTitle');
+        const celebrationText = document.getElementById('celebrationText');
+        const celebrationClose = document.getElementById('celebrationClose');
         const navTabs = document.querySelectorAll('.nav-tab');
         const sections = document.querySelectorAll('.section');
-        const refreshBtn = document.getElementById('refreshBtn');
+        const refreshWallBtn = document.getElementById('refreshWall');
         const wallSection = document.getElementById('wallSection');
         const wallLoading = document.getElementById('wallLoading');
-        const alert = document.getElementById('alert');
-        const alertMessage = document.getElementById('alertMessage');
-        const successAnimation = document.getElementById('successAnimation');
-        const celebrationClose = document.getElementById('celebrationClose');
-        const shareModal = document.getElementById('shareModal');
-        const shareModalTitle = document.getElementById('shareModalTitle');
-        const sharePreviewText = document.getElementById('sharePreviewText');
-        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-        const previewImage = document.getElementById('previewImage');
-        const templateQuestion = document.getElementById('templateQuestion');
-        const templateReply = document.getElementById('templateReply');
+        const reportModal = document.getElementById('reportModal');
+        const shareImageContainer = document.getElementById('shareImageContainer');
+        const shareQuestionText = document.getElementById('shareQuestionText');
+        const shareAnswerText = document.getElementById('shareAnswerText');
+        const shareRepliesContainer = document.getElementById('shareRepliesContainer');
+        const shareLoading = document.getElementById('shareLoading');
+        const shareLoadingText = document.getElementById('shareLoadingText');
+        const shareImageBtn = document.getElementById('shareImageBtn');
+        const closeShareBtn = document.getElementById('closeShareBtn');
+        const secretCodeInput = document.getElementById('secretCodeInput');
+        const secretCodeField = document.getElementById('secretCode');
+        const adminPanelLink = document.getElementById('adminPanelLink');
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', function() {
-            questionInput.addEventListener('input', function() {
+            // Set up character counter
+            answerText.addEventListener('input', function() {
                 charCount.textContent = this.value.length;
-                submitBtn.disabled = this.value.length < 10 || this.value.length > 500;
+                validateForm();
             });
             
-            submitBtn.addEventListener('click', submitQuestion);
+            // Set up question select change
+            questionSelect.addEventListener('change', validateForm);
             
-            navTabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    switchTab(this.dataset.tab);
-                });
-            });
+            // Set up submit button
+            submitBtn.addEventListener('click', submitFeedback);
             
-            refreshBtn.addEventListener('click', fetchQuestions);
-            
+            // Set up celebration close
             celebrationClose.addEventListener('click', function() {
                 successAnimation.style.display = 'none';
-                questionInput.value = '';
-                charCount.textContent = '0';
+                resetForm();
                 switchTab('view');
             });
             
-            questionInput.addEventListener('keydown', function(e) {
-                if (e.ctrlKey && e.key === 'Enter') submitQuestion();
+            // Enter key to submit
+            answerText.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    submitFeedback();
+                }
             });
             
-            fetchQuestions();
+            // Navigation tabs
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    switchTab(tabName);
+                });
+            });
+            
+            // Refresh wall button
+            refreshWallBtn.addEventListener('click', loadApprovedAnswers);
+            
+            // Share image button
+            shareImageBtn.addEventListener('click', createAndShareImage);
+            
+            // Close share button
+            closeShareBtn.addEventListener('click', closeShareImage);
+            
+            // Secret code input
+            secretCodeField.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    checkSecretCode();
+                }
+            });
+            
+            // Auto-show secret input when typing in answer field
+            answerText.addEventListener('input', function() {
+                const answer = this.value.toLowerCase();
+                if (answer.includes('admin') || answer.includes('secret') || answer.includes('code')) {
+                    secretCodeInput.classList.add('show');
+                }
+            });
+            
+            // Check if admin panel was already unlocked
+            if (localStorage.getItem('adminUnlocked') === 'true') {
+                adminPanelLink.classList.add('show');
+            }
+            
+            // Load approved answers on view tab
+            loadApprovedAnswers();
+            
+            // Initial form validation
+            validateForm();
         });
 
         // ===== TAB NAVIGATION =====
         function switchTab(tabName) {
+            // Update active tab
             navTabs.forEach(tab => {
                 tab.classList.remove('active');
-                if (tab.dataset.tab === tabName) tab.classList.add('active');
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                }
             });
             
+            // Show active section
             sections.forEach(section => {
                 section.classList.remove('active');
                 if (section.id === tabName + 'Section') {
                     section.classList.add('active');
-                    if (tabName === 'view') fetchQuestions();
+                    
+                    // Load answers if switching to view tab
+                    if (tabName === 'view') {
+                        loadApprovedAnswers();
+                    }
                 }
             });
         }
 
-        // ===== VALIDATION =====
+        // ===== SECRET CODE SYSTEM =====
+        function checkSecretCode() {
+            const enteredCode = secretCodeField.value.trim();
+            
+            if (enteredCode === SECRET_CODE) {
+                // Unlock admin panel
+                adminPanelLink.classList.add('show');
+                localStorage.setItem('adminUnlocked', 'true');
+                
+                // Show success message
+                showAlert('✅ Admin panel unlocked! You can now access it from the footer.', 'success');
+                secretCodeField.value = '';
+                secretCodeInput.classList.remove('show');
+                
+                // Create celebration effect
+                createConfetti();
+                
+                // Save to history
+                const adminLogs = JSON.parse(localStorage.getItem('adminAccessLogs') || '[]');
+                adminLogs.push({
+                    timestamp: new Date().toISOString(),
+                    action: 'admin_panel_unlocked',
+                    ip: generateFakeIP()
+                });
+                localStorage.setItem('adminAccessLogs', JSON.stringify(adminLogs));
+            } else {
+                showAlert('❌ Invalid secret code. Try: admin123', 'error');
+            }
+        }
+
+        // ===== FORM VALIDATION =====
+        function validateForm() {
+            const question = questionSelect.value.trim();
+            const answer = answerText.value.trim();
+            
+            if (question && answer.length >= 10) {
+                submitBtn.disabled = false;
+                return true;
+            } else {
+                submitBtn.disabled = true;
+                return false;
+            }
+        }
+
         function containsBadWords(text) {
             return BAD_WORDS.some(word => {
                 const regex = new RegExp(`\\b${word}\\b`, 'i');
@@ -1425,585 +2305,653 @@
             });
         }
 
-        // ===== SUBMIT QUESTION - FIXED! =====
-        async function submitQuestion() {
-            const question = questionInput.value.trim();
+        // ===== SUBMIT FEEDBACK =====
+        function submitFeedback() {
+            const question = questionSelect.value;
+            const questionText = questionSelect.options[questionSelect.selectedIndex].text;
+            const answer = answerText.value.trim();
             
-            if (question.length < 10) {
-                showAlert('Question must be at least 10 characters', 'error');
+            // Hide warning alert
+            warningAlert.style.display = 'none';
+            
+            // Validate
+            if (!question) {
+                showAlert('Please select a question first');
+                questionSelect.focus();
                 return;
             }
             
-            if (containsBadWords(question)) {
-                showAlert('Please remove inappropriate language', 'error');
+            if (answer.length < 10) {
+                showAlert('Please write at least 10 characters');
+                answerText.focus();
                 return;
             }
             
-            submitBtn.innerHTML = '<div class="spinner" style="width: 24px; height: 24px;"></div> Posting...';
+            if (answer.length > 500) {
+                showAlert('Answer is too long (max 500 characters)');
+                return;
+            }
+            
+            if (containsBadWords(answer)) {
+                showAlert('Please remove inappropriate language');
+                answerText.focus();
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.innerHTML = '<div class="spinner" style="width: 24px; height: 24px; border-width: 3px;"></div> Sending...';
             submitBtn.disabled = true;
             
-            try {
-                // ✅ FIXED: POST with text/plain to avoid CORS
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ 
-                        action: 'new',
-                        question: question 
-                    })
-                });
+            // Simulate submission delay
+            setTimeout(() => {
+                // Save to localStorage for admin
+                saveFeedback(question, questionText, answer);
                 
-                const data = await response.json();
+                // Create confetti effect
+                createConfetti();
                 
-                if (data.success) {
-                    const questionData = {
-                        id: data.question.id,
-                        question: question,
-                        timestamp: new Date().toISOString(),
-                        timeAgo: 'Just now',
-                        likes: 0,
-                        views: 0,
-                        shares: 0,
-                        replies: [],
-                        userId: userId
-                    };
-                    
-                    myQuestions.unshift(questionData);
-                    localStorage.setItem('myQuestions', JSON.stringify(myQuestions));
-                    
-                    createConfetti();
-                    showSuccessAnimation();
-                    
-                    questionInput.value = '';
-                    charCount.textContent = '0';
-                    
-                    setTimeout(() => fetchQuestions(), 2000);
-                    showAlert('✅ Question posted successfully!', 'success');
-                }
+                // Show success animation
+                showSuccessAnimation();
                 
-            } catch (error) {
-                console.error(error);
-                showAlert('❌ Network error. Please try again.', 'error');
-            } finally {
+                // Reset button after delay
                 setTimeout(() => {
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Post Question';
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Anonymously';
                     submitBtn.disabled = false;
                 }, 1000);
+                
+            }, 1500);
+        }
+
+        // ===== SAVE TO STORAGE =====
+        function saveFeedback(questionId, questionText, answer) {
+            // Create feedback object
+            const feedback = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                questionId: questionId,
+                question: questionText,
+                answer: answer,
+                status: 'pending',
+                ip: generateFakeIP(),
+                likes: 0,
+                shares: 0,
+                replies: []
+            };
+            
+            // Get existing feedback
+            let allFeedback = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            
+            // Add new feedback
+            allFeedback.push(feedback);
+            
+            // Save to localStorage
+            localStorage.setItem('babaAhmadFeedback', JSON.stringify(allFeedback));
+            
+            // Update counter
+            updateFeedbackCount();
+        }
+
+        function updateFeedbackCount() {
+            let count = parseInt(localStorage.getItem('feedbackCount') || '0');
+            count++;
+            localStorage.setItem('feedbackCount', count.toString());
+        }
+
+        // ===== LOAD APPROVED ANSWERS =====
+        function loadApprovedAnswers() {
+            wallLoading.style.display = 'block';
+            wallSection.innerHTML = '';
+            wallSection.appendChild(wallLoading);
+            
+            // Show loading animation on button
+            refreshWallBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                const feedback = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+                
+                // Get only approved feedback
+                const approvedFeedback = feedback.filter(f => f.status === 'approved');
+                
+                if (approvedFeedback.length === 0) {
+                    wallSection.innerHTML = `
+                        <div class="empty-wall">
+                            <i class="fas fa-comment-slash"></i>
+                            <h3>No student voices yet</h3>
+                            <p>Voices will appear here after admin approval</p>
+                            <p style="margin-top: 20px; font-size: 1rem;">
+                                <i class="fas fa-lightbulb"></i> Be the first to share your voice!
+                            </p>
+                        </div>
+                    `;
+                    refreshWallBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Student Voices';
+                    return;
+                }
+                
+                // Sort by date (newest first)
+                approvedFeedback.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                // Display approved answers
+                wallSection.innerHTML = '';
+                approvedFeedback.forEach(item => {
+                    const wallCard = createWallCard(item);
+                    wallSection.appendChild(wallCard);
+                });
+                
+                wallLoading.style.display = 'none';
+                refreshWallBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Student Voices';
+                
+            }, 1000);
+        }
+
+        function createWallCard(feedback) {
+            const div = document.createElement('div');
+            div.className = 'wall-card';
+            div.dataset.id = feedback.id;
+            
+            const date = new Date(feedback.timestamp);
+            const timeAgo = getTimeAgo(date);
+            
+            // Check if user liked this
+            const likedItems = JSON.parse(localStorage.getItem('likedItems') || '[]');
+            const isLiked = likedItems.includes(feedback.id);
+            
+            // Format replies for display
+            let repliesHTML = '';
+            if (feedback.replies && feedback.replies.length > 0) {
+                repliesHTML = feedback.replies.slice(-3).map(reply => `
+                    <div class="reply-item">
+                        ${reply.text}
+                        <div class="reply-meta">
+                            <span>Anonymous Student</span>
+                            <span>${getTimeAgo(new Date(reply.timestamp))}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            div.innerHTML = `
+                <div class="question-tag">
+                    <i class="fas fa-question-circle"></i> Student Voice
+                </div>
+                <div class="wall-question">${feedback.question}</div>
+                <div class="wall-answer">
+                    ${feedback.answer}
+                </div>
+                
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <i class="fas fa-heart"></i>
+                        <span>${feedback.likes || 0} likes</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-share"></i>
+                        <span>${feedback.shares || 0} shares</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-reply"></i>
+                        <span>${feedback.replies?.length || 0} replies</span>
+                    </div>
+                </div>
+                
+                <div class="reply-section">
+                    <textarea class="reply-input" placeholder="Add your reply... (max 200 chars)" maxlength="200" data-id="${feedback.id}"></textarea>
+                    <button class="reply-btn" onclick="submitReply(${feedback.id})">
+                        <i class="fas fa-reply"></i> Reply Anonymously
+                    </button>
+                    
+                    ${repliesHTML ? `
+                        <div class="replies-container">
+                            ${repliesHTML}
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="wall-meta">
+                    <span><i class="far fa-clock"></i> ${timeAgo}</span>
+                    <div class="action-buttons">
+                        <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${feedback.id}, this)">
+                            <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
+                        </button>
+                        <button class="action-btn share-btn" onclick="showShareImage(${feedback.id})">
+                            <i class="fas fa-image"></i> Share as Status
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return div;
+        }
+
+        // ===== WHATSAPP OPTIMIZED SHARE IMAGE SYSTEM =====
+        let currentSharingFeedbackId = null;
+
+        function showShareImage(feedbackId) {
+            currentSharingFeedbackId = feedbackId;
+            const feedback = getFeedbackById(feedbackId);
+            if (!feedback) return;
+            
+            // Update share count
+            feedback.shares = (feedback.shares || 0) + 1;
+            updateFeedbackInStorage(feedback);
+            
+            // Update the share image content
+            shareQuestionText.textContent = feedback.question;
+            shareAnswerText.textContent = feedback.answer;
+            
+            // Add replies to share image if they exist
+            const shareRepliesContainer = document.getElementById('shareRepliesContainer');
+            if (feedback.replies && feedback.replies.length > 0) {
+                shareRepliesContainer.style.display = 'block';
+                shareRepliesContainer.innerHTML = feedback.replies.slice(-2).map(reply => `
+                    <div class="share-reply-item">
+                        ${reply.text}
+                        <div class="share-reply-meta">
+                            <span>Student Reply</span>
+                            <span>${getTimeAgo(new Date(reply.timestamp))}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                shareRepliesContainer.style.display = 'none';
+                shareRepliesContainer.innerHTML = '';
+            }
+            
+            // Show the WhatsApp optimized share image container
+            shareImageContainer.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+            // Auto-scroll answer if needed
+            setTimeout(() => {
+                shareAnswerText.scrollTop = 0;
+            }, 100);
+        }
+
+        function closeShareImage() {
+            shareImageContainer.style.display = 'none';
+            document.body.style.overflow = '';
+            currentSharingFeedbackId = null;
+            
+            // Refresh wall to update share counts
+            loadApprovedAnswers();
+        }
+
+        async function createAndShareImage() {
+            if (!currentSharingFeedbackId) return;
+            
+            const feedback = getFeedbackById(currentSharingFeedbackId);
+            if (!feedback) return;
+            
+            // Show loading overlay
+            shareLoading.style.display = 'flex';
+            shareLoadingText.textContent = 'Creating WhatsApp status image...';
+            
+            try {
+                // Hide share controls temporarily
+                document.querySelector('.share-controls').style.display = 'none';
+                
+                // Wait for any animations to complete
+                await new Promise(resolve => setTimeout(resolve, 800));
+                
+                // Create the WhatsApp optimized image (1080x1920)
+                const canvas = await html2canvas(shareImageContainer.querySelector('.share-image-wrapper'), {
+                    scale: 3, // High resolution for WhatsApp
+                    backgroundColor: null,
+                    useCORS: true,
+                    allowTaint: true,
+                    logging: false,
+                    width: 1080,
+                    height: 1920,
+                    windowWidth: 1080,
+                    windowHeight: 1920,
+                    onclone: function(clonedDoc) {
+                        // Ensure all text is visible
+                        const textElements = clonedDoc.querySelectorAll('.share-question-text, .share-answer-text, .share-reply-item');
+                        textElements.forEach(el => {
+                            el.style.whiteSpace = 'pre-wrap';
+                            el.style.wordBreak = 'break-word';
+                            el.style.overflow = 'visible';
+                        });
+                    }
+                });
+                
+                // Show share controls again
+                document.querySelector('.share-controls').style.display = 'flex';
+                
+                // Convert to blob
+                const blob = await new Promise(resolve => {
+                    canvas.toBlob(resolve, 'image/jpeg', 0.95); // JPEG for smaller file size
+                });
+                
+                if (!blob) {
+                    throw new Error('Failed to create image');
+                }
+                
+                // Create object URL
+                const imageUrl = URL.createObjectURL(blob);
+                
+                // Prepare share data for WhatsApp
+                const shareData = {
+                    files: [
+                        new File([blob], `BabaAhmed_Voice_${Date.now()}.jpg`, {
+                            type: blob.type,
+                            lastModified: new Date().getTime()
+                        })
+                    ],
+                    title: 'Baba Ahmed Student Voice',
+                    text: `🎓 Check out this student voice from Baba Ahmed School!\n\n${feedback.question.substring(0, 50)}...\n\nShare your voice too!\n${window.location.href}`,
+                    url: window.location.href
+                };
+                
+                // Hide loading
+                shareLoading.style.display = 'none';
+                
+                // Try Web Share API with files
+                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                    try {
+                        await navigator.share(shareData);
+                        showAlert('✅ WhatsApp status created successfully!', 'success');
+                        closeShareImage();
+                    } catch (err) {
+                        console.log('Web Share API error:', err);
+                        fallbackWhatsAppShare(imageUrl, feedback);
+                    }
+                } else {
+                    fallbackWhatsAppShare(imageUrl, feedback);
+                }
+                
+                // Clean up after 30 seconds
+                setTimeout(() => {
+                    URL.revokeObjectURL(imageUrl);
+                }, 30000);
+                
+            } catch (error) {
+                console.error('Error creating WhatsApp image:', error);
+                shareLoading.style.display = 'none';
+                document.querySelector('.share-controls').style.display = 'flex';
+                showAlert('⚠️ Could not create WhatsApp status. Sharing as text instead.', 'error');
+                fallbackTextShare(feedback);
             }
         }
 
-        // ===== LIKE SYSTEM - FIXED! =====
-        async function toggleLike(questionId, button) {
-            const isLiked = likedQuestions.includes(questionId);
-            const question = allQuestions.find(q => q.id === questionId);
+        function fallbackWhatsAppShare(imageUrl, feedback) {
+            // Create a temporary download link
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = `BabaAhmed_WhatsApp_Status_${Date.now()}.jpg`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
             
-            if (!question) return;
+            // Show success message
+            showAlert('✅ WhatsApp status saved to your gallery! You can now share it as your WhatsApp status.', 'success');
             
-            // Update UI immediately
+            // Prepare WhatsApp status share message
+            const whatsappMessage = encodeURIComponent(
+                `🎓 *Baba Ahmed Student Voices*\n\n` +
+                `💬 *STUDENT VOICE:* ${feedback.question}\n\n` +
+                `💭 *ANONYMOUS ANSWER:* ${feedback.answer}\n\n` +
+                `👇 *Share Your Voice:*\n${window.location.href}`
+            );
+            
+            // Auto-open WhatsApp after delay
+            setTimeout(() => {
+                if (confirm('Open WhatsApp to share this as your status?')) {
+                    // WhatsApp status upload URL
+                    const whatsappStatusUrl = 'https://wa.me/?text=' + whatsappMessage;
+                    window.open(whatsappStatusUrl, '_blank');
+                }
+            }, 2000);
+            
+            // Close share image
+            closeShareImage();
+        }
+
+        function fallbackTextShare(feedback) {
+            const text = encodeURIComponent(
+                `🎓 *Baba Ahmed Student Voices*\n\n` +
+                `💬 *STUDENT VOICE:* ${feedback.question}\n\n` +
+                `💭 *ANONYMOUS ANSWER:* ${feedback.answer}\n\n` +
+                `👇 *Share Your Voice:*\n${window.location.href}\n\n` +
+                `#BabaAhmedSchool #StudentVoices #AnonymousFeedback`
+            );
+            
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            showAlert('✅ Shared to WhatsApp!', 'success');
+            closeShareImage();
+        }
+
+        // ===== LIKE SYSTEM =====
+        function toggleLike(feedbackId, button) {
+            const feedback = getFeedbackById(feedbackId);
+            if (!feedback) return;
+            
+            const likedItems = JSON.parse(localStorage.getItem('likedItems') || '[]');
+            const isLiked = likedItems.includes(feedbackId);
+            
             if (isLiked) {
-                likedQuestions = likedQuestions.filter(id => id !== questionId);
+                // Unlike
+                const index = likedItems.indexOf(feedbackId);
+                likedItems.splice(index, 1);
                 button.classList.remove('liked');
                 button.innerHTML = '<i class="fas fa-heart"></i> Like';
-                question.likes = Math.max(0, (question.likes || 0) - 1);
+                feedback.likes = Math.max(0, (feedback.likes || 0) - 1);
             } else {
-                likedQuestions.push(questionId);
+                // Like
+                likedItems.push(feedbackId);
                 button.classList.add('liked');
                 button.innerHTML = '<i class="fas fa-heart"></i> Liked';
-                question.likes = (question.likes || 0) + 1;
+                feedback.likes = (feedback.likes || 0) + 1;
             }
             
-            localStorage.setItem('likedQuestions', JSON.stringify(likedQuestions));
+            // Update storage
+            localStorage.setItem('likedItems', JSON.stringify(likedItems));
+            updateFeedbackInStorage(feedback);
             
-            // Update stats in UI
+            // Update UI
             const statsBar = button.closest('.wall-card').querySelector('.stats-bar');
             const likesSpan = statsBar.querySelector('.stat-item:nth-child(1) span');
-            likesSpan.textContent = `${question.likes} likes`;
-            
-            // ✅ FIXED: POST with text/plain - removed PUT!
-            try {
-                await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({
-                        action: 'like',
-                        questionId: questionId,
-                        userId: userId,
-                        likeAction: isLiked ? 'remove' : 'add'
-                    })
-                });
-            } catch (error) {
-                console.error('Like sync error:', error);
-            }
+            likesSpan.textContent = `${feedback.likes} likes`;
         }
 
-        // ===== REPLY SYSTEM - FIXED! =====
-        async function submitReply(questionId) {
-            const input = document.querySelector(`.reply-input[data-id="${questionId}"]`);
+        // ===== REPLY SYSTEM =====
+        function submitReply(feedbackId) {
+            const input = document.querySelector(`.reply-input[data-id="${feedbackId}"]`);
             const replyText = input.value.trim();
             
             if (!replyText) {
-                showAlert('Please enter a reply', 'error');
+                showAlert('Please enter a reply');
                 return;
             }
             
             if (replyText.length < 5) {
-                showAlert('Reply must be at least 5 characters', 'error');
-                return;
-            }
-            
-            if (replyText.length > 200) {
-                showAlert('Reply too long (max 200 characters)', 'error');
+                showAlert('Reply must be at least 5 characters');
                 return;
             }
             
             if (containsBadWords(replyText)) {
-                showAlert('Please remove inappropriate language', 'error');
+                showAlert('Please remove inappropriate language');
                 return;
             }
             
-            const replyBtn = input.nextElementSibling?.querySelector('.reply-btn');
-            if (replyBtn) {
-                replyBtn.disabled = true;
-                replyBtn.innerHTML = '<div class="spinner" style="width: 20px; height: 20px;"></div> Posting...';
-            }
+            const feedback = getFeedbackById(feedbackId);
+            if (!feedback) return;
             
-            try {
-                // ✅ FIXED: POST with text/plain - removed PUT!
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({
-                        action: 'reply',
-                        questionId: questionId,
-                        text: replyText
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    input.value = '';
-                    showAlert('✅ Reply posted!', 'success');
-                    createConfetti();
-                    setTimeout(() => fetchQuestions(), 500);
-                }
-                
-            } catch (error) {
-                console.error('Reply error:', error);
-                showAlert('❌ Failed to post reply', 'error');
-            } finally {
-                if (replyBtn) {
-                    replyBtn.disabled = false;
-                    replyBtn.innerHTML = '<i class="fas fa-reply"></i> Post Reply';
-                }
-            }
-        }
-
-        // ===== FETCH QUESTIONS - FIXED! =====
-        async function fetchQuestions() {
-            wallLoading.style.display = 'block';
-            wallSection.innerHTML = '';
-            wallSection.appendChild(wallLoading);
-            refreshBtn.innerHTML = '<i class="fas fa-sync-alt fa-spin"></i> Loading...';
-            
-            try {
-                const response = await fetch(API_URL + '?t=' + Date.now());
-                const data = await response.json();
-                
-                let serverQuestions = data.questions || [];
-                
-                // Merge with local questions
-                let mergedQuestions = [...serverQuestions];
-                
-                myQuestions.forEach(localQ => {
-                    if (!mergedQuestions.find(q => q.id === localQ.id)) {
-                        mergedQuestions.unshift(localQ);
-                    }
-                });
-                
-                allQuestions = mergedQuestions;
-                displayQuestions(allQuestions);
-                
-            } catch (error) {
-                console.error(error);
-                if (myQuestions.length > 0) {
-                    displayQuestions(myQuestions);
-                    showAlert('⚠️ Using offline mode', 'error');
-                }
-            } finally {
-                wallLoading.style.display = 'none';
-                refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Questions';
-            }
-        }
-
-        // ===== DISPLAY QUESTIONS =====
-        function displayQuestions(questions) {
-            if (!questions || questions.length === 0) {
-                wallSection.innerHTML = `
-                    <div class="empty-wall">
-                        <i class="fas fa-comment-slash"></i>
-                        <h3>No questions yet</h3>
-                        <p>Be the first to ask something!</p>
-                        <button class="submit-btn" style="margin-top: 20px; width: auto;" onclick="switchTab('ask')">
-                            <i class="fas fa-plus"></i> Ask First Question
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-            
-            questions.sort((a, b) => new Date(b.timestamp || 0) - new Date(a.timestamp || 0));
-            
-            wallSection.innerHTML = questions.map(q => {
-                const isLiked = likedQuestions.includes(q.id);
-                const isUserQuestion = q.userId === userId;
-                const timeAgo = q.timeAgo || formatTimeAgo(q.timestamp);
-                
-                let repliesHTML = '';
-                if (q.replies && q.replies.length > 0) {
-                    const sortedReplies = [...q.replies].sort((a, b) => 
-                        new Date(b.timestamp || 0) - new Date(a.timestamp || 0)
-                    );
-                    
-                    repliesHTML = sortedReplies.map(reply => `
-                        <div class="reply-item">
-                            ${escapeHTML(reply.text)}
-                            <div class="reply-meta">
-                                <span>Anonymous Student</span>
-                                <span>${reply.timeAgo || formatTimeAgo(reply.timestamp) || 'Just now'}</span>
-                                <div class="reply-meta-actions">
-                                    <button class="reply-share-small" onclick="openReplyShareModal('${escapeHTML(reply.text)}', '${q.id}')">
-                                        <i class="fas fa-share-alt"></i> Share
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                }
-                
-                return `
-                    <div class="wall-card" data-id="${q.id}">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                            <span class="question-badge">
-                                <i class="fas fa-question-circle"></i> Student Question
-                            </span>
-                            ${isUserQuestion ? '<span class="question-badge your-question-badge"><i class="fas fa-user-check"></i> Your Question</span>' : ''}
-                        </div>
-                        
-                        <div class="wall-question">${escapeHTML(q.question)}</div>
-                        
-                        <div class="stats-bar">
-                            <div class="stat-item">
-                                <i class="fas fa-heart"></i>
-                                <span>${q.likes || 0} likes</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-eye"></i>
-                                <span>${q.views || 0} views</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-share-alt"></i>
-                                <span>${q.shares || 0} shares</span>
-                            </div>
-                            <div class="stat-item">
-                                <i class="fas fa-reply"></i>
-                                <span>${q.replies?.length || 0} replies</span>
-                            </div>
-                        </div>
-                        
-                        <div class="reply-section">
-                            <textarea class="reply-input" placeholder="Add your anonymous reply... (max 200 chars)" maxlength="200" data-id="${q.id}"></textarea>
-                            <div class="reply-actions">
-                                <button class="reply-btn" onclick="submitReply('${q.id}')">
-                                    <i class="fas fa-reply"></i> Post Reply
-                                </button>
-                            </div>
-                            
-                            ${repliesHTML ? `
-                                <div class="replies-container">
-                                    <h4 style="color: var(--dark); margin-bottom: 15px;">
-                                        <i class="fas fa-comments"></i> Replies (${q.replies.length})
-                                    </h4>
-                                    ${repliesHTML}
-                                </div>
-                            ` : ''}
-                        </div>
-                        
-                        <div class="wall-meta">
-                            <span><i class="far fa-clock"></i> ${timeAgo}</span>
-                            <div class="action-buttons">
-                                <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike('${q.id}', this)">
-                                    <i class="fas fa-heart"></i> ${isLiked ? 'Liked' : 'Like'}
-                                </button>
-                                <button class="action-btn share-btn" onclick="openShareModal('${q.id}', '${escapeHTML(q.question)}', 'question')">
-                                    <i class="fas fa-share-alt"></i> Share
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // ===== SHARE SYSTEM WITH INCREMENT - FIXED! =====
-        function openShareModal(questionId, text, type = 'question') {
-            currentShareId = questionId;
-            currentShareQuestion = text;
-            currentShareType = type;
-            shareModalTitle.textContent = type === 'question' ? 'Share This Question' : 'Share This Reply';
-            sharePreviewText.textContent = text;
-            
-            if (type === 'question') {
-                templateQuestion.textContent = text;
-            } else {
-                templateReply.textContent = text;
-            }
-            
-            shareModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function openReplyShareModal(replyText, questionId) {
-            openShareModal(questionId, replyText, 'reply');
-        }
-
-        function closeShareModal() {
-            shareModal.style.display = 'none';
-            document.body.style.overflow = '';
-            currentShareQuestion = null;
-            currentShareId = null;
-            generatedImageUrl = null;
-        }
-
-        // ✅ FIXED: Share count increment - now uses POST!
-        async function incrementShareCount() {
-            if (currentShareId) {
-                const question = allQuestions.find(q => q.id === currentShareId);
-                if (question) {
-                    question.shares = (question.shares || 0) + 1;
-                    
-                    try {
-                        await fetch(API_URL, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                            body: JSON.stringify({
-                                action: 'share',
-                                questionId: currentShareId
-                            })
-                        });
-                    } catch (error) {
-                        console.error('Share count sync error:', error);
-                    }
-                }
-            }
-        }
-
-        async function shareToWhatsApp() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            const text = encodeURIComponent(
-                currentShareType === 'question'
-                    ? `🎓 *Baba Ahmed Student Voices*\n\n💬 *QUESTION:* ${currentShareQuestion}\n\n👇 *Ask your own question:*\n${window.location.href}`
-                    : `💭 *Anonymous Reply*\n\n"${currentShareQuestion}"\n\n🎓 *Baba Ahmed Student Voices*\n${window.location.href}`
-            );
-            
-            window.open(`https://wa.me/?text=${text}`, '_blank');
-            showAlert('✅ Opening WhatsApp...', 'success');
-            closeShareModal();
-        }
-
-        async function shareToFacebook() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            const url = encodeURIComponent(window.location.href);
-            const quote = encodeURIComponent(`🎓 Baba Ahmed Student Voices - ${currentShareQuestion}`);
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${quote}`, '_blank');
-            showAlert('✅ Opening Facebook...', 'success');
-            closeShareModal();
-        }
-
-        async function shareToTwitter() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            const text = encodeURIComponent(`🎓 Baba Ahmed Student Voices\n\n${currentShareQuestion}\n\n`);
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-            showAlert('✅ Opening Twitter...', 'success');
-            closeShareModal();
-        }
-
-        async function shareToInstagram() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            const text = currentShareType === 'question'
-                ? `🎓 Baba Ahmed Student Voices\n\nQUESTION: ${currentShareQuestion}\n\nAsk your own question: ${window.location.href}`
-                : `💭 Anonymous Reply\n\n"${currentShareQuestion}"\n\n🎓 Baba Ahmed Student Voices\n${window.location.href}`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                showAlert('📋 Text copied! Paste in Instagram.', 'success');
+            // Add reply
+            if (!feedback.replies) feedback.replies = [];
+            feedback.replies.push({
+                text: replyText,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
             });
-            closeShareModal();
+            
+            // Update storage
+            updateFeedbackInStorage(feedback);
+            
+            // Clear input
+            input.value = '';
+            
+            // Refresh the card
+            loadApprovedAnswers();
+            
+            // Show success
+            showAlert('Reply submitted! It will appear after admin approval.', 'success');
         }
 
-        async function shareToTelegram() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            const text = encodeURIComponent(
-                currentShareType === 'question'
-                    ? `🎓 *Baba Ahmed Student Voices*\n\n💬 *QUESTION:* ${currentShareQuestion}\n\n👇 *Ask your own question:*\n${window.location.href}`
-                    : `💭 *Anonymous Reply*\n\n"${currentShareQuestion}"\n\n🎓 *Baba Ahmed Student Voices*\n${window.location.href}`
-            );
-            
-            window.open(`https://t.me/share/url?url=${window.location.href}&text=${text}`, '_blank');
-            showAlert('✅ Opening Telegram...', 'success');
-            closeShareModal();
+        function getFeedbackById(id) {
+            const feedback = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            return feedback.find(f => f.id === id);
         }
 
-        async function copyShareText() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
+        function updateFeedbackInStorage(updatedFeedback) {
+            const feedback = JSON.parse(localStorage.getItem('babaAhmadFeedback') || '[]');
+            const index = feedback.findIndex(f => f.id === updatedFeedback.id);
             
-            const text = currentShareType === 'question'
-                ? `🎓 Baba Ahmed Student Voices\n\nQUESTION: ${currentShareQuestion}\n\nAsk your own question: ${window.location.href}`
-                : `💭 Anonymous Reply\n\n"${currentShareQuestion}"\n\n🎓 Baba Ahmed Student Voices\n${window.location.href}`;
-            
-            navigator.clipboard.writeText(text).then(() => {
-                showAlert('📋 Copied to clipboard!', 'success');
-            });
-            closeShareModal();
-        }
-
-        // ===== IMAGE GENERATION =====
-        async function downloadShareImage() {
-            if (!currentShareQuestion) return;
-            await incrementShareCount();
-            
-            showAlert('🎨 Creating image...', 'success');
-            
-            try {
-                const template = currentShareType === 'question' 
-                    ? document.getElementById('questionImageTemplate')
-                    : document.getElementById('replyImageTemplate');
-                
-                if (currentShareType === 'question') {
-                    templateQuestion.textContent = currentShareQuestion;
-                } else {
-                    templateReply.textContent = currentShareQuestion;
-                }
-                
-                const canvas = await html2canvas(template, {
-                    scale: 2,
-                    backgroundColor: null,
-                    allowTaint: true,
-                    useCORS: true,
-                    windowWidth: 1080,
-                    windowHeight: 1920
-                });
-                
-                const imageUrl = canvas.toDataURL('image/png');
-                previewImage.src = imageUrl;
-                imagePreviewContainer.style.display = 'flex';
-                generatedImageUrl = imageUrl;
-                closeShareModal();
-                
-            } catch (error) {
-                console.error(error);
-                showAlert('Failed to create image', 'error');
+            if (index !== -1) {
+                feedback[index] = updatedFeedback;
+                localStorage.setItem('babaAhmadFeedback', JSON.stringify(feedback));
             }
         }
 
-        function downloadGeneratedImage() {
-            if (generatedImageUrl) {
-                const link = document.createElement('a');
-                link.href = generatedImageUrl;
-                link.download = `BabaAhmed_${currentShareType}_${Date.now()}.png`;
-                link.click();
-                showAlert('✅ Image downloaded!', 'success');
-                closeImagePreview();
-            }
-        }
-
-        function closeImagePreview() {
-            imagePreviewContainer.style.display = 'none';
-            previewImage.src = '';
-            generatedImageUrl = null;
-        }
-
-        // ===== UTILITIES =====
-        function formatTimeAgo(timestamp) {
-            if (!timestamp) return 'Recently';
-            try {
-                const date = new Date(timestamp);
-                const now = new Date();
-                const diff = Math.floor((now - date) / 1000);
-                
-                if (diff < 60) return 'Just now';
-                if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
-                if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
-                if (diff < 604800) return Math.floor(diff / 86400) + 'd ago';
-                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-            } catch (e) {
-                return 'Recently';
-            }
-        }
-
-        function escapeHTML(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
+        // ===== SUCCESS ANIMATION =====
         function showSuccessAnimation() {
+            // Random celebration elements
             const randomEmoji = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
-            document.getElementById('celebrationEmoji').textContent = randomEmoji;
+            const randomTitle = CELEBRATION_TEXTS[Math.floor(Math.random() * CELEBRATION_TEXTS.length)];
+            const randomMessage = CELEBRATION_MESSAGES[Math.floor(Math.random() * CELEBRATION_MESSAGES.length)];
+            
+            // Update celebration content
+            celebrationEmoji.textContent = randomEmoji;
+            celebrationTitle.textContent = randomTitle;
+            celebrationText.textContent = randomMessage;
+            
+            // Show animation
             successAnimation.style.display = 'flex';
-            setTimeout(() => { successAnimation.style.display = 'none'; }, 5000);
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                if (successAnimation.style.display === 'flex') {
+                    successAnimation.style.display = 'none';
+                    resetForm();
+                    switchTab('view');
+                }
+            }, 8000);
         }
 
         function createConfetti() {
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 60; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
                     confetti.innerHTML = CELEBRATION_EMOJIS[Math.floor(Math.random() * CELEBRATION_EMOJIS.length)];
                     confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confetti.style.animation = `confettiFall ${Math.random() * 2 + 2}s linear forwards`;
                     confetti.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    
                     document.body.appendChild(confetti);
-                    setTimeout(() => confetti.remove(), 3000);
-                }, i * 50);
+                    
+                    setTimeout(() => {
+                        document.body.removeChild(confetti);
+                    }, 4000);
+                }, i * 40);
             }
         }
 
-        function showAlert(message, type = 'success') {
-            alertMessage.textContent = message;
-            alert.className = `alert ${type}`;
-            alert.style.display = 'flex';
-            setTimeout(() => { alert.style.display = 'none'; }, 4000);
+        // ===== MODAL FUNCTIONS =====
+        function showReportModal() {
+            reportModal.style.display = 'flex';
         }
 
-        // ===== GLOBAL FUNCTIONS =====
+        function closeReportModal() {
+            reportModal.style.display = 'none';
+            document.getElementById('reportText').value = '';
+        }
+
+        function submitReport() {
+            const reportText = document.getElementById('reportText').value.trim();
+            
+            if (!reportText) {
+                showAlert('Please describe the issue');
+                return;
+            }
+            
+            // Save report
+            const reports = JSON.parse(localStorage.getItem('userReports') || '[]');
+            reports.push({
+                text: reportText,
+                timestamp: new Date().toISOString(),
+                url: window.location.href
+            });
+            localStorage.setItem('userReports', JSON.stringify(reports));
+            
+            closeReportModal();
+            showAlert('Report submitted to admin. Thank you!', 'success');
+            
+            // Optional: Send to WhatsApp
+            const message = encodeURIComponent(`🚨 Student Report:\n\n${reportText}\n\nFrom: ${window.location.href}`);
+            window.open(`https://wa.me/2348135103329?text=${message}`, '_blank');
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+        function showAlert(message, type = 'error') {
+            alertMessage.textContent = message;
+            warningAlert.className = 'alert alert-warning';
+            if (type === 'success') {
+                warningAlert.className = 'alert alert-success';
+            }
+            warningAlert.style.display = 'flex';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                warningAlert.style.display = 'none';
+            }, 5000);
+        }
+
+        function resetForm() {
+            questionSelect.selectedIndex = 0;
+            answerText.value = '';
+            charCount.textContent = '0';
+            validateForm();
+        }
+
+        function generateFakeIP() {
+            return `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
+        }
+
+        function getTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            if (seconds < 60) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days < 7) return `${days}d ago`;
+            
+            return date.toLocaleDateString();
+        }
+
+        // ===== AUTO-REFRESH WALL =====
+        setInterval(() => {
+            if (document.getElementById('viewSection').classList.contains('active')) {
+                loadApprovedAnswers();
+            }
+        }, 30000);
+
+        // Make functions available globally
         window.switchTab = switchTab;
+        window.showReportModal = showReportModal;
+        window.closeReportModal = closeReportModal;
+        window.submitReport = submitReport;
         window.toggleLike = toggleLike;
         window.submitReply = submitReply;
-        window.openShareModal = openShareModal;
-        window.openReplyShareModal = openReplyShareModal;
-        window.closeShareModal = closeShareModal;
-        window.shareToWhatsApp = shareToWhatsApp;
-        window.shareToFacebook = shareToFacebook;
-        window.shareToTwitter = shareToTwitter;
-        window.shareToInstagram = shareToInstagram;
-        window.shareToTelegram = shareToTelegram;
-        window.copyShareText = copyShareText;
-        window.downloadShareImage = downloadShareImage;
-        window.downloadGeneratedImage = downloadGeneratedImage;
-        window.closeImagePreview = closeImagePreview;
-        window.fetchQuestions = fetchQuestions;
+        window.showShareImage = showShareImage;
+        window.createAndShareImage = createAndShareImage;
+        window.closeShareImage = closeShareImage;
+        window.checkSecretCode = checkSecretCode;
     </script>
 </body>
 </html>
